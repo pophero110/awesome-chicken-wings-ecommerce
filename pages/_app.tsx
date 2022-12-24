@@ -1,9 +1,12 @@
-import { AppProps } from "next/app";
+import { AppProps } from 'next/app';
+import { NextUIProvider } from '@nextui-org/react';
 
 const App = ({ Component, pageProps }: AppProps) => {
-  return (
-    <Component {...pageProps} />
-  );
+	return (
+		<NextUIProvider>
+			<Component {...pageProps} />
+		</NextUIProvider>
+	);
 };
 
 export default App;
