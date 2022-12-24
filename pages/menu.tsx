@@ -10,7 +10,6 @@ export const getStaticProps: GetStaticProps = async () => {
 	const items = await prisma.item.findMany();
 	return {
 		props: { items: JSON.parse(JSON.stringify(items)) },
-		revalidate: 10,
 	};
 };
 
