@@ -7,10 +7,20 @@ import Item, { ItemProps } from '../components/menu/item';
 import { Grid } from '@nextui-org/react';
 
 export const getStaticProps: GetStaticProps = async () => {
-	const items = await prisma.item.findMany();
+	// const items = await prisma.item.findMany();
+	// return {
+	// 	props: { items: JSON.parse(JSON.stringify(items)) }
+	// };
 	return {
-		props: { items: JSON.parse(JSON.stringify(items)) },
-		revalidate: 10,
+		props: {
+			items: [
+				{
+					item_id: 1,
+					name: 'test',
+					price: 10,
+				},
+			],
+		},
 	};
 };
 
