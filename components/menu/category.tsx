@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text } from '@nextui-org/react';
-import style from './styles.module.css';
 export type CategoryProps = {
 	id: string;
 	name: string;
@@ -12,9 +11,10 @@ const Category: React.FC<{ category: CategoryProps }> = ({
 }) => {
 	const style = {
 		whiteSpace: 'nowrap',
-		padding: '0 10px',
+		padding: '3px 10px',
 		marginRight: '5px',
-		borderRadius: '30px',
+		borderRadius: '25px',
+		cursor: 'pointer',
 	};
 	const selectCategory = (e) => {
 		const categories = document.getElementsByClassName(
