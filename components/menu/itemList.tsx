@@ -8,10 +8,10 @@ type ItemListProps = {
 
 const ItemList: React.FC<ItemListProps> = ({ items }) => {
 	return (
-		<Grid.Container gap={2} justify='flex-start'>
+		<Grid.Container gap={1} justify='flex-start'>
 			{items.map((item) => {
 				return (
-					<Grid xs={6} sm={3} key={item.id}>
+					<Grid xs={12} sm={3} key={item.id}>
 						<Item item={item}></Item>
 					</Grid>
 				);
