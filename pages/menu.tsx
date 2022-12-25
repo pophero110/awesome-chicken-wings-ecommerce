@@ -22,7 +22,7 @@ const Menu: React.FC<MenuProps> = ({ items }) => {
 		<Grid.Container gap={2} justify='flex-start'>
 			{items.map((item) => {
 				return (
-					<Grid xs={6} sm={3} key={item.item_id}>
+					<Grid xs={6} sm={3} key={item.id}>
 						<Item item={item}></Item>
 					</Grid>
 				);
