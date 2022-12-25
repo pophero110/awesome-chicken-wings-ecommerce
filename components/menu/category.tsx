@@ -8,7 +8,7 @@ export type CategoryProps = {
 
 const Category: React.FC<{
 	category: CategoryProps;
-	activeCategory: object;
+	activeCategory: CSSProperties;
 }> = ({ category, activeCategory }) => {
 	const style: CSSProperties = {
 		whiteSpace: 'nowrap',
@@ -24,8 +24,15 @@ const Category: React.FC<{
 		);
 		for (const category of categories as any) {
 			category.style.backgroundColor = 'transparent';
+			Object.assign(category.style, {
+				backgroundColor: 'transparent',
+				color: 'black',
+			});
 		}
-		e.target.style.backgroundColor = '#0072f5';
+		Object.assign(e.target.style, {
+			backgroundColor: '#0072F5',
+			color: 'white',
+		});
 	};
 	return (
 		<Text
