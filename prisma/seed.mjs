@@ -1,42 +1,39 @@
 import { PrismaClient } from '@prisma/client';
-import { CategoresItems } from './data.mjs';
+import { CategoresItems, Items } from './data.mjs';
 const prisma = new PrismaClient();
 
 async function main() {
 	await prisma.item.createMany({
-		data: Object.values(CategoresItems)
-			.flat()
-			.map((item, id) => {
-				return {
-					id,
-					name: item.name,
-					price: item.price,
-				};
-			}),
+		data: Items,
 		skipDuplicates: true,
 	});
-
 	await prisma.category.createMany({
 		data: Object.keys(CategoresItems).map((name, id) => {
-			return {
-				id,
-				name,
-			};
+			return { name, id };
 		}),
 		skipDuplicates: true,
 	});
 
-	await prisma.categoriesOnItems.createMany({
-		data: Object.keys(CategoresItems)
-			.map((cName, categoryId) => {
-				return CategoresItems[cName].map((iName, itemId) => {
+	const categoriesOnItems = await Promise.all(
+		Object.keys(CategoresItems)
+			.map((categoryName, categoryId) => {
+				return CategoresItems[categoryName].map(async (item) => {
+					const foundItem = await prisma.item.findFirst({
+						where: {
+							name: item.name,
+						},
+					});
 					return {
 						categoryId,
-						itemId,
+						itemId: foundItem.id,
 					};
 				});
 			})
-			.flat(),
+			.flat()
+	);
+
+	await prisma.categoriesOnItems.createMany({
+		data: categoriesOnItems,
 		skipDuplicates: true,
 	});
 }

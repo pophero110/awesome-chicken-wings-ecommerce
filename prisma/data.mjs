@@ -1,11 +1,11 @@
 export const Sandwich = [
-	'Grilled',
-	'Fried',
-	'Buffalo',
-	'Whiting',
-	'Catfish',
-	'Tilapia',
-].map((name, id) => {
+	'Grilled Sandwich',
+	'Fried Sandwich',
+	'Buffalo Sandwich',
+	'Whiting Sandwich',
+	'Catfish Sandwich',
+	'Tilapia Sandwich',
+].map((name) => {
 	return {
 		name,
 		price: 9.25,
@@ -24,7 +24,7 @@ export const Hamburger = [
 	'Cheese Burger',
 	'Teriyaki Burger',
 	'BBQ Burger',
-].map((name, id) => {
+].map((name) => {
 	return {
 		name,
 		price: 15,
@@ -87,17 +87,37 @@ export const FriedRice = [
 	},
 ];
 
+export const Items = [
+	...Sandwich,
+	...FriedRice,
+	...Fish,
+	...ChickenTender,
+	...Hamburger,
+	...Shrimp,
+	...Salad,
+	...SeedfoodBoil,
+	...PillySteak,
+	...SideOrder,
+	...Wing,
+].map((item, id) => {
+	return {
+		id,
+		name: item.name,
+		price: item.price,
+	};
+});
+
 // Key as Category, Value as Item
 export const CategoresItems = {
 	Sandwich,
 	Wing,
 	Hamburger,
 	Salad,
-	SideOrder,
-	PillySteak,
-	SeedfoodBoil,
 	Shrimp,
-	ChickenTender,
 	Fish,
-	FriedRice,
+	'Side Order': SideOrder,
+	'Pilly Steak': PillySteak,
+	'Seedfood Boil': SeedfoodBoil,
+	'Chicken Tender': ChickenTender,
+	'Fried Rice': FriedRice,
 };
