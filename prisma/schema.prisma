@@ -10,17 +10,29 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  user_id       Int @id @default(autoincrement())
-  email         String  @unique
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
-}
-
 model Item {
-  item_id       Int @id @default(autoincrement())
+  id            Int @id @default(autoincrement())
   name          String
   price         Float
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
+  categories    CategoriesOnItems[]
+}
+
+model Category {
+  id            Int @id @default(autoincrement())
+  name          String
+  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
+  items         CategoriesOnItems[]
+}
+
+model CategoriesOnItems {
+  category          Category @relation(fields: [categoryId], references: [id])
+  categoryId        Int
+  item              Item @relation(fields: [itemId], references: [id])
+  itemId            Int
+  assignedAt DateTime @default(now())
+
+  @@id([itemId, categoryId])
 }
