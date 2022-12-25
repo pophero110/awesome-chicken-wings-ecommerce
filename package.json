@@ -8,6 +8,9 @@
 		"start": "next start",
 		"lint": "next lint"
 	},
+	"prisma": {
+		"seed": "node prisma/seed.mjs"
+	},
 	"keywords": [],
 	"author": "",
 	"license": "MIT",
