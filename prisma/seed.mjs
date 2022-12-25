@@ -1,53 +1,43 @@
 import { PrismaClient } from '@prisma/client';
+import { CategoresItems } from './data.mjs';
 const prisma = new PrismaClient();
 
 async function main() {
-	const items = [...Array(15)].map((e, index) => {
-		return {
-			id: index,
-			name: `${(index + 1) * 5}PC Chicken Wings`,
-			price: index * 5,
-		};
-	});
-
 	await prisma.item.createMany({
-		data: items,
+		data: Object.values(CategoresItems)
+			.flat()
+			.map((item, id) => {
+				return {
+					id,
+					name: item.name,
+					price: item.price,
+				};
+			}),
 		skipDuplicates: true,
-	});
-
-	const categories = [
-		'Sandwich',
-		'Hamburger',
-		'Salad',
-		'Side Order',
-		'Wings',
-		'Philly Steak',
-		'Shrimp',
-		'Seafood Boil',
-		'Chicken Tender',
-		'Fish',
-		'Fried Rice',
-	].map((name, id) => {
-		return {
-			id,
-			name,
-		};
 	});
 
 	await prisma.category.createMany({
-		data: categories,
+		data: Object.keys(CategoresItems).map((name, id) => {
+			return {
+				id,
+				name,
+			};
+		}),
 		skipDuplicates: true,
 	});
 
-	const categoriesOnItems = items.map((item) => {
-		return {
-			categoryId: 4,
-			itemId: item.id,
-		};
-	});
-
 	await prisma.categoriesOnItems.createMany({
-		data: categoriesOnItems,
+		data: Object.keys(CategoresItems)
+			.map((cName, categoryId) => {
+				return CategoresItems[cName].map((iName, itemId) => {
+					return {
+						categoryId,
+						itemId,
+					};
+				});
+			})
+			.flat(),
+		skipDuplicates: true,
 	});
 }
 main()
