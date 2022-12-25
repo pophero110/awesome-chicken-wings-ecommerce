@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Card, Text, Row } from '@nextui-org/react';
 export type ItemProps = {
-	item_id: string;
+	id: string;
 	name: string;
 	price: number;
 };

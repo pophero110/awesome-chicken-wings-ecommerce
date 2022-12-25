@@ -1,10 +1,8 @@
 import React from 'react';
+import ItemList from '../components/menu/itemList';
+import { ItemProps } from '../components/menu/item';
 import { GetStaticProps } from 'next';
-import Router from 'next/router';
-import ReactMarkdown from 'react-markdown';
 import prisma from '../lib/prisma';
-import Item, { ItemProps } from '../components/menu/item';
-import { Grid } from '@nextui-org/react';
 
 export const getStaticProps: GetStaticProps = async () => {
 	const items = await prisma.item.findMany();
@@ -13,22 +11,12 @@ export const getStaticProps: GetStaticProps = async () => {
 	};
 };
 
-export type MenuProps = {
+type MenuProps = {
 	items: ItemProps[];
 };
 
 const Menu: React.FC<MenuProps> = ({ items }) => {
-	return (
-		<Grid.Container gap={2} justify='flex-start'>
-			{items.map((item) => {
-				return (
-					<Grid xs={6} sm={3} key={item.id}>
-						<Item item={item}></Item>
-					</Grid>
-				);
-			})}
-		</Grid.Container>
-	);
+	return <ItemList items={items}></ItemList>;
 };
 
 export default Menu;
