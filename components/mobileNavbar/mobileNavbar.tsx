@@ -3,7 +3,7 @@ import NavItem from './navItem';
 import { CSSProperties } from '@nextui-org/react/types/theme';
 import { useState } from 'react';
 const MoblieNavbar = () => {
-	const [activeNavItem, setActiveNavItem] = useState('home');
+	const [activeNavItem, setActiveNavItem] = useState('');
 	const style: CSSProperties = {
 		position: 'fixed',
 		width: '100%',

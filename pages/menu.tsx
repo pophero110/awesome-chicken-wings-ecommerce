@@ -6,7 +6,6 @@ import { GetStaticProps } from 'next';
 import prisma from '../lib/prisma';
 import { Container } from '@nextui-org/react';
 import { useState } from 'react';
-import Layout from '../components/Layout';
 export const getStaticProps: GetStaticProps = async () => {
 	const categories = await prisma.category.findMany({
 		include: { items: { include: { item: true } } },
@@ -40,17 +39,14 @@ const Menu: React.FC<MenuProps> = ({ categories }) => {
 	const items = categories.filter(
 		(category) => category.name === activeCategoryName
 	)[0].items;
-	console.log(activeCategoryName);
 	return (
-		<Layout>
-			<Container style={{ paddingBottom: '4.5rem' }}>
-				<CategroyNav
-					categories={categories}
-					activeCategoryName={activeCategoryName}
-					setActiveCategoryName={setActiveCategoryName}></CategroyNav>
-				<ItemList items={items}></ItemList>
-			</Container>
-		</Layout>
+		<Container style={{ paddingBottom: '4.5rem' }}>
+			<CategroyNav
+				categories={categories}
+				activeCategoryName={activeCategoryName}
+				setActiveCategoryName={setActiveCategoryName}></CategroyNav>
+			<ItemList items={items}></ItemList>
+		</Container>
 	);
 };
 
