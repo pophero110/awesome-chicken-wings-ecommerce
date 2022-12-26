@@ -1,5 +1,5 @@
 import React from 'react';
-
+import style from './item.module.css';
 import { Card, Text, Row } from '@nextui-org/react';
 export type ItemProps = {
 	id: string;
@@ -9,7 +9,7 @@ export type ItemProps = {
 
 const Item: React.FC<{ item: ItemProps }> = ({ item }) => {
 	return (
-		<Card isPressable>
+		<Card isPressable className={style.menu__item}>
 			<Card.Body css={{ p: 0 }}>
 				<Card.Image
 					src={'https://nextui.org/images/fruit-1.jpeg'}
