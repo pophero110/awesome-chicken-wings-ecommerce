@@ -9,4 +9,5 @@
 
 # TODO
 
+-   fix slow animation on iPhone 12 Pro
 -   css vendor autoprefixer
