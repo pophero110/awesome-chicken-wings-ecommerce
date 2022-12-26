@@ -19,9 +19,9 @@ const NavItem: React.FC<NavItemProps> = ({
 		menu: <Category set='bold' />,
 	};
 	const mapRoute = {
-		cart: '/cart',
 		home: '/',
-		menu: 'menu',
+		cart: '/cart',
+		menu: '/menu',
 	};
 	const style = {
 		padding: '15px 15px',
