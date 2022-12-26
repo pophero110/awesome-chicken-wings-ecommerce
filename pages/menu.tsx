@@ -1,7 +1,6 @@
 import React from 'react';
 import ItemList from '../components/menu/itemList';
 import CategroyNav from '../components/menu/categoryNav';
-import MobileNavbar from '../components/mobileNavbar/mobileNavbar';
 import { CategoryProps } from '../components/menu/category';
 import { GetStaticProps } from 'next';
 import prisma from '../lib/prisma';
@@ -41,6 +40,7 @@ const Menu: React.FC<MenuProps> = ({ categories }) => {
 	const items = categories.filter(
 		(category) => category.name === activeCategoryName
 	)[0].items;
+	console.log(activeCategoryName);
 	return (
 		<Layout>
 			<Container style={{ paddingBottom: '4.5rem' }}>
