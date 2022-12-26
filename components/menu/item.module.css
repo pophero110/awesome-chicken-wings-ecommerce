@@ -11,3 +11,20 @@
 		transform: none;
 	}
 }
+
+.menu__item__metadata {
+	padding-top: 10px;
+	justify-content: space-around;
+	position: absolute;
+	top: 0;
+	left: 1rem;
+}
+
+.menu__item__action {
+	display: flex;
+	align-items: center;
+	position: absolute;
+	bottom: 0;
+	right: 1rem;
+	padding-bottom: 10px;
+}
