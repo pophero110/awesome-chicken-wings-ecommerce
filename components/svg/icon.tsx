@@ -3,14 +3,16 @@ import React from 'react';
 type IconProps = {
 	type: string;
 	onClick: () => void;
+	width: string;
+	height: string;
 };
-const Icon: React.FC<IconProps> = ({ type, onClick }) => {
+const Icon: React.FC<IconProps> = ({ type, onClick, width, height }) => {
 	const plusIcon = (
 		<svg
 			onClick={onClick}
 			xmlns='http://www.w3.org/2000/svg'
-			width='24px'
-			height='24px'
+			width={width}
+			height={height}
 			viewBox='0 0 24 24'
 			role='presentation'>
 			<g transform='translate(2 2)'>
@@ -25,8 +27,8 @@ const Icon: React.FC<IconProps> = ({ type, onClick }) => {
 		<svg
 			onClick={onClick}
 			xmlns='http://www.w3.org/2000/svg'
-			width='24px'
-			height='24px'
+			width={width}
+			height={height}
 			viewBox='0 0 24 24'
 			role='presentation'>
 			<g transform='translate(2 2)'>

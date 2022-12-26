@@ -36,6 +36,8 @@ const Item: React.FC<{ item: ItemProps }> = ({ item }) => {
 					{displayMinus ? (
 						<>
 							<Icon
+								width='30px'
+								height='30px'
 								type='minus'
 								onClick={handleMinusClick}></Icon>
 							<span
@@ -43,6 +45,7 @@ const Item: React.FC<{ item: ItemProps }> = ({ item }) => {
 									paddingLeft: '5px',
 									paddingRight: '5px',
 									color: '#EAF4FF',
+									fontSize: '1.1rem',
 								}}>
 								0
 							</span>
@@ -51,7 +54,11 @@ const Item: React.FC<{ item: ItemProps }> = ({ item }) => {
 						''
 					)}
 
-					<Icon type='plus' onClick={handlePlusClick}></Icon>
+					<Icon
+						width='30px'
+						height='30px'
+						type='plus'
+						onClick={handlePlusClick}></Icon>
 				</div>
 			</Card.Body>
 		</Card>
