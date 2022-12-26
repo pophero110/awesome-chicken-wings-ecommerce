@@ -32,9 +32,7 @@ const NavItem: React.FC<NavItemProps> = ({
 	return (
 		<Link href={mapRoute[name]}>
 			<a
-				onClick={() => {
-					setActiveNavItem(name);
-				}}
+				onClick={() => setActiveNavItem(name)}
 				style={
 					activeNavItem === name
 						? { ...style, borderTop: '4px solid #0072F5' }
