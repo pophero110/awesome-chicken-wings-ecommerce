@@ -15,13 +15,15 @@ const CategroyNav: React.FC<CategroyNavProps> = ({
 	return (
 		<div className='categoryNav' style={{ paddingTop: '10px' }}>
 			<Slider>
-				{categories.map((category) => {
+				{categories.map((category, index) => {
 					return (
 						<Category
 							activeCategoryName={activeCategoryName}
 							setActiveCategoryName={setActiveCategoryName}
 							name={category.name}
-							key={category.id}></Category>
+							key={category.id}
+							id={''}
+							items={[]}></Category>
 					);
 				})}
 			</Slider>
