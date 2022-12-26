@@ -1,25 +1,26 @@
 import React from 'react';
 import Category, { CategoryProps } from './category';
 import Slider from '../shared/slider/slider';
-import { CSSProperties } from '@nextui-org/react/types/theme';
-import { useEffect } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 type CategroyNavProps = {
 	categories: CategoryProps[];
+	setActiveCategoryName: Dispatch<SetStateAction<string>>;
+	activeCategoryName: string;
 };
-const CategroyNav: React.FC<CategroyNavProps> = ({ categories }) => {
-	const activeCategory: CSSProperties = {
-		backgroundColor: '#0072f5',
-		color: 'white',
-	};
-
+const CategroyNav: React.FC<CategroyNavProps> = ({
+	categories,
+	activeCategoryName,
+	setActiveCategoryName,
+}) => {
 	return (
 		<div className='categoryNav' style={{ paddingTop: '10px' }}>
 			<Slider>
-				{categories.map((category, index) => {
+				{categories.map((category) => {
 					return (
 						<Category
-							activeCategory={index === 0 ? activeCategory : {}}
-							category={category}
+							activeCategoryName={activeCategoryName}
+							setActiveCategoryName={setActiveCategoryName}
+							name={category.name}
 							key={category.id}></Category>
 					);
 				})}
