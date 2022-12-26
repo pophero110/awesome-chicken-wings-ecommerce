@@ -50,7 +50,6 @@ const Menu: React.FC<MenuProps> = ({ categories }) => {
 					setActiveCategoryName={setActiveCategoryName}></CategroyNav>
 				<ItemList items={items}></ItemList>
 			</Container>
-			<MobileNavbar></MobileNavbar>
 		</Layout>
 	);
 };
