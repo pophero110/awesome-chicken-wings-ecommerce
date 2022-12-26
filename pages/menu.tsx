@@ -1,12 +1,13 @@
 import React from 'react';
 import ItemList from '../components/menu/itemList';
 import CategroyNav from '../components/menu/categoryNav';
-import { ItemProps } from '../components/menu/item';
+import MobileNavbar from '../components/mobileNavbar/mobileNavbar';
 import { CategoryProps } from '../components/menu/category';
 import { GetStaticProps } from 'next';
 import prisma from '../lib/prisma';
 import { Container } from '@nextui-org/react';
 import { useState } from 'react';
+import Layout from '../components/Layout';
 export const getStaticProps: GetStaticProps = async () => {
 	const categories = await prisma.category.findMany({
 		include: { items: { include: { item: true } } },
@@ -41,13 +42,16 @@ const Menu: React.FC<MenuProps> = ({ categories }) => {
 		(category) => category.name === activeCategoryName
 	)[0].items;
 	return (
-		<Container>
-			<CategroyNav
-				categories={categories}
-				activeCategoryName={activeCategoryName}
-				setActiveCategoryName={setActiveCategoryName}></CategroyNav>
-			<ItemList items={items}></ItemList>
-		</Container>
+		<Layout>
+			<Container style={{ paddingBottom: '4.5rem' }}>
+				<CategroyNav
+					categories={categories}
+					activeCategoryName={activeCategoryName}
+					setActiveCategoryName={setActiveCategoryName}></CategroyNav>
+				<ItemList items={items}></ItemList>
+			</Container>
+			<MobileNavbar></MobileNavbar>
+		</Layout>
 	);
 };
 
