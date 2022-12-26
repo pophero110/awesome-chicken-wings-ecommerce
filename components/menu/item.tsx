@@ -22,14 +22,7 @@ const Item: React.FC<{ item: ItemProps }> = ({ item }) => {
 			<Card.Footer css={{ justifyItems: 'flex-start' }}>
 				<Row wrap='wrap' justify='space-between' align='center'>
 					<Text b>{item.name}</Text>
-					<Text
-						css={{
-							color: '$accents7',
-							fontWeight: '$semibold',
-							fontSize: '$sm',
-						}}>
-						{`$${item.price}`}
-					</Text>
+					<Text color='success'>{`$${item.price}`}</Text>
 				</Row>
 			</Card.Footer>
 		</Card>
