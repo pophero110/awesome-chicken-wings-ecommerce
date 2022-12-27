@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import ItemList from '../components/menu/itemList';
 import CategroyNav from '../components/menu/categoryNav';
 import { CategoryProps } from '../components/menu/category';
