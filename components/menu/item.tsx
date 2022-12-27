@@ -50,10 +50,7 @@ const Item: React.FC<{ item: ItemProps }> = ({ item }) => {
 								0
 							</span>
 						</>
-					) : (
-						''
-					)}
-
+					) : null}
 					<Icon
 						width='30px'
 						height='30px'

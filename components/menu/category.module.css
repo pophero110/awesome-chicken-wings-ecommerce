@@ -2,7 +2,7 @@
 	white-space: nowrap;
 	padding: 3px 10px;
 	margin-right: 5px;
-	border-radius: 25px;
+	border-radius: var(--nextui-radii-lg);
 	cursor: pointer;
 	user-select: none;
 }

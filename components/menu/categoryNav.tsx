@@ -13,9 +13,9 @@ const CategroyNav: React.FC<CategroyNavProps> = ({
 	setActiveCategoryName,
 }) => {
 	return (
-		<div className='categoryNav' style={{ paddingTop: '10px' }}>
+		<div className='categoryNav'>
 			<Slider>
-				{categories.map((category, index) => {
+				{categories.map((category) => {
 					return (
 						<Category
 							activeCategoryName={activeCategoryName}
