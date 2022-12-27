@@ -1,22 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import style from './item.module.css';
 import { Card, Text } from '@nextui-org/react';
 import Icon from '../svg/icon';
+import {
+	ItemsContext,
+	ItemsDispatchContext,
+} from '../../contexts/itemsContext';
 export type ItemProps = {
 	id: string;
 	name: string;
 	price: number;
-	itemDispatch: ({}) => void;
-	itemState: {};
 };
 
-const Item: React.FC<ItemProps> = ({
-	id,
-	name,
-	price,
-	itemDispatch,
-	itemState,
-}) => {
+const Item: React.FC<ItemProps> = ({ id, name, price }) => {
+	const { itemState } = useContext(ItemsContext);
+	const { itemDispatch } = useContext(ItemsDispatchContext);
 	const handlePlusClick = () => {
 		itemDispatch({ type: 'addItem', id });
 	};

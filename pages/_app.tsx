@@ -7,6 +7,8 @@ import Router from 'next/router';
 import { useEffect } from 'react';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
+import ItemsProvider from '../contexts/itemsContext';
+
 const App = ({ Component, pageProps }: AppProps) => {
 	const darkTheme = createTheme({
 		type: 'dark',
@@ -29,7 +31,9 @@ const App = ({ Component, pageProps }: AppProps) => {
 	return (
 		<NextUIProvider theme={darkTheme}>
 			<Layout>
-				<Component {...pageProps} />
+				<ItemsProvider>
+					<Component {...pageProps} />
+				</ItemsProvider>
 			</Layout>
 		</NextUIProvider>
 	);

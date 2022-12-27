@@ -6,7 +6,6 @@ import { GetStaticProps } from 'next';
 import prisma from '../lib/prisma';
 import { Container, Spacer } from '@nextui-org/react';
 import { useState } from 'react';
-import { itemReducer, itemInitialState } from '../reducers/menuReducer';
 export const getStaticProps: GetStaticProps = async () => {
 	const categories = await prisma.category.findMany({
 		include: { items: { include: { item: true } } },
@@ -37,7 +36,6 @@ type MenuProps = {
 
 const Menu: React.FC<MenuProps> = ({ categories }) => {
 	const [activeCategoryName, setActiveCategoryName] = useState('Sandwich');
-	const [itemState, itemDispatch] = useReducer(itemReducer, itemInitialState);
 	const items = categories.filter(
 		(category) => category.name === activeCategoryName
 	)[0].items;
@@ -50,10 +48,7 @@ const Menu: React.FC<MenuProps> = ({ categories }) => {
 					activeCategoryName={activeCategoryName}
 					setActiveCategoryName={setActiveCategoryName}></CategroyNav>
 				<Spacer y={1}></Spacer>
-				<ItemList
-					items={items}
-					itemDispatch={itemDispatch}
-					itemState={itemState}></ItemList>
+				<ItemList items={items}></ItemList>
 			</Container>
 			<Spacer y={4}></Spacer>
 		</>

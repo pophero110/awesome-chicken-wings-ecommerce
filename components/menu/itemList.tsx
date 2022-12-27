@@ -3,15 +3,9 @@ import Item, { ItemProps } from './item';
 import { Grid } from '@nextui-org/react';
 type ItemListProps = {
 	items: ItemProps[];
-	itemDispatch: ({}) => void;
-	itemState: {};
 };
 
-const ItemList: React.FC<ItemListProps> = ({
-	items,
-	itemDispatch,
-	itemState,
-}) => {
+const ItemList: React.FC<ItemListProps> = ({ items }) => {
 	return (
 		<Grid.Container gap={1} justify='flex-start'>
 			{items.map((item) => {
@@ -20,9 +14,7 @@ const ItemList: React.FC<ItemListProps> = ({
 						<Item
 							id={item.id}
 							name={item.name}
-							price={item.price}
-							itemState={itemState}
-							itemDispatch={itemDispatch}></Item>
+							price={item.price}></Item>
 					</Grid>
 				);
 			})}
