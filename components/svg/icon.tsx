@@ -7,9 +7,13 @@ type IconProps = {
 	height: string;
 };
 const Icon: React.FC<IconProps> = ({ type, onClick, width, height }) => {
+	const style = {
+		cursor: 'pointer',
+	};
 	const plusIcon = (
 		<svg
 			onClick={onClick}
+			style={style}
 			xmlns='http://www.w3.org/2000/svg'
 			width={width}
 			height={height}
@@ -26,6 +30,7 @@ const Icon: React.FC<IconProps> = ({ type, onClick, width, height }) => {
 	const minusIcon = (
 		<svg
 			onClick={onClick}
+			style={style}
 			xmlns='http://www.w3.org/2000/svg'
 			width={width}
 			height={height}
