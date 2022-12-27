@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import style from './item.module.css';
 import { Card, Text } from '@nextui-org/react';
 import Icon from '../svg/icon';
