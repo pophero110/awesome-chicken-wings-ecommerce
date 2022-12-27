@@ -6,15 +6,22 @@ export type ItemProps = {
 	id: string;
 	name: string;
 	price: number;
+	itemDispatch: ({}) => void;
+	itemState: {};
 };
 
-const Item: React.FC<{ item: ItemProps }> = ({ item }) => {
-	const [displayMinus, setDisplayMinus] = useState(false);
+const Item: React.FC<ItemProps> = ({
+	id,
+	name,
+	price,
+	itemDispatch,
+	itemState,
+}) => {
 	const handlePlusClick = () => {
-		setDisplayMinus(true);
+		itemDispatch({ type: 'addItem', id });
 	};
 	const handleMinusClick = () => {
-		setDisplayMinus(false);
+		itemDispatch({ type: 'subtractItem', id });
 	};
 	return (
 		<Card className={style.menu__item}>
@@ -24,16 +31,16 @@ const Item: React.FC<{ item: ItemProps }> = ({ item }) => {
 					objectFit='cover'
 					width='100%'
 					height={150}
-					alt={item.name}
+					alt={name}
 				/>
 				<div className={style.menu__item__metadata}>
 					<Text b style={{ backgroundColor: 'transparent' }}>
-						{item.name}
+						{name}
 					</Text>
-					<Text color='white'>{`$${item.price}`}</Text>
+					<Text color='white'>{`$${price}`}</Text>
 				</div>
 				<div className={style.menu__item__action}>
-					{displayMinus ? (
+					{itemState[id] >= 1 ? (
 						<>
 							<Icon
 								width='30px'
@@ -47,10 +54,11 @@ const Item: React.FC<{ item: ItemProps }> = ({ item }) => {
 									color: '#EAF4FF',
 									fontSize: '1.1rem',
 								}}>
-								0
+								{itemState[id]}
 							</span>
 						</>
 					) : null}
+
 					<Icon
 						width='30px'
 						height='30px'
