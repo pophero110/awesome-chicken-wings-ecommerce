@@ -14,12 +14,11 @@ type Props = {
 	children: ReactNode;
 };
 const ItemsProvider: React.FC<Props> = ({ children }) => {
-	const [items, itemDispatch] = useReducer(itemReducer, itemInitialState);
+	const [itemState, itemDispatch] = useReducer(itemReducer, itemInitialState);
 
 	return (
-		<ItemsContext.Provider value={{ itemState: items }}>
-			<ItemsDispatchContext.Provider
-				value={{ itemDispatch: itemDispatch }}>
+		<ItemsContext.Provider value={{ itemState }}>
+			<ItemsDispatchContext.Provider value={{ itemDispatch }}>
 				{children}
 			</ItemsDispatchContext.Provider>
 		</ItemsContext.Provider>
