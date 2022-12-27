@@ -6,7 +6,7 @@ import { GetStaticProps } from 'next';
 import prisma from '../lib/prisma';
 import { Container, Spacer } from '@nextui-org/react';
 import { useState } from 'react';
-import itemReducer, { itemInitialState } from '../reducers/itemReducer';
+import { itemReducer, itemInitialState } from '../reducers/menuReducer';
 export const getStaticProps: GetStaticProps = async () => {
 	const categories = await prisma.category.findMany({
 		include: { items: { include: { item: true } } },
