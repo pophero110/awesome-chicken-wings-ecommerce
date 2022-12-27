@@ -1,10 +1,19 @@
 import React from 'react';
-import { Container, Col, Row, Text, Spacer } from '@nextui-org/react';
+import { Container, Col, Row, Text } from '@nextui-org/react';
 import Image from 'next/image';
 import styles from './cartItem.module.css';
 import Icon from '../svg/icon';
 import { CSSProperties } from '@nextui-org/react/types/theme';
-const CartItem = () => {
+import { useItemDispatch } from '../../contexts/itemsContext';
+import { addItem, subtractItem } from '../../reducers/itemReducer';
+type CartItemProps = {
+	id: string;
+	quantity: number;
+	name: string;
+	price: number;
+};
+const CartItem: React.FC<CartItemProps> = ({ id, quantity, name, price }) => {
+	const { itemDispatch } = useItemDispatch();
 	const style: CSSProperties = {
 		backgroundColor: '#26292B',
 		borderRadius: 'var(--ui-border-radius)',
@@ -26,8 +35,8 @@ const CartItem = () => {
 						display: 'flex',
 						flexDirection: 'column',
 					}}>
-					<Text>Chicken Wing</Text>
-					<Text b>{`$15.0`}</Text>
+					<Text>{name}</Text>
+					<Text b>{`$${price}`}</Text>
 				</Col>
 				<Col
 					style={{
@@ -40,7 +49,9 @@ const CartItem = () => {
 						width='30px'
 						height='30px'
 						type='minus'
-						onClick={() => {}}></Icon>
+						onClick={() =>
+							itemDispatch({ type: subtractItem, id })
+						}></Icon>
 					<span
 						style={{
 							paddingLeft: '5px',
@@ -48,10 +59,10 @@ const CartItem = () => {
 							color: '#EAF4FF',
 							fontSize: '1.1rem',
 						}}>
-						0
+						{quantity}
 					</span>
 					<Icon
-						onClick={() => {}}
+						onClick={() => itemDispatch({ type: addItem, id })}
 						width='30px'
 						height='30px'
 						type='plus'></Icon>
