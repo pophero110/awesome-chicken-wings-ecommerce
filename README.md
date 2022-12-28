@@ -13,3 +13,4 @@
 -   css vendor autoprefixer
 -   consider to upgrade to Next.js 13
 -   add dynamic title
+-   add next build cache
