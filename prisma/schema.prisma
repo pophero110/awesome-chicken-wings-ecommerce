@@ -11,28 +11,50 @@ datasource db {
 }
 
 model Item {
-  id            Int @id @default(autoincrement())
-  name          String
-  price         Decimal
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
-  categories    CategoriesOnItems[]
+  id         Int                 @id @default(autoincrement())
+  name       String
+  price      Decimal
+  createdAt  DateTime            @default(now()) @map(name: "created_at")
+  updatedAt  DateTime            @updatedAt @map(name: "updated_at")
+  categories CategoriesOnItems[]
+  LineItem   LineItem[]
 }
 
 model Category {
-  id            Int @id @default(autoincrement())
-  name          String
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
-  items         CategoriesOnItems[]
+  id        Int                 @id @default(autoincrement())
+  name      String
+  createdAt DateTime            @default(now()) @map(name: "created_at")
+  updatedAt DateTime            @updatedAt @map(name: "updated_at")
+  items     CategoriesOnItems[]
 }
 
 model CategoriesOnItems {
-  category          Category @relation(fields: [categoryId], references: [id])
-  categoryId        Int
-  item              Item @relation(fields: [itemId], references: [id])
-  itemId            Int
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  item       Item     @relation(fields: [itemId], references: [id])
+  itemId     Int
   assignedAt DateTime @default(now())
 
   @@id([itemId, categoryId])
+}
+
+model LineItem {
+  id        Int      @id @default(autoincrement())
+  unitPrice Decimal
+  quantity  Int
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+  item      Item     @relation(fields: [itemId], references: [id])
+  itemId    Int
+  Order     Order    @relation(fields: [orderId], references: [id])
+  orderId   Int
+}
+
+model Order {
+  id       Int        @id @default(autoincrement())
+  subTotal Decimal
+  total    Decimal
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+  lineItem LineItem[]
 }
