@@ -30,11 +30,11 @@ const App = ({ Component, pageProps }: AppProps) => {
 	}, []);
 	return (
 		<NextUIProvider theme={darkTheme}>
-			<Layout>
-				<ItemsProvider>
+			<ItemsProvider>
+				<Layout>
 					<Component {...pageProps} />
-				</ItemsProvider>
-			</Layout>
+				</Layout>
+			</ItemsProvider>
 		</NextUIProvider>
 	);
 };
