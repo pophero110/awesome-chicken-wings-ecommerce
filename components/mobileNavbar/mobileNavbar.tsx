@@ -12,18 +12,23 @@ const MoblieNavbar = () => {
 		justifyContent: 'space-around',
 		backgroundColor: '#102C4C',
 	};
-	const customNavItem = ['home', 'menu', 'cart'];
 	return (
 		<div style={style}>
-			{customNavItem.map((name) => {
-				return (
-					<NavItem
-						key={name}
-						activeNavItem={activeNavItem}
-						setActiveNavItem={setActiveNavItem}
-						name={name}></NavItem>
-				);
-			})}
+			<NavItem
+				key={'home'}
+				activeNavItem={activeNavItem}
+				setActiveNavItem={setActiveNavItem}
+				name={'home'}></NavItem>
+			<NavItem
+				key={'menu'}
+				activeNavItem={activeNavItem}
+				setActiveNavItem={setActiveNavItem}
+				name={'menu'}></NavItem>
+			<NavItem
+				key={'cart'}
+				activeNavItem={activeNavItem}
+				setActiveNavItem={setActiveNavItem}
+				name={'cart'}></NavItem>
 		</div>
 	);
 };
