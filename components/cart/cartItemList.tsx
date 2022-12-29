@@ -1,14 +1,18 @@
 import CartItem from './cartItem';
 import { Grid } from '@nextui-org/react';
 import { useItems } from '../../contexts/itemsContext';
-
 type CartItemListProps = {
-	mapItemsById: {};
+	mapItemsById: {
+		id: {
+			name: string;
+			price: number;
+		};
+	};
 };
-const CartItemList: React.FC<CartItemListProps> = ({ mapItemsById }) => {
+const CartItemList = ({ mapItemsById }: CartItemListProps) => {
 	const { itemState } = useItems();
 	const itemIds = Object.keys(itemState);
-	const items = itemIds.map((id) => {
+	const cartItems = itemIds.map((id) => {
 		return itemState[id] === 0 ? null : (
 			<Grid xs={12} sm={6} key={id}>
 				<CartItem
@@ -19,7 +23,7 @@ const CartItemList: React.FC<CartItemListProps> = ({ mapItemsById }) => {
 			</Grid>
 		);
 	});
-	return items;
+	return <>{cartItems}</>;
 };
 
 export default CartItemList;
