@@ -41,12 +41,21 @@ const CartItem: React.FC<CartItemProps> = ({ id, quantity, name, price }) => {
 					style={{
 						display: 'flex',
 						flexDirection: 'column',
+						height: '100%',
 					}}>
-					<Text>{name}</Text>
-					<Text b>{`$${price}`}</Text>
+					<div
+						style={{
+							paddingLeft: '0.5rem',
+						}}>
+						<Text>{name}</Text>
+						<Text b>{`$${price}`}</Text>
+					</div>
+
 					<div
 						style={{
 							display: 'flex',
+							marginTop: 'auto',
+							marginLeft: 'auto',
 						}}>
 						<Icon
 							width='30px'
