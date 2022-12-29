@@ -8,7 +8,10 @@ export const itemReducer = (state, action) => {
 			state[action.id] ? state[action.id]++ : (state[action.id] = 1);
 			return { ...state };
 		case subtractItem:
-			state[action.id]--;
+			state[action.id] === 1
+				? delete state[action.id]
+				: state[action.id]--;
+
 			return { ...state };
 		default:
 			throw new Error('In itemReducer');
