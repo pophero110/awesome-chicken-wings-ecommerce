@@ -20,13 +20,21 @@ const CartItem: React.FC<CartItemProps> = ({ id, quantity, name, price }) => {
 	};
 	return (
 		<Container style={style}>
-			<Row>
-				<Col>
+			<Row
+				style={{
+					position: 'relative',
+					height: '106px',
+				}}>
+				<Col
+					span={6}
+					style={{
+						position: 'relative',
+						height: '100%',
+					}}>
 					<Image
 						className={styles.cartItem__img}
 						src='/../public/fruit-1.jpeg'
-						width={'100%'}
-						height={'100%'}
+						layout='fill'
 						alt='missing'></Image>
 				</Col>
 				<Col
@@ -36,35 +44,32 @@ const CartItem: React.FC<CartItemProps> = ({ id, quantity, name, price }) => {
 					}}>
 					<Text>{name}</Text>
 					<Text b>{`$${price}`}</Text>
-				</Col>
-				<Col
-					style={{
-						display: 'flex',
-						alignSelf: 'end',
-						justifyContent: 'end',
-						paddingBottom: '5px',
-					}}>
-					<Icon
-						width='30px'
-						height='30px'
-						type='minus'
-						onClick={() =>
-							itemDispatch({ type: subtractItem, id })
-						}></Icon>
-					<span
+					<div
 						style={{
-							paddingLeft: '5px',
-							paddingRight: '5px',
-							color: '#EAF4FF',
-							fontSize: '1.1rem',
+							display: 'flex',
 						}}>
-						{quantity}
-					</span>
-					<Icon
-						onClick={() => itemDispatch({ type: addItem, id })}
-						width='30px'
-						height='30px'
-						type='plus'></Icon>
+						<Icon
+							width='30px'
+							height='30px'
+							type='minus'
+							onClick={() =>
+								itemDispatch({ type: subtractItem, id })
+							}></Icon>
+						<span
+							style={{
+								paddingLeft: '5px',
+								paddingRight: '5px',
+								color: '#EAF4FF',
+								fontSize: '1.1rem',
+							}}>
+							{quantity}
+						</span>
+						<Icon
+							onClick={() => itemDispatch({ type: addItem, id })}
+							width='30px'
+							height='30px'
+							type='plus'></Icon>
+					</div>
 				</Col>
 			</Row>
 		</Container>
