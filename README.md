@@ -14,3 +14,5 @@
 -   consider to upgrade to Next.js 13
 -   add dynamic title next/head
 -   add next build cache
+-   call npx prisma generate automatically after running schema migration
+-   item detail modal with options
