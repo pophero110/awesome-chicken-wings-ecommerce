@@ -16,3 +16,4 @@
 -   add next build cache
 -   call npx prisma generate automatically after running schema migration
 -   item detail modal with options
+-   json response serializer
