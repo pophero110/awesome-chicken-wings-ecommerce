@@ -1,4 +1,3 @@
-import React from 'react';
 import NavItem from './navItem';
 import { CSSProperties } from '@nextui-org/react/types/theme';
 import { useState } from 'react';

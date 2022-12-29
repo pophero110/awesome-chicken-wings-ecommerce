@@ -1,4 +1,3 @@
-import React from 'react';
 import Category, { CategoryProps } from './category';
 import Slider from '../shared/slider/slider';
 import { Dispatch, SetStateAction } from 'react';

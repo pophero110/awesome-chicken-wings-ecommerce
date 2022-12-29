@@ -1,4 +1,3 @@
-import React from 'react';
 import Item, { ItemProps } from './item';
 import { Grid } from '@nextui-org/react';
 type ItemListProps = {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Text } from '@nextui-org/react';
 import { ItemProps } from './item';
 import { Dispatch, SetStateAction } from 'react';
