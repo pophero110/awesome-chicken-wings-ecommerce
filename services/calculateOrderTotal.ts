@@ -4,7 +4,7 @@ type lineItem = {
 	itemId: number;
 };
 
-const CalculateOrderTotal = (
+const calculateOrderTotal = (
 	lineItems: lineItem[]
 ): {
 	subtotal: number;
@@ -22,4 +22,4 @@ const CalculateOrderTotal = (
 
 	return { subtotal, total };
 };
-export default CalculateOrderTotal;
+export default calculateOrderTotal;

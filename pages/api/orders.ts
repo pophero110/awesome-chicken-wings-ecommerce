@@ -1,7 +1,7 @@
 import { Prisma } from '@prisma/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../lib/prisma';
-import CalculateOrderTotal from '../../services/calculateOrderTotal';
+import calculateOrderTotal from '../../services/calculateOrderTotal';
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === 'POST') {
 		const { itemsData } = req.body;
@@ -26,7 +26,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 		});
 
 		//@ts-ignore
-		const orderData = CalculateOrderTotal(lineItemsData);
+		const orderData = calculateOrderTotal(lineItemsData);
 		if (req.body.checkoutMode) {
 			try {
 				const order = await prisma.order.create({
