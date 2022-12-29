@@ -1,4 +1,3 @@
-import React from 'react';
 import { Container, Col, Row, Text } from '@nextui-org/react';
 import Image from 'next/image';
 import styles from './cartItem.module.css';
@@ -42,7 +41,7 @@ const CartItem: React.FC<CartItemProps> = ({ id, quantity, name, price }) => {
 					style={{
 						display: 'flex',
 						alignSelf: 'end',
-						justifyContent: 'center',
+						justifyContent: 'end',
 						paddingBottom: '5px',
 					}}>
 					<Icon
