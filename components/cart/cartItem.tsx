@@ -33,7 +33,7 @@ const CartItem: React.FC<CartItemProps> = ({ id, quantity, name, price }) => {
 					}}>
 					<Image
 						className={styles.cartItem__img}
-						src='/../public/fruit-1.jpeg'
+						src='/fruit-1.jpeg'
 						layout='fill'
 						alt='missing'></Image>
 				</Col>
