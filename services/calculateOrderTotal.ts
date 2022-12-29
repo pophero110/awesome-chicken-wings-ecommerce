@@ -10,10 +10,14 @@ const CalculateOrderTotal = (
 	subtotal: number;
 	total: number;
 } => {
-	const subtotal = lineItems.reduce((acc, cur) => {
-		//@ts-ignore
-		return acc + cur.quantity * cur.unitPrice;
-	}, 0);
+	const subtotal = parseFloat(
+		lineItems
+			.reduce((acc, cur) => {
+				//@ts-ignore
+				return acc + cur.quantity * cur.unitPrice;
+			}, 0)
+			.toFixed(2)
+	);
 	const total = subtotal;
 
 	return { subtotal, total };
