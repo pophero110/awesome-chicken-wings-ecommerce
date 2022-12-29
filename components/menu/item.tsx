@@ -34,7 +34,7 @@ const Item: React.FC<ItemProps> = ({ id, name, price }) => {
 					</Text>
 					<Text color='white'>{`$${price}`}</Text>
 				</div>
-				<div className={style.menu__item__action}>
+				<div className={style.menu__item__modify}>
 					{itemState[id] >= 1 ? (
 						<>
 							<Icon

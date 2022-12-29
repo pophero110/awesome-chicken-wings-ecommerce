@@ -20,7 +20,7 @@
 	left: 1rem;
 }
 
-.menu__item__action {
+.menu__item__modify {
 	display: flex;
 	align-items: center;
 	position: absolute;
