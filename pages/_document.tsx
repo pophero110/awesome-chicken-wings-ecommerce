@@ -15,6 +15,7 @@ class MyDocument extends Document {
 		return (
 			<Html lang='en'>
 				<Head>{CssBaseline.flush()}</Head>
+				<script src='https://js.stripe.com/v3/' async></script>
 				<body>
 					<Main />
 					<NextScript />
