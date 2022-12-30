@@ -1,4 +1,5 @@
-import { Button, Grid } from '@nextui-org/react';
+import { Text, Grid } from '@nextui-org/react';
+import Link from 'next/link';
 type CartCheckoutProps = {
 	total: number | null;
 	setCheckoutModeHandler: () => void;
@@ -11,16 +12,23 @@ const CartCheckout: React.FC<CartCheckoutProps> = ({
 		<Grid
 			style={{
 				width: '100%',
-				position: 'sticky',
-				bottom: '0',
 			}}>
-			<Button
-				onPress={setCheckoutModeHandler}
-				style={{
-					width: '100%',
-				}}>
-				Continue To Payment • ${total}
-			</Button>
+			<Link href='/checkout'>
+				<a onClick={setCheckoutModeHandler}>
+					<Text
+						b
+						style={{
+							backgroundColor: 'var(--nextui-colors-blue600)',
+							borderRadius: 'var(--ui-border-radius)',
+							width: '100%',
+							display: 'block',
+							textAlign: 'center',
+							padding: '0.7rem',
+						}}>
+						Continue To Payment • ${total}
+					</Text>
+				</a>
+			</Link>
 		</Grid>
 	);
 };
