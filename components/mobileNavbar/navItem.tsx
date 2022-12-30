@@ -48,7 +48,7 @@ const NavItem: React.FC<NavItemProps> = ({
 				{name === 'cart' ? (
 					<Badge
 						color='error'
-						content={quantity > 100 ? '99+' : `${quantity}+`}
+						content={quantity > 100 ? '99+' : quantity}
 						size='sm'
 						isInvisible={quantity < 1}
 						shape='circle'>
