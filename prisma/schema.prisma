@@ -51,10 +51,13 @@ model LineItem {
 }
 
 model Order {
-  id       Int        @id @default(autoincrement())
-  subtotal Decimal
-  total    Decimal
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @updatedAt @map(name: "updated_at")
-  lineItem LineItem[]
+  id          Int        @id @default(autoincrement())
+  orderNumber String     @unique
+  subtotal    Decimal
+  total       Decimal
+  createdAt   DateTime   @default(now()) @map(name: "created_at")
+  updatedAt   DateTime   @updatedAt @map(name: "updated_at")
+  lineItem    LineItem[]
+
+  @@index([orderNumber])
 }
