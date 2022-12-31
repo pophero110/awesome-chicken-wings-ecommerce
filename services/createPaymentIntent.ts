@@ -1,6 +1,8 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-
+import Stripe from 'stripe';
 const createPaymentIntent = async (order) => {
+	const stripe = new Stripe('pk_test_TYooMQauvdEDq54NiTphI7jx', {
+		apiVersion: '2022-11-15',
+	});
 	const paymentIntent = await stripe.paymentIntents.create(
 		{
 			amount: order.total * 100,
