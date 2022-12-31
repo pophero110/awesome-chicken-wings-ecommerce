@@ -2,6 +2,10 @@ import { Prisma } from '@prisma/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../lib/prisma';
 import calculateOrderTotal from '../../services/calculateOrderTotal';
+import createPaymentIntent from '../../services/createPaymentIntent';
+import generateOrderNumber from '../../utils/generateOrderNumber';
+import { parseCookies } from 'nookies';
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === 'POST') {
 		const { itemsData } = req.body;
@@ -25,13 +29,24 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 			};
 		});
 
+		const orderNumber = await generateOrderNumber();
 		//@ts-ignore
 		const orderData = calculateOrderTotal(lineItemsData);
+		let { clientSecret } = parseCookies({ req });
+		if (!clientSecret) {
+			const paymentIntent = await createPaymentIntent({
+				...orderData,
+				orderNumber,
+			});
+			clientSecret = paymentIntent.client_secret;
+		}
 		if (req.body.checkoutMode) {
 			try {
-				const order = await prisma.order.create({
+				await prisma.order.create({
 					data: {
 						...orderData,
+						//@ts-ignore
+						orderNumber,
 						lineItem: {
 							createMany: {
 								data: lineItemsData,
@@ -42,7 +57,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 						lineItem: true,
 					},
 				});
-				res.status(200).json({ ...order });
+
+				res.status(200).json({
+					...orderData,
+					clientSecret,
+				});
 			} catch (e) {
 				if (e instanceof Prisma.PrismaClientKnownRequestError) {
 					// The .code property can be accessed in a type-safe manner
@@ -51,7 +70,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 				throw e;
 			}
 		} else {
-			res.status(200).json({ ...orderData });
+			res.status(200).json({ ...orderData, orderNumber, clientSecret });
 		}
 	}
 };
