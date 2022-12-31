@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Spacer, Grid, Text } from '@nextui-org/react';
+import { Container, Spacer, Grid } from '@nextui-org/react';
 import CartItemList from '../components/cart/cartItemList';
 import { GetServerSideProps } from 'next';
 import prisma from '../lib/prisma';
