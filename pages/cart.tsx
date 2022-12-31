@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Spacer, Grid, Text } from '@nextui-org/react';
 import CartItemList from '../components/cart/cartItemList';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import prisma from '../lib/prisma';
 import { useItems } from '../contexts/itemsContext';
 import OrderSummary from '../components/cart/orderSummary';
-import CartCheckout from '../components/cart/cartCheckout';
 import EmptyCartText from '../components/cart/emptyCartText';
-export const getStaticProps: GetStaticProps = async () => {
+import CartPayment from '../components/cart/cartPayment';
+import { setCookie } from 'nookies';
+export const getServerSideProps: GetServerSideProps = async () => {
 	const items = await prisma.item.findMany();
 	const mapItemsById = items.reduce((acc, { id, name, price }) => {
 		return { ...acc, ...{ [id]: { name, price } } };
@@ -38,6 +39,7 @@ const Cart: React.FC<CartProps> = ({ mapItemsById }) => {
 		subtotal: null,
 		total: null,
 	});
+	const [clientSecret, setClientSecret] = useState(null);
 	const [checkoutMode, setCheckoutMode] = useState(false);
 	const setCheckoutModeHandler = () => {
 		setCheckoutMode(true);
@@ -60,8 +62,11 @@ const Cart: React.FC<CartProps> = ({ mapItemsById }) => {
 					return response;
 				})
 				.then(async (response) => {
-					const orderSummary = await response.json();
-					setOrderSummary({ ...orderSummary });
+					const { subtotal, total, clientSecret } =
+						await response.json();
+					setCookie(null, 'clientSecret', clientSecret);
+					setOrderSummary({ subtotal, total });
+					setClientSecret(clientSecret);
 				})
 				.catch((error) => {
 					// TODO
@@ -74,8 +79,6 @@ const Cart: React.FC<CartProps> = ({ mapItemsById }) => {
 			createOrder();
 		}
 	}, [JSON.stringify(itemState), checkoutMode]);
-	console.log(emptyCart);
-	console.log(itemState);
 	return (
 		<>
 			{!emptyCart ? (
@@ -86,17 +89,17 @@ const Cart: React.FC<CartProps> = ({ mapItemsById }) => {
 							mapItemsById={mapItemsById}></CartItemList>
 						<OrderSummary
 							orderSummary={orderSummary}></OrderSummary>
-						<CartCheckout
+						<CartPayment
+							clientSecret={clientSecret}
 							total={orderSummary.total}
 							setCheckoutModeHandler={
 								setCheckoutModeHandler
-							}></CartCheckout>
+							}></CartPayment>
 					</Grid.Container>
 				</Container>
 			) : (
 				<EmptyCartText></EmptyCartText>
 			)}
-
 			<Spacer y={4}></Spacer>
 		</>
 	);
