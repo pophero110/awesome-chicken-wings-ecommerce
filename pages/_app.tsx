@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import ItemsProvider from '../contexts/itemsContext';
-
+import CategoryProvider from '../contexts/categoryContext';
 const App = ({ Component, pageProps }: AppProps) => {
 	const darkTheme = createTheme({
 		type: 'dark',
@@ -21,7 +21,6 @@ const App = ({ Component, pageProps }: AppProps) => {
 		Router.events.on('routeChangeStart', handleRouteStart);
 		Router.events.on('routeChangeComplete', handleRouteDone);
 		Router.events.on('routeChangeError', handleRouteDone);
-
 		return () => {
 			Router.events.off('routeChangeStart', handleRouteStart);
 			Router.events.off('routeChangeComplete', handleRouteDone);
@@ -31,9 +30,11 @@ const App = ({ Component, pageProps }: AppProps) => {
 	return (
 		<NextUIProvider theme={darkTheme}>
 			<ItemsProvider>
-				<Layout>
-					<Component {...pageProps} />
-				</Layout>
+				<CategoryProvider>
+					<Layout>
+						<Component {...pageProps} />
+					</Layout>
+				</CategoryProvider>
 			</ItemsProvider>
 		</NextUIProvider>
 	);
