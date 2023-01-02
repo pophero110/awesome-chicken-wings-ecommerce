@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { destroyCookie } from 'nookies';
+import { useItemDispatch } from '../../contexts/itemsContext';
 export default function CheckoutForm({
 	clientSecret,
 	total,
 	setCheckoutModeHandler,
 }) {
+	const { itemDispatch } = useItemDispatch();
+	const router = useRouter();
 	const [succeeded, setSucceeded] = useState(false);
 	const [error, setError] = useState(null);
 	const [processing, setProcessing] = useState(null);
@@ -54,9 +58,12 @@ export default function CheckoutForm({
 			setError(`Payment failed ${payload.error.message}`);
 			setProcessing(false);
 		} else {
-			destroyCookie(null, 'clientSecret');
 			setProcessing(false);
 			setSucceeded(true);
+			destroyCookie(null, 'clientSecret');
+			destroyCookie(null, 'paymentIntentId');
+			itemDispatch({ type: 'clearItems' });
+			router.push('/');
 		}
 	};
 	return (
