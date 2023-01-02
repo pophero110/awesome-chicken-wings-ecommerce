@@ -49,7 +49,6 @@ const Menu: React.FC<MenuProps> = ({ categories }) => {
 				<Spacer y={1}></Spacer>
 				<ItemList items={items}></ItemList>
 			</Container>
-			<Spacer y={4}></Spacer>
 		</>
 	);
 };

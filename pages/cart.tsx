@@ -107,7 +107,6 @@ const Cart: React.FC<CartProps> = ({ mapItemsById }) => {
 			) : (
 				<EmptyCartText></EmptyCartText>
 			)}
-			<Spacer y={4}></Spacer>
 		</>
 	);
 };
