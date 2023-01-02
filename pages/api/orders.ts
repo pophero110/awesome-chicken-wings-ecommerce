@@ -1,78 +1,30 @@
-import { Prisma } from '@prisma/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import prisma from '../../lib/prisma';
-import calculateOrderTotal from '../../services/calculateOrderTotal';
-import createPaymentIntent from '../../services/createPaymentIntent';
-import generateOrderNumber from '../../utils/generateOrderNumber';
 import { parseCookies } from 'nookies';
-
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+import CreateOrder from '../../services/createOrder';
+import createPaymentIntent from '../../utils/createPaymentIntent';
+const orderHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === 'POST') {
-		const { itemsData } = req.body;
-		const itemsId = Object.keys(itemsData).map((id) => parseInt(id));
-		if (!itemsId.length) {
-			res.status(400).json({
-				error: 'No item has been selected',
-			});
-		}
-		const items = await prisma.item.findMany({
-			where: {
-				id: { in: itemsId },
-			},
-		});
+		const { itemsData, checkoutMode } = req.body;
+		const service = new CreateOrder(itemsData, checkoutMode);
+		const order = await service.process();
 
-		const lineItemsData = items.map((item) => {
-			return {
-				unitPrice: item.price,
-				quantity: itemsData[item.id.toString()],
-				itemId: item.id,
-			};
-		});
-
-		const orderNumber = await generateOrderNumber();
-		//@ts-ignore
-		const orderData = calculateOrderTotal(lineItemsData);
 		let { clientSecret } = parseCookies({ req });
 		if (!clientSecret) {
-			const paymentIntent = await createPaymentIntent({
-				...orderData,
-				orderNumber,
-			});
+			const paymentIntent = await createPaymentIntent(order);
 			clientSecret = paymentIntent.client_secret;
 		}
-		if (req.body.checkoutMode) {
-			try {
-				await prisma.order.create({
-					data: {
-						...orderData,
-						//@ts-ignore
-						orderNumber,
-						lineItem: {
-							createMany: {
-								data: lineItemsData,
-							},
-						},
-					},
-					include: {
-						lineItem: true,
-					},
-				});
 
-				res.status(200).json({
-					...orderData,
-					clientSecret,
-				});
-			} catch (e) {
-				if (e instanceof Prisma.PrismaClientKnownRequestError) {
-					// The .code property can be accessed in a type-safe manner
-					res.status(400).json(e.message);
-				}
-				throw e;
-			}
-		} else {
-			res.status(200).json({ ...orderData, orderNumber, clientSecret });
+		if (order.error) {
+			res.status(400).json({
+				error: order.error,
+			});
 		}
+		res.status(200).json({
+			subtotal: order.subtotal,
+			total: order.total,
+			clientSecret,
+		});
 	}
 };
 
-export default handler;
+export default orderHandler;
