@@ -39,8 +39,9 @@ const Cart: React.FC<CartProps> = ({ mapItemsById }) => {
 		subtotal: null,
 		total: null,
 	});
-	const [clientSecret, setClientSecret] = useState(null);
 	const [checkoutMode, setCheckoutMode] = useState(false);
+	const [clientSecret, setClientSecret] = useState(null);
+
 	const setCheckoutModeHandler = () => {
 		setCheckoutMode(true);
 	};
