@@ -1,6 +1,7 @@
 export const itemInitialState = {};
 export const addItem = 'addItem';
 export const subtractItem = 'subtractItem';
+export const clearItems = 'clearItems';
 
 export const itemReducer = (state, action) => {
 	switch (action.type) {
@@ -13,6 +14,8 @@ export const itemReducer = (state, action) => {
 				: state[action.id]--;
 
 			return { ...state };
+		case clearItems:
+			return {};
 		default:
 			throw new Error('In itemReducer');
 	}
