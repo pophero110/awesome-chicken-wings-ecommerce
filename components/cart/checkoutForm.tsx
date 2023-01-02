@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { destroyCookie } from 'nookies';
 import { useItemDispatch } from '../../contexts/itemsContext';
+import { Loading, Text } from '@nextui-org/react';
 export default function CheckoutForm({
 	clientSecret,
 	total,
@@ -87,7 +88,11 @@ export default function CheckoutForm({
 					textAlign: 'center',
 					padding: '0.7rem',
 				}}>
-				<span id='button-text'>Pay ${total}</span>
+				{processing ? (
+					<Loading color='white' type='spinner' size='lg' />
+				) : (
+					<Text id='button-text'>Pay ${total}</Text>
+				)}
 			</button>
 			{error && (
 				<p className='card-error' role='alert'>
