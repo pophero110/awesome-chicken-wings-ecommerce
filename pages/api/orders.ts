@@ -12,7 +12,7 @@ const orderHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 		const order = await service.process();
 
 		if (order.error) {
-			res.status(400).json({
+			return res.status(400).json({
 				error: order.error,
 			});
 		}
@@ -29,10 +29,14 @@ const orderHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 				);
 			}
 
-			res.status(200).json({
+			return res.status(200).json({
 				subtotal: order.subtotal,
 				total: order.total,
 				clientSecret: paymentIntent.client_secret,
+			});
+		} else {
+			res.status(200).json({
+				message: 'Order was created successfully',
 			});
 		}
 	}
