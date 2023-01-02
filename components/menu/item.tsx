@@ -1,6 +1,6 @@
 import style from './item.module.css';
 import { Card, Text } from '@nextui-org/react';
-import Icon from '../svg/icon';
+import Icon from '../icon';
 import { useItems, useItemDispatch } from '../../contexts/itemsContext';
 export type ItemProps = {
 	id: string;
