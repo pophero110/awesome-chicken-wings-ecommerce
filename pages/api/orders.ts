@@ -1,17 +1,23 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { parseCookies } from 'nookies';
+import { parseCookies, setCookie } from 'nookies';
 import CreateOrder from '../../services/createOrder';
-import createPaymentIntent from '../../utils/createPaymentIntent';
+import {
+	createPaymentIntent,
+	updatePaymentIntent,
+} from '../../utils/paymentIntent';
 const orderHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === 'POST') {
 		const { itemsData, checkoutMode } = req.body;
 		const service = new CreateOrder(itemsData, checkoutMode);
 		const order = await service.process();
 
-		let { clientSecret } = parseCookies({ req });
+		let paymentIntent;
+		let { clientSecret, paymentIntentId } = parseCookies({ req });
 		if (!clientSecret) {
-			const paymentIntent = await createPaymentIntent(order);
-			clientSecret = paymentIntent.client_secret;
+			paymentIntent = await createPaymentIntent(order);
+			setCookie({ res }, 'paymentIntentId', paymentIntent.id);
+		} else {
+			paymentIntent = await updatePaymentIntent(paymentIntentId, order);
 		}
 
 		if (order.error) {
@@ -22,7 +28,7 @@ const orderHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 		res.status(200).json({
 			subtotal: order.subtotal,
 			total: order.total,
-			clientSecret,
+			clientSecret: paymentIntent.client_secret,
 		});
 	}
 };
