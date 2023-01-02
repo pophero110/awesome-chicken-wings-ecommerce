@@ -1,7 +1,7 @@
 import { Container, Col, Row, Text } from '@nextui-org/react';
 import Image from 'next/image';
 import styles from './cartItem.module.css';
-import Icon from '../svg/icon';
+import Icon from '../icon';
 import { CSSProperties } from '@nextui-org/react/types/theme';
 import { useItemDispatch } from '../../contexts/itemsContext';
 import { addItem, subtractItem } from '../../reducers/itemReducer';
