@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Spacer, Grid } from '@nextui-org/react';
-import CartItemList from '../components/cart/cartItemList';
+import { setCookie } from 'nookies';
 import { GetServerSideProps } from 'next';
 import prisma from '../lib/prisma';
 import { useItems } from '../contexts/itemsContext';
 import OrderSummary from '../components/cart/orderSummary';
 import EmptyCartText from '../components/cart/emptyCartText';
 import CartPayment from '../components/cart/cartPayment';
-import { setCookie } from 'nookies';
+import CartItemList from '../components/cart/cartItemList';
+
 export const getServerSideProps: GetServerSideProps = async () => {
 	const items = await prisma.item.findMany();
 	const mapItemsById = items.reduce((acc, { id, name, price }) => {
@@ -65,9 +66,14 @@ const Cart: React.FC<CartProps> = ({ mapItemsById }) => {
 				.then(async (response) => {
 					const { subtotal, total, clientSecret } =
 						await response.json();
-					setCookie(null, 'clientSecret', clientSecret);
-					setOrderSummary({ subtotal, total });
-					setClientSecret(clientSecret);
+					if (!checkoutMode) {
+						setOrderSummary({
+							subtotal,
+							total,
+						});
+						setClientSecret(clientSecret);
+						setCookie(null, 'clientSecret', clientSecret);
+					}
 				})
 				.catch((error) => {
 					// TODO
