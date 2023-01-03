@@ -29,7 +29,7 @@ jobs:
             - name: create env file
               run: |
                   touch .env
-                  echo DATABASE_URL=${{ postgres }} >> .env
+                  echo DATABASE_URL=postgres >> .env
             - run: npx prisma generate
             - run: npm test
             - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
