@@ -1,27 +1,20 @@
 import Category, { CategoryProps } from './category';
 import Slider from '../shared/slider/slider';
-import { Dispatch, SetStateAction } from 'react';
+import { useCategory } from '../../contexts/categoryContext';
 type CategroyNavProps = {
 	categories: CategoryProps[];
-	setActiveCategoryName: Dispatch<SetStateAction<string>>;
-	activeCategoryName: string;
 };
-const CategroyNav: React.FC<CategroyNavProps> = ({
-	categories,
-	activeCategoryName,
-	setActiveCategoryName,
-}) => {
+const CategroyNav: React.FC<CategroyNavProps> = ({ categories }) => {
+	const { activeCategory } = useCategory();
 	return (
 		<div className='categoryNav'>
-			<Slider>
+			<Slider scrollTo={activeCategory.id}>
 				{categories.map((category) => {
 					return (
 						<Category
-							activeCategoryName={activeCategoryName}
-							setActiveCategoryName={setActiveCategoryName}
 							name={category.name}
 							key={category.id}
-							id={''}
+							id={category.id}
 							items={[]}></Category>
 					);
 				})}
