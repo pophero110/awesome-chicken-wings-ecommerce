@@ -1,0 +1,15 @@
+.notification_container {
+	animation: forwards slidein 3s linear;
+}
+
+@keyframes slidein {
+	0% {
+		transform: translate(-50%, -20%);
+	}
+	80% {
+		transform: translate(-50%, -20%);
+	}
+	100% {
+		transform: translate(-50%, -60px);
+	}
+}

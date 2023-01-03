@@ -4,6 +4,7 @@ import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { destroyCookie } from 'nookies';
 import { useItemDispatch } from '../../contexts/itemsContext';
 import { Loading, Text } from '@nextui-org/react';
+import { useSetNotification } from '../../contexts/notification';
 export default function CheckoutForm({
 	clientSecret,
 	total,
@@ -17,6 +18,7 @@ export default function CheckoutForm({
 	const [disabled, setDisabled] = useState(true);
 	const stripe = useStripe();
 	const elements = useElements();
+	const { setNotification } = useSetNotification();
 
 	const cardStyle = {
 		style: {
@@ -61,6 +63,7 @@ export default function CheckoutForm({
 		} else {
 			setProcessing(false);
 			setSucceeded(true);
+			setNotification('Your order has been placed Successfully');
 			destroyCookie(null, 'clientSecret');
 			destroyCookie(null, 'paymentIntentId');
 			itemDispatch({ type: 'clearItems' });
