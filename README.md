@@ -1,4 +1,7 @@
-# awesome-chicken-wings-ecommerce
+# awesome-chicken-wings-ecommerceCancel changes
+
+# Stripe Test Credit Card
+- 4242-4242-4242-4242 02/42 242 12345
 
 # Theme
 
