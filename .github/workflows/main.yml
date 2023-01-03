@@ -6,32 +6,12 @@ on:
             - master
 
 jobs:
-    container-job:
+    build:
         runs-on: ubuntu-latest
-        container: node:10.18-jessie
 
-        services:
-            postgres:
-                image: postgres
-                env:
-                    POSTGRES_PASSWORD: postgres
-                options: >-
-                    --health-cmd pg_isready
-                    --health-interval 10s
-                    --health-timeout 5s
-                    --health-retries 5
         steps:
             - uses: actions/checkout@v2
             - uses: actions/setup-node@v3
-              with:
-                  node-version: '18'
-            - run: npm install
-            - name: create env file
-              run: |
-                  touch .env
-                  echo DATABASE_URL=postgres >> .env
-            - run: npx prisma generate
-            - run: npm test
             - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
               with:
                   heroku_api_key: ${{secrets.HEROKU_API_KEY}}
