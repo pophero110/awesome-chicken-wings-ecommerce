@@ -1,8 +1,19 @@
 import NavItem from './navItem';
 import { CSSProperties } from '@nextui-org/react/types/theme';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 const MoblieNavbar = () => {
-	const [activeNavItem, setActiveNavItem] = useState('');
+	const [activeNavItem, setActiveNavItem] = useState('/');
+	const router = useRouter();
+	useEffect(() => {
+		const handleRouteDone = (url) => {
+			setActiveNavItem(url);
+		};
+		router.events.on('routeChangeComplete', handleRouteDone);
+		return () => {
+			router.events.off('routeChangeComplete', handleRouteDone);
+		};
+	}, [activeNavItem]);
 	const style: CSSProperties = {
 		position: 'fixed',
 		width: '100%',
@@ -15,19 +26,16 @@ const MoblieNavbar = () => {
 		<div style={style}>
 			<NavItem
 				key={'home'}
-				activeNavItem={activeNavItem}
-				setActiveNavItem={setActiveNavItem}
-				name={'home'}></NavItem>
+				route={'/'}
+				activeNavItem={activeNavItem}></NavItem>
 			<NavItem
 				key={'menu'}
-				activeNavItem={activeNavItem}
-				setActiveNavItem={setActiveNavItem}
-				name={'menu'}></NavItem>
+				route={'/menu'}
+				activeNavItem={activeNavItem}></NavItem>
 			<NavItem
 				key={'cart'}
-				activeNavItem={activeNavItem}
-				setActiveNavItem={setActiveNavItem}
-				name={'cart'}></NavItem>
+				route={'/cart'}
+				activeNavItem={activeNavItem}></NavItem>
 		</div>
 	);
 };

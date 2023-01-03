@@ -1,10 +1,17 @@
 import { useEffect } from 'react';
 import style from './slider.module.css';
-const Slider = ({ children }) => {
+import { ReactNode } from 'react';
+type SliderProps = {
+	children: ReactNode[];
+	scrollTo: number;
+};
+const Slider: React.FC<SliderProps> = ({ children, scrollTo }) => {
 	useEffect(() => {
 		const slider = document.getElementsByClassName(
 			'categoryNav__slider'
 		)[0];
+		slider.scrollLeft = 116 * scrollTo;
+
 		let mouseX = 0;
 		let scollLeft = 0;
 		const mouseUpHandler = function () {
@@ -31,7 +38,7 @@ const Slider = ({ children }) => {
 			document.removeEventListener('mousemove', mouseMoveHandler);
 			document.removeEventListener('mouseup', mouseUpHandler);
 		};
-	}, []);
+	}, [scrollTo]);
 	return (
 		<div
 			className={'categoryNav__slider ' + style.categoryNav__slider}
