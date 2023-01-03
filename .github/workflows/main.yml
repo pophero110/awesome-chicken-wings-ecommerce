@@ -1,17 +1,39 @@
 name: Deploy
 
 on:
-  push:
-    branches:
-      - master
+    push:
+        branches:
+            - master
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
+    container-job:
+        runs-on: ubuntu-latest
+        container: node:10.18-jessie
+
+        services:
+            postgres:
+                image: postgres
+                env:
+                POSTGRES_PASSWORD: postgres
+                options: >-
+                --health-cmd pg_isready
+                --health-interval 10s
+                --health-timeout 5s
+                --health-retries 5
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: '18'
+            - run: npm ci
+            - name: create env file
+              run: |
+                  touch .env
+                  echo DATABASE_URL=${{ postgres }} >> .env
+            - run: npx prisma generate
+            - run: npm test
+            - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+              with:
+                  heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+                  heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+                  heroku_email: ${{secrets.HEROKU_EMAIL}}
