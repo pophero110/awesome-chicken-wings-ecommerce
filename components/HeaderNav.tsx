@@ -85,7 +85,7 @@ export default function HeaderNav() {
 					</Navbar.Item>
 					<Dropdown.Menu
 						aria-label='User menu actions'
-						color='secondary'
+						color='primary'
 						onAction={(actionKey) => console.log({ actionKey })}>
 						<Dropdown.Item key='profile' css={{ height: '$18' }}>
 							<Text b color='inherit' css={{ d: 'flex' }}>
@@ -98,7 +98,7 @@ export default function HeaderNav() {
 						<Dropdown.Item key='lightMode' withDivider>
 							Light Mode
 						</Dropdown.Item>
-						<Dropdown.Item key='logout' withDivider color='error'>
+						<Dropdown.Item key='logout' withDivider color='warning'>
 							Log Out
 						</Dropdown.Item>
 					</Dropdown.Menu>
