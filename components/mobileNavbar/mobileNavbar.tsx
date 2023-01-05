@@ -1,7 +1,9 @@
 import NavItem from './navItem';
+import { Grid } from '@nextui-org/react';
 import { CSSProperties } from '@nextui-org/react/types/theme';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import styles from './mobileNavbar.module.css';
 const MoblieNavbar = () => {
 	const [activeNavItem, setActiveNavItem] = useState('/');
 	const router = useRouter();
@@ -23,7 +25,7 @@ const MoblieNavbar = () => {
 		backgroundColor: '#102C4C',
 	};
 	return (
-		<div style={style}>
+		<div className={styles.mobileNavbar} style={style}>
 			<NavItem
 				key={'home'}
 				route={'/'}
