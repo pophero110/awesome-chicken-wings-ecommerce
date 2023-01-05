@@ -11,10 +11,7 @@ const CartPayment = ({ clientSecret, total, setCheckoutModeHandler }) => {
 	return (
 		<>
 			{clientSecret && (
-				<Grid
-					style={{
-						width: '100%',
-					}}>
+				<>
 					<Spacer></Spacer>
 					<Elements stripe={stripePromise}>
 						<CheckoutForm
@@ -23,7 +20,7 @@ const CartPayment = ({ clientSecret, total, setCheckoutModeHandler }) => {
 							setCheckoutModeHandler={setCheckoutModeHandler}
 						/>
 					</Elements>
-				</Grid>
+				</>
 			)}
 		</>
 	);

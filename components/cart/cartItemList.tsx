@@ -14,7 +14,7 @@ const CartItemList = ({ mapItemsById }: CartItemListProps) => {
 	const itemIds = Object.keys(itemState);
 	const cartItems = itemIds.map((id) => {
 		return itemState[id] === 0 ? null : (
-			<Grid xs={12} sm={6} key={id}>
+			<Grid xs={12} key={id}>
 				<CartItem
 					id={id}
 					quantity={itemState[id]}
@@ -23,7 +23,7 @@ const CartItemList = ({ mapItemsById }: CartItemListProps) => {
 			</Grid>
 		);
 	});
-	return <>{cartItems}</>;
+	return <Grid.Container gap={1}>{cartItems}</Grid.Container>;
 };
 
 export default CartItemList;

@@ -13,42 +13,37 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ orderSummary }) => {
 		padding: '8px',
 	};
 	return (
-		<Grid
-			style={{
-				width: '100%',
-			}}>
-			<Container style={style}>
-				<Row
-					style={{
-						display: 'flex',
-						justifyContent: 'space-between',
-					}}>
-					<Text b>Subtotal</Text>
-					<Text b>${subtotal}</Text>
-				</Row>
-				<Row
-					style={{
-						display: 'flex',
-						justifyContent: 'space-between',
-					}}>
-					<Text b>Tax</Text>
-					<Text b>$0</Text>
-				</Row>
-				<div
-					style={{
-						borderBottom: '1px solid #697177',
-						margin: '8px 0px',
-					}}></div>
-				<Row
-					style={{
-						display: 'flex',
-						justifyContent: 'space-between',
-					}}>
-					<Text b>Total</Text>
-					<Text b>${total}</Text>
-				</Row>
-			</Container>
-		</Grid>
+		<Container style={style}>
+			<Row
+				style={{
+					display: 'flex',
+					justifyContent: 'space-between',
+				}}>
+				<Text b>Subtotal</Text>
+				<Text b>${subtotal}</Text>
+			</Row>
+			<Row
+				style={{
+					display: 'flex',
+					justifyContent: 'space-between',
+				}}>
+				<Text b>Tax</Text>
+				<Text b>$0</Text>
+			</Row>
+			<div
+				style={{
+					borderBottom: '1px solid #697177',
+					margin: '8px 0px',
+				}}></div>
+			<Row
+				style={{
+					display: 'flex',
+					justifyContent: 'space-between',
+				}}>
+				<Text b>Total</Text>
+				<Text b>${total}</Text>
+			</Row>
+		</Container>
 	);
 };
 

@@ -92,16 +92,37 @@ const Cart: React.FC<CartProps> = ({ mapItemsById }) => {
 				<Container>
 					<Spacer y={1}></Spacer>
 					<Grid.Container gap={1} justify='flex-start'>
-						<CartItemList
-							mapItemsById={mapItemsById}></CartItemList>
-						<OrderSummary
-							orderSummary={orderSummary}></OrderSummary>
-						<CartPayment
-							clientSecret={clientSecret}
-							total={orderSummary.total}
-							setCheckoutModeHandler={
-								setCheckoutModeHandler
-							}></CartPayment>
+						<Grid xs={12} sm={6}>
+							<CartItemList
+								mapItemsById={mapItemsById}></CartItemList>
+						</Grid>
+						<Grid
+							xs={12}
+							sm={6}
+							style={{
+								width: '100%',
+							}}>
+							<Grid.Container direction='column' gap={1}>
+								<Grid>
+									<OrderSummary
+										orderSummary={
+											orderSummary
+										}></OrderSummary>
+								</Grid>
+								<Grid>
+									<CartPayment
+										clientSecret={clientSecret}
+										total={orderSummary.total}
+										setCheckoutModeHandler={
+											setCheckoutModeHandler
+										}></CartPayment>
+								</Grid>
+							</Grid.Container>
+						</Grid>
+						<Grid
+							style={{
+								width: '100%',
+							}}></Grid>
 					</Grid.Container>
 				</Container>
 			) : (
