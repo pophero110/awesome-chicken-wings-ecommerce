@@ -1,0 +1,9 @@
+.headerNav__navItem {
+	border-top: 0px !important;
+}
+
+@media screen and (max-width: 600px) {
+	.headerNav__navItem {
+		display: none !important;
+	}
+}

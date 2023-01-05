@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { Logo } from './Logo';
 import { SearchIcon } from './SearchIcon';
 import { useState } from 'react';
-
+import NavItem from './mobileNavbar/navItem';
+import styles from './HeaderNav.module.css';
 export default function HeaderNav() {
 	const [activeNavItem, setActiveNavItem] = useState('Home');
 	const activeNavItemHandler = (navItem) => {
@@ -70,6 +71,11 @@ export default function HeaderNav() {
 						}}
 						placeholder='Search...'
 					/>
+				</Navbar.Item>
+				<Navbar.Item>
+					<NavItem
+						route={'/cart'}
+						className={styles.headerNav__navItem}></NavItem>
 				</Navbar.Item>
 				<Dropdown placement='bottom-right'>
 					<Navbar.Item>
