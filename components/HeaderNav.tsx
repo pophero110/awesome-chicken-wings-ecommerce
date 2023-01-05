@@ -2,26 +2,35 @@ import { Navbar, Text, Input, Dropdown, Avatar } from '@nextui-org/react';
 import Link from 'next/link';
 import { Logo } from './Logo';
 import { SearchIcon } from './SearchIcon';
+import { useState } from 'react';
+
 export default function HeaderNav() {
+	const [activeNavItem, setActiveNavItem] = useState('Home');
+	const activeNavItemHandler = (navItem) => {
+		setActiveNavItem(navItem);
+	};
 	return (
-		<Navbar
-			isBordered
-			variant='sticky'
-			css={{
-				width: '100%',
-			}}>
+		<Navbar isBordered variant='sticky'>
 			<Navbar.Brand css={{ mr: '$4' }}>
 				<Logo />
 				<Text b color='inherit' css={{ mr: '$11' }} hideIn='xs'>
 					Awesome Chicken
 				</Text>
-				<Navbar.Content hideIn='xs' variant='highlight'>
+				<Navbar.Content hideIn='xs' variant='default'>
 					<Link href='/'>
-						<Navbar.Link isActive>Home</Navbar.Link>
+						<Navbar.Link
+							onClick={() => setActiveNavItem('Home')}
+							isActive={activeNavItem === 'Home'}>
+							Home
+						</Navbar.Link>
 					</Link>
 
 					<Link href='/menu'>
-						<Navbar.Link>Menu</Navbar.Link>
+						<Navbar.Link
+							onClick={() => setActiveNavItem('Menu')}
+							isActive={activeNavItem === 'Menu'}>
+							Menu
+						</Navbar.Link>
 					</Link>
 				</Navbar.Content>
 			</Navbar.Brand>
@@ -86,21 +95,8 @@ export default function HeaderNav() {
 								zoey@example.com
 							</Text>
 						</Dropdown.Item>
-						<Dropdown.Item key='settings' withDivider>
-							My Settings
-						</Dropdown.Item>
-						<Dropdown.Item key='team_settings'>
-							Team Settings
-						</Dropdown.Item>
-						<Dropdown.Item key='analytics' withDivider>
-							Analytics
-						</Dropdown.Item>
-						<Dropdown.Item key='system'>System</Dropdown.Item>
-						<Dropdown.Item key='configurations'>
-							Configurations
-						</Dropdown.Item>
-						<Dropdown.Item key='help_and_feedback' withDivider>
-							Help & Feedback
+						<Dropdown.Item key='lightMode' withDivider>
+							Light Mode
 						</Dropdown.Item>
 						<Dropdown.Item key='logout' withDivider color='error'>
 							Log Out
