@@ -9,6 +9,8 @@ import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import ItemsProvider from '../contexts/itemsContext';
 import CategoryProvider from '../contexts/categoryContext';
+import { trpc } from '../utils/trpc';
+import { SSRProvider } from '@react-aria/ssr';
 const App = ({ Component, pageProps }: AppProps) => {
 	const darkTheme = createTheme({
 		type: 'dark',
@@ -28,16 +30,18 @@ const App = ({ Component, pageProps }: AppProps) => {
 		};
 	}, []);
 	return (
-		<NextUIProvider theme={darkTheme}>
-			<ItemsProvider>
-				<CategoryProvider>
-					<Layout>
-						<Component {...pageProps} />
-					</Layout>
-				</CategoryProvider>
-			</ItemsProvider>
-		</NextUIProvider>
+		<SSRProvider>
+			<NextUIProvider theme={darkTheme}>
+				<ItemsProvider>
+					<CategoryProvider>
+						<Layout>
+							<Component {...pageProps} />
+						</Layout>
+					</CategoryProvider>
+				</ItemsProvider>
+			</NextUIProvider>
+		</SSRProvider>
 	);
 };
 
-export default App;
+export default trpc.withTRPC(App);
