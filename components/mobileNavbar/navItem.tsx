@@ -38,6 +38,7 @@ const NavItem: React.FC<NavItemProps> = ({
 	return (
 		<Link href={route}>
 			<a
+				aria-label='cart'
 				className={className}
 				style={
 					activeNavItem === route
