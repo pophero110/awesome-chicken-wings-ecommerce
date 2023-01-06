@@ -16,14 +16,14 @@ const Notification = () => {
 			clearTimeout(timeout);
 		};
 	}, [notification]);
-	const message = notification ? (
+	const message = true ? (
 		<div
 			className={style.notification_container}
 			style={{
 				position: 'fixed',
 				display: 'flex',
 				alignItems: 'center',
-				zIndex: '100',
+				zIndex: '300',
 				left: '50%',
 				backgroundColor: '#17C964',
 				borderRadius: '4px',

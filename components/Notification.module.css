@@ -4,12 +4,12 @@
 
 @keyframes slidein {
 	0% {
-		transform: translate(-50%, -20%);
+		transform: translate(-50%, -60px);
 	}
 	80% {
-		transform: translate(-50%, -20%);
+		transform: translate(-50%, -60px);
 	}
 	100% {
-		transform: translate(-50%, -60px);
+		transform: translate(-50%, -120px);
 	}
 }

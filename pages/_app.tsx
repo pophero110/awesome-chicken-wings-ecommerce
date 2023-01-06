@@ -30,17 +30,16 @@ const App = ({ Component, pageProps }: AppProps) => {
 		};
 	}, []);
 	return (
-		<SSRProvider>
-			<NextUIProvider theme={darkTheme}>
-				<ItemsProvider>
-					<CategoryProvider>
-						<Layout>
-							<Component {...pageProps} />
-						</Layout>
-					</CategoryProvider>
-				</ItemsProvider>
-			</NextUIProvider>
-		</SSRProvider>
+		// <SSRProvider>
+		<NextUIProvider theme={darkTheme}>
+			<ItemsProvider>
+				<CategoryProvider>
+					<Layout>
+						<Component {...pageProps} />
+					</Layout>
+				</CategoryProvider>
+			</ItemsProvider>
+		</NextUIProvider>
 	);
 };
 

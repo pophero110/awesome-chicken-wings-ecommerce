@@ -91,7 +91,10 @@ const Cart: React.FC<CartProps> = ({ mapItemsById }) => {
 			{!emptyCart ? (
 				<Container>
 					<Spacer y={1}></Spacer>
-					<Grid.Container gap={1} justify='flex-start'>
+					<Grid.Container
+						gap={1}
+						justify='flex-start'
+						alignItems='flex-start'>
 						<Grid xs={12} sm={6}>
 							<CartItemList
 								mapItemsById={mapItemsById}></CartItemList>
