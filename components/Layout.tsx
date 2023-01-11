@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { Dispatch, ReactNode, SetStateAction } from 'react';
 import MoblieNavbar from './mobileNavbar/mobileNavbar';
 import { Spacer } from '@nextui-org/react';
 import Notification from './Notification';
@@ -6,7 +6,7 @@ import NotificationProvider from '../contexts/notification';
 import HeaderNav from './HeaderNav';
 type Props = {
 	children: ReactNode;
-	setDarkMode: () => void;
+	setDarkMode: Dispatch<SetStateAction<boolean>>;
 	darkMode: boolean;
 };
 
