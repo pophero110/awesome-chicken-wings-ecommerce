@@ -12,11 +12,10 @@ const Notification = () => {
 		}, 3000);
 
 		return () => {
-			console.log('noti3');
 			clearTimeout(timeout);
 		};
 	}, [notification]);
-	const message = true ? (
+	const message = notification ? (
 		<div
 			className={style.notification_container}
 			style={{

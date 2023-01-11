@@ -23,17 +23,6 @@ type IndexProps = {
 };
 
 const Index: React.FC<IndexProps> = ({ categories }) => {
-	useEffect(() => {
-		const hello = async () => {
-			await fetch('/api/trpc/hello', {
-				method: 'GET',
-			}).then(async (res) => {
-				console.log(await res.json());
-				return res;
-			});
-		};
-		hello();
-	}, []);
 	return (
 		<Container>
 			<Spacer></Spacer>
