@@ -6,13 +6,17 @@ import NotificationProvider from '../contexts/notification';
 import HeaderNav from './HeaderNav';
 type Props = {
 	children: ReactNode;
+	setDarkMode: () => void;
+	darkMode: boolean;
 };
 
-const Layout: React.FC<Props> = ({ children }) => {
+const Layout: React.FC<Props> = ({ children, darkMode, setDarkMode }) => {
 	return (
 		<div>
 			<NotificationProvider>
-				<HeaderNav></HeaderNav>
+				<HeaderNav
+					setDarkMode={setDarkMode}
+					darkMode={darkMode}></HeaderNav>
 				<Notification></Notification>
 				{children}
 				<Spacer y={4}></Spacer>

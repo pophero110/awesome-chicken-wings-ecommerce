@@ -5,10 +5,24 @@ import { SearchIcon } from './SearchIcon';
 import { useState } from 'react';
 import NavItem from './mobileNavbar/navItem';
 import styles from './HeaderNav.module.css';
-export default function HeaderNav() {
+import { useSession } from 'next-auth/react';
+export default function HeaderNav({ darkMode, setDarkMode }) {
 	const [activeNavItem, setActiveNavItem] = useState('Home');
-	const activeNavItemHandler = (navItem) => {
-		setActiveNavItem(navItem);
+	const { data: session } = useSession();
+	const actionHandler = (actionKey) => {
+		switch (actionKey) {
+			case 'toggleMode':
+				setDarkMode(!darkMode);
+				break;
+
+			case 'login':
+				break;
+
+			case 'logout':
+				break;
+			default:
+				break;
+		}
 	};
 	return (
 		<Navbar isBordered variant='sticky'>
@@ -92,21 +106,37 @@ export default function HeaderNav() {
 					<Dropdown.Menu
 						aria-label='User menu actions'
 						color='primary'
-						onAction={(actionKey) => console.log({ actionKey })}>
-						<Dropdown.Item key='profile' css={{ height: '$18' }}>
-							<Text b color='inherit' css={{ d: 'flex' }}>
-								Signed in as
-							</Text>
-							<Text b color='inherit' css={{ d: 'flex' }}>
-								zoey@example.com
-							</Text>
+						onAction={(actionKey) => actionHandler(actionKey)}>
+						{session ? (
+							<Dropdown.Item
+								key='profile'
+								css={{ height: '$18' }}>
+								<Text b color='inherit' css={{ d: 'flex' }}>
+									Signed in as
+								</Text>
+								<Text b color='inherit' css={{ d: 'flex' }}>
+									zoey@example.com
+								</Text>
+							</Dropdown.Item>
+						) : null}
+						<Dropdown.Item key='toggleMode' withDivider>
+							{darkMode ? 'Light Mode' : 'Dark Mode'}
 						</Dropdown.Item>
-						<Dropdown.Item key='lightMode' withDivider>
-							Light Mode
-						</Dropdown.Item>
-						<Dropdown.Item key='logout' withDivider color='warning'>
-							Log Out
-						</Dropdown.Item>
+						{session ? (
+							<Dropdown.Item
+								key='logout'
+								withDivider
+								color='warning'>
+								Log Out
+							</Dropdown.Item>
+						) : (
+							<Dropdown.Item
+								key='login'
+								withDivider
+								color='warning'>
+								Log In
+							</Dropdown.Item>
+						)}
 					</Dropdown.Menu>
 				</Dropdown>
 			</Navbar.Content>

@@ -11,11 +11,16 @@ import ItemsProvider from '../contexts/itemsContext';
 import CategoryProvider from '../contexts/categoryContext';
 import { trpc } from '../utils/trpc';
 import { SSRProvider } from '@react-aria/ssr';
-const App = ({ Component, pageProps }: AppProps) => {
+import { SessionProvider } from 'next-auth/react';
+import { useState } from 'react';
+const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
 	const darkTheme = createTheme({
 		type: 'dark',
 	});
-
+	const lightTheme = createTheme({
+		type: 'light',
+	});
+	const [darkMode, setDarkMode] = useState(true);
 	useEffect(() => {
 		const handleRouteStart = () => NProgress.start();
 		const handleRouteDone = () => NProgress.done();
@@ -30,16 +35,21 @@ const App = ({ Component, pageProps }: AppProps) => {
 		};
 	}, []);
 	return (
-		// <SSRProvider>
-		<NextUIProvider theme={darkTheme}>
-			<ItemsProvider>
-				<CategoryProvider>
-					<Layout>
-						<Component {...pageProps} />
-					</Layout>
-				</CategoryProvider>
-			</ItemsProvider>
-		</NextUIProvider>
+		<SSRProvider>
+			<SessionProvider session={session}>
+				<NextUIProvider theme={darkMode ? darkTheme : lightTheme}>
+					<ItemsProvider>
+						<CategoryProvider>
+							<Layout
+								setDarkMode={setDarkMode}
+								darkMode={darkMode}>
+								<Component {...pageProps} />
+							</Layout>
+						</CategoryProvider>
+					</ItemsProvider>
+				</NextUIProvider>
+			</SessionProvider>
+		</SSRProvider>
 	);
 };
 
