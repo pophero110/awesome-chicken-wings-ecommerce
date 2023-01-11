@@ -1,6 +1,13 @@
-import { Navbar, Text, Input, Dropdown, Avatar } from '@nextui-org/react';
+import {
+	Navbar,
+	Text,
+	Input,
+	Dropdown,
+	Avatar,
+	Image,
+} from '@nextui-org/react';
 import Link from 'next/link';
-import { Logo } from './Logo';
+// import { Logo } from './Logo';
 import { SearchIcon } from './SearchIcon';
 import { useState } from 'react';
 import NavItem from './mobileNavbar/navItem';
@@ -27,28 +34,61 @@ export default function HeaderNav({ darkMode, setDarkMode }) {
 	return (
 		<Navbar isBordered variant='sticky'>
 			<Navbar.Brand css={{ mr: '$4' }}>
-				<Logo />
-				<Text b color='inherit' css={{ mr: '$11' }} hideIn='xs'>
+				<Image
+					autoResize={true}
+					width={50}
+					height={50}
+					src='./logo.png'
+					alt='logo'
+				/>
+				<Text b color='inherit' hideIn='xs'>
 					Awesome Chicken
 				</Text>
-				<Navbar.Content hideIn='xs' variant='default'>
-					<Link href='/'>
-						<Navbar.Link
-							onClick={() => setActiveNavItem('Home')}
-							isActive={activeNavItem === 'Home'}>
-							Home
-						</Navbar.Link>
-					</Link>
-
-					<Link href='/menu'>
-						<Navbar.Link
-							onClick={() => setActiveNavItem('Menu')}
-							isActive={activeNavItem === 'Menu'}>
-							Menu
-						</Navbar.Link>
-					</Link>
-				</Navbar.Content>
+				{/* <Text b color='inherit' css={{ mr: '$11' }} hideIn='xs'>
+					Awesome Chicken
+				</Text> */}
 			</Navbar.Brand>
+			<Navbar.Content hideIn='xs' variant='default'>
+				<Link href='/'>
+					<Navbar.Link
+						onClick={() => setActiveNavItem('Home')}
+						isActive={activeNavItem === 'Home'}>
+						Home
+					</Navbar.Link>
+				</Link>
+
+				<Link href='/menu'>
+					<Navbar.Link
+						onClick={() => setActiveNavItem('Menu')}
+						isActive={activeNavItem === 'Menu'}>
+						Menu
+					</Navbar.Link>
+				</Link>
+
+				<Link href='/menu'>
+					<Navbar.Link
+						onClick={() => setActiveNavItem('About')}
+						isActive={activeNavItem === 'About'}>
+						About
+					</Navbar.Link>
+				</Link>
+
+				<Link href='/menu'>
+					<Navbar.Link
+						onClick={() => setActiveNavItem('About')}
+						isActive={activeNavItem === 'About'}>
+						About
+					</Navbar.Link>
+				</Link>
+
+				<Link href='/menu'>
+					<Navbar.Link
+						onClick={() => setActiveNavItem('About')}
+						isActive={activeNavItem === 'About'}>
+						About
+					</Navbar.Link>
+				</Link>
+			</Navbar.Content>
 			<Navbar.Content
 				css={{
 					'@xsMax': {
