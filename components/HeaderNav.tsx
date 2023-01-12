@@ -64,30 +64,6 @@ export default function HeaderNav({ darkMode, setDarkMode }) {
 						Menu
 					</Navbar.Link>
 				</Link>
-
-				<Link href='/menu'>
-					<Navbar.Link
-						onClick={() => setActiveNavItem('About')}
-						isActive={activeNavItem === 'About'}>
-						About
-					</Navbar.Link>
-				</Link>
-
-				<Link href='/menu'>
-					<Navbar.Link
-						onClick={() => setActiveNavItem('About')}
-						isActive={activeNavItem === 'About'}>
-						About
-					</Navbar.Link>
-				</Link>
-
-				<Link href='/menu'>
-					<Navbar.Link
-						onClick={() => setActiveNavItem('About')}
-						isActive={activeNavItem === 'About'}>
-						About
-					</Navbar.Link>
-				</Link>
 			</Navbar.Content>
 			<Navbar.Content
 				css={{
@@ -104,6 +80,7 @@ export default function HeaderNav({ darkMode, setDarkMode }) {
 						},
 					}}>
 					<Input
+						aria-label='search'
 						clearable
 						contentLeft={
 							<SearchIcon
