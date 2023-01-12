@@ -22,7 +22,7 @@ export default function HeaderNav({ darkMode, setDarkMode }) {
 				setDarkMode(!darkMode);
 				break;
 
-			case 'login':
+			case 'signin':
 				break;
 
 			case 'logout':
@@ -164,17 +164,25 @@ export default function HeaderNav({ darkMode, setDarkMode }) {
 						</Dropdown.Item>
 						{session ? (
 							<Dropdown.Item
-								key='logout'
+								key='signout'
 								withDivider
 								color='warning'>
-								Log Out
+								Sign out
 							</Dropdown.Item>
 						) : (
 							<Dropdown.Item
-								key='login'
+								key='signin'
 								withDivider
 								color='warning'>
-								Log In
+								<Link href={'/auth/signin'}>
+									<a
+										style={{
+											display: 'block',
+											width: '100%',
+										}}>
+										Sign in
+									</a>
+								</Link>
 							</Dropdown.Item>
 						)}
 					</Dropdown.Menu>
