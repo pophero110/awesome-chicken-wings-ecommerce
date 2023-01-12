@@ -34,13 +34,6 @@ export default function HeaderNav({ darkMode, setDarkMode }) {
 	return (
 		<Navbar isBordered variant='sticky'>
 			<Navbar.Brand css={{ mr: '$4' }}>
-				<Image
-					autoResize={true}
-					width={50}
-					height={50}
-					src='./logo.png'
-					alt='logo'
-				/>
 				<Text b color='inherit' hideIn='xs'>
 					Awesome Chicken
 				</Text>
