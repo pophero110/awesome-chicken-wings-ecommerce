@@ -1,7 +1,8 @@
 # awesome-chicken-wings-ecommerce
 
 # Stripe Test Credit Card
-- 4242-4242-4242-4242 02/42 242 12345
+
+-   4242-4242-4242-4242 02/42 242 12345
 
 # Theme
 
@@ -20,3 +21,4 @@
 -   call npx prisma generate automatically after running schema migration - Done
 -   item detail modal with options
 -   json response serializer
+-   prisma test env setup script
