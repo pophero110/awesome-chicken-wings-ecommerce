@@ -58,6 +58,8 @@ model Order {
   createdAt   DateTime   @default(now()) @map(name: "created_at")
   updatedAt   DateTime   @updatedAt @map(name: "updated_at")
   lineItem    LineItem[]
+  userId      Int?
+  user        User?       @relation(fields: [userId], references: [id])
 
   @@index([orderNumber])
 }
@@ -68,4 +70,6 @@ model User {
   passwordHash String   @unique
   createdAt    DateTime @default(now()) @map(name: "created_at")
   updatedAt    DateTime @updatedAt @map(name: "updated_at")
+
+  order Order[]
 }
