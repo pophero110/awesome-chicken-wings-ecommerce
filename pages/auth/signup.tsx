@@ -4,7 +4,9 @@ import type { AppRouter } from '../../server/routers/_app';
 import superjson from 'superjson';
 import { useState } from 'react';
 import { useSetNotification } from '../../contexts/notification';
+import Router from 'next/router';
 export default function Signup() {
+	const router = Router;
 	const { setNotification } = useSetNotification();
 	const [error, setError] = useState('');
 	const client = createTRPCProxyClient<AppRouter>({
@@ -21,6 +23,7 @@ export default function Signup() {
 			password,
 		});
 		if (result.ok) {
+			router.push('/', undefined, { shallow: true });
 			setNotification('Sign up successfully');
 		} else {
 			setError('Something went wong');
@@ -29,6 +32,7 @@ export default function Signup() {
 	return (
 		<div>
 			<Form
+				setError={setError}
 				error={error}
 				type={'signup'}
 				handleSubmit={handleSubmit}></Form>

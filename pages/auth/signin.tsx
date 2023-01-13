@@ -27,6 +27,7 @@ export default function Signin() {
 		<div>
 			<Form
 				error={error}
+				setError={setError}
 				type={'signin'}
 				handleSubmit={handleSubmit}></Form>
 		</div>
