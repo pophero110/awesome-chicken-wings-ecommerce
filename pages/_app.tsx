@@ -12,20 +12,27 @@ import CategoryProvider from '../contexts/categoryContext';
 import { trpc } from '../utils/trpc';
 import { SSRProvider } from '@react-aria/ssr';
 import { SessionProvider } from 'next-auth/react';
-import { getSession } from 'next-auth/react';
-const App = ({ Component, pageProps }: AppProps) => {
-	const [session, setSession] = useState(null);
+import { authOptions } from './api/auth/[...nextauth]';
+
+export const getServerSideProps = async (ctx) => {
+	const session = await unstable_getServerSession(
+		ctx.req,
+		ctx.res,
+		authOptions
+	);
+
+	return {
+		props: {
+			session: JSON.parse(JSON.stringify(session)),
+		},
+	};
+};
+const App = ({ Component, pageProps, session }: AppProps) => {
 	const darkTheme = createTheme({
 		type: 'dark',
 	});
 	useEffect(() => {
-		const fetchSession = async () => {
-			//TODO avoid session from fetch on every route change
-			const session = await getSession();
-			setSession(session);
-		};
 		const handleRouteStart = () => {
-			fetchSession();
 			NProgress.start();
 		};
 		const handleRouteDone = () => NProgress.done();
