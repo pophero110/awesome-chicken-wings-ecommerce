@@ -17,7 +17,7 @@ const Category: React.FC<CategoryProps> = ({ category }) => {
 			name: category.name,
 			id: category.id,
 		});
-		route.push('/menu');
+		route.push('/menu', undefined, { shallow: true });
 	};
 	return (
 		<Card isPressable isHoverable onPress={() => clickHandler()}>
