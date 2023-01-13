@@ -1,11 +1,4 @@
-import {
-	Navbar,
-	Text,
-	Input,
-	Dropdown,
-	Avatar,
-	Image,
-} from '@nextui-org/react';
+import { Navbar, Text, Input, Dropdown, Avatar } from '@nextui-org/react';
 import Link from 'next/link';
 // import { Logo } from './Logo';
 import { SearchIcon } from './SearchIcon';
@@ -13,26 +6,11 @@ import { useState } from 'react';
 import NavItem from './mobileNavbar/navItem';
 import styles from './HeaderNav.module.css';
 import { useSession } from 'next-auth/react';
-export default function HeaderNav({ darkMode, setDarkMode }) {
+export default function HeaderNav() {
 	const [activeNavItem, setActiveNavItem] = useState('Home');
 	const { data: session } = useSession();
-	const actionHandler = (actionKey) => {
-		switch (actionKey) {
-			case 'toggleMode':
-				setDarkMode(!darkMode);
-				break;
-
-			case 'signin':
-				break;
-
-			case 'logout':
-				break;
-			default:
-				break;
-		}
-	};
 	return (
-		<Navbar isBordered variant='sticky'>
+		<Navbar disableBlur variant='sticky' maxWidth={'fluid'}>
 			<Navbar.Brand css={{ mr: '$4' }}>
 				<Text b color='inherit' hideIn='xs'>
 					Awesome Chicken
@@ -129,21 +107,12 @@ export default function HeaderNav({ darkMode, setDarkMode }) {
 								</Text>
 							</Dropdown.Item>
 						) : null}
-						<Dropdown.Item key='toggleMode' withDivider>
-							{darkMode ? 'Light Mode' : 'Dark Mode'}
-						</Dropdown.Item>
 						{session ? (
-							<Dropdown.Item
-								key='signout'
-								withDivider
-								color='warning'>
+							<Dropdown.Item key='signout' color='warning'>
 								Sign out
 							</Dropdown.Item>
 						) : (
-							<Dropdown.Item
-								key='signin'
-								withDivider
-								color='warning'>
+							<Dropdown.Item key='signin' color='warning'>
 								<Link href={'/auth/signin'}>
 									<a
 										style={{

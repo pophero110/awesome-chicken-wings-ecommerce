@@ -17,10 +17,6 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
 	const darkTheme = createTheme({
 		type: 'dark',
 	});
-	const lightTheme = createTheme({
-		type: 'light',
-	});
-	const [darkMode, setDarkMode] = useState(true);
 	useEffect(() => {
 		const handleRouteStart = () => NProgress.start();
 		const handleRouteDone = () => NProgress.done();
@@ -37,12 +33,10 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
 	return (
 		<SSRProvider>
 			<SessionProvider session={session}>
-				<NextUIProvider theme={darkMode ? darkTheme : lightTheme}>
+				<NextUIProvider theme={darkTheme}>
 					<ItemsProvider>
 						<CategoryProvider>
-							<Layout
-								setDarkMode={setDarkMode}
-								darkMode={darkMode}>
+							<Layout>
 								<Component {...pageProps} />
 							</Layout>
 						</CategoryProvider>
