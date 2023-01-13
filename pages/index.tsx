@@ -25,7 +25,6 @@ type IndexProps = {
 const Index: React.FC<IndexProps> = ({ categories }) => {
 	return (
 		<Container>
-			<Spacer></Spacer>
 			<CategoryList categories={categories}></CategoryList>
 		</Container>
 	);

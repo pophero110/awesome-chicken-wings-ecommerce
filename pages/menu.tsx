@@ -41,7 +41,6 @@ const Menu: React.FC<MenuProps> = ({ categories }) => {
 	return (
 		<>
 			<Container>
-				<Spacer y={1}></Spacer>
 				<CategroyNav categories={categories}></CategroyNav>
 				<Spacer y={1}></Spacer>
 				<ItemList items={items}></ItemList>
