@@ -14,7 +14,7 @@ export default function Form({ handleSubmit, type, error, setError }) {
 		let error = '';
 		const emailRegex =
 			/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-		if (confirmPassword !== password) {
+		if (type == 'signup' && confirmPassword !== password) {
 			error = 'Password does not match';
 		}
 		if (!email.match(emailRegex)) {
