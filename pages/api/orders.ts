@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { parseCookies, setCookie } from 'nookies';
+import { parseCookies, setCookie, destroyCookie } from 'nookies';
 import CreateOrder from '../../services/createOrder';
 import {
 	createPaymentIntent,
@@ -35,6 +35,8 @@ const orderHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 				clientSecret: paymentIntent.client_secret,
 			});
 		} else {
+			destroyCookie({ res }, 'paymentIntentId');
+			destroyCookie({ res }, 'clientSecret');
 			res.status(200).json({
 				message: 'Order was created successfully',
 			});
