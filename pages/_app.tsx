@@ -4,28 +4,29 @@ import { createTheme } from '@nextui-org/react';
 import Layout from '../components/Layout';
 import './global.css';
 import Router from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import ItemsProvider from '../contexts/itemsContext';
 import CategoryProvider from '../contexts/categoryContext';
 import { trpc } from '../utils/trpc';
 import { SSRProvider } from '@react-aria/ssr';
+import { SessionProvider } from 'next-auth/react';
 import { getSession } from 'next-auth/react';
-
 const App = ({ Component, pageProps }: AppProps) => {
-	useEffect(() => {
-		const checkSession = async () => {
-			const session = await getSession();
-			console.log(session);
-		};
-		checkSession();
-	});
+	const [session, setSession] = useState(null);
 	const darkTheme = createTheme({
 		type: 'dark',
 	});
 	useEffect(() => {
-		const handleRouteStart = () => NProgress.start();
+		const fetchSession = async () => {
+			const session = await getSession();
+			setSession(session);
+		};
+		const handleRouteStart = () => {
+			fetchSession();
+			NProgress.start();
+		};
 		const handleRouteDone = () => NProgress.done();
 
 		Router.events.on('routeChangeStart', handleRouteStart);
@@ -42,9 +43,11 @@ const App = ({ Component, pageProps }: AppProps) => {
 			<NextUIProvider theme={darkTheme}>
 				<ItemsProvider>
 					<CategoryProvider>
-						<Layout>
-							<Component {...pageProps} />
-						</Layout>
+						<SessionProvider session={session}>
+							<Layout>
+								<Component {...pageProps} />
+							</Layout>
+						</SessionProvider>
 					</CategoryProvider>
 				</ItemsProvider>
 			</NextUIProvider>

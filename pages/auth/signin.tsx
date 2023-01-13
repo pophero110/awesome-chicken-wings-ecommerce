@@ -1,33 +1,16 @@
 import Form from '../../components/auth/form';
-import { getCsrfToken } from 'next-auth/react';
-export default function Signin({ csrfToken }) {
-	const handlerSubmit = async ({ email, password }) => {
-		const requestOptions = {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				email,
-				password,
-				csrfToken,
-			}),
-		};
-		const res = await fetch(
-			'/api/auth/callback/credentials',
-			requestOptions
-		).then(async (res) => {
-			return await res;
-		});
+import Router from 'next/router';
+import { signIn } from 'next-auth/react';
+export default function Signin() {
+	const router = Router;
+	const handleSubmit = async ({ email, password }) => {
+		signIn('credentials', { redirect: false, email, password });
+		//TODO redirect the page to where user start
+		router.push('/');
 	};
 	return (
 		<div>
-			<Form type={'signin'} handlerSubmit={handlerSubmit}></Form>
+			<Form type={'signin'} handleSubmit={handleSubmit}></Form>
 		</div>
 	);
-}
-export async function getServerSideProps(context) {
-	return {
-		props: {
-			csrfToken: await getCsrfToken(context),
-		},
-	};
 }

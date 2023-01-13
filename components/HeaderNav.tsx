@@ -4,9 +4,12 @@ import { SearchIcon } from './SearchIcon';
 import { useState } from 'react';
 import NavItem from './mobileNavbar/navItem';
 import styles from './HeaderNav.module.css';
+import { signOut, useSession } from 'next-auth/react';
+
 export default function HeaderNav() {
+	const { data: session } = useSession();
 	const [activeNavItem, setActiveNavItem] = useState('Home');
-	const session = false;
+
 	return (
 		<Navbar disableBlur variant='sticky' maxWidth={'fluid'}>
 			<Navbar.Brand css={{ mr: '$4' }}>
@@ -96,18 +99,15 @@ export default function HeaderNav() {
 						{session ? (
 							<Dropdown.Item
 								key='profile'
-								css={{ height: '$18' }}>
+								css={{ height: '$14' }}>
 								<Text b color='inherit' css={{ d: 'flex' }}>
-									Signed in as
-								</Text>
-								<Text b color='inherit' css={{ d: 'flex' }}>
-									zoey@example.com
+									Profile
 								</Text>
 							</Dropdown.Item>
 						) : null}
 						{session ? (
 							<Dropdown.Item key='signout' color='warning'>
-								Sign out
+								<div onClick={signOut}>Sign out</div>
 							</Dropdown.Item>
 						) : (
 							<Dropdown.Item key='signin' color='warning'>
