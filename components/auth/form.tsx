@@ -1,6 +1,7 @@
 import { Container, Text, Input, Button, Spacer } from '@nextui-org/react';
 import { useState } from 'react';
 import Link from 'next/link';
+import { Message, Lock } from 'react-iconly';
 export default function Form({ handleSubmit, type, error, setError }) {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -28,6 +29,15 @@ export default function Form({ handleSubmit, type, error, setError }) {
 	};
 	return (
 		<Container gap={2}>
+			<Spacer y={1}></Spacer>
+			<Text
+				h4
+				css={{
+					textAlign: 'center',
+					margin: 0,
+				}}>
+				Welcome to Awesome Chicken
+			</Text>
 			<Spacer y={2}></Spacer>
 			<Input
 				clearable
@@ -37,6 +47,7 @@ export default function Form({ handleSubmit, type, error, setError }) {
 				bordered
 				color='primary'
 				labelPlaceholder='Email'
+				contentLeft={<Message set='broken' primaryColor='white' />}
 				onChange={(e) => setEmail(e.target.value)}></Input>
 			<Spacer y={2}></Spacer>
 			<Input.Password
@@ -46,6 +57,7 @@ export default function Form({ handleSubmit, type, error, setError }) {
 				bordered
 				color='primary'
 				labelPlaceholder='Password'
+				contentLeft={<Lock set='broken' primaryColor='white' />}
 				value={password}
 				onChange={(e) => setPassword(e.target.value)}></Input.Password>
 
@@ -59,6 +71,7 @@ export default function Form({ handleSubmit, type, error, setError }) {
 						bordered
 						color='primary'
 						labelPlaceholder='Confirm Password'
+						contentLeft={<Lock set='broken' primaryColor='white' />}
 						value={confirmPassword}
 						onChange={(e) =>
 							setConfirmPassword(e.target.value)
@@ -83,13 +96,19 @@ export default function Form({ handleSubmit, type, error, setError }) {
 				style={{
 					display: 'flex',
 					justifyContent: 'space-between',
+					alignItems: 'center',
 				}}>
 				<Button onPress={submitHandler}>
 					{type == 'signin' ? 'Sign in' : 'Sign up'}
 				</Button>
 				{type == 'signin' ? (
 					<Link href='/auth/signup'>
-						<a>Sign up</a>
+						<a
+							style={{
+								fontSize: '14px',
+							}}>
+							Sign up
+						</a>
 					</Link>
 				) : null}
 			</div>
