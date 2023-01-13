@@ -1,6 +1,7 @@
 import { Container, Text, Input, Button, Spacer } from '@nextui-org/react';
 import { useState } from 'react';
-export default function Form({ handleSubmit, type }) {
+import Link from 'next/link';
+export default function Form({ handleSubmit, type, error }) {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const submitHandler = async () => {
@@ -27,9 +28,33 @@ export default function Form({ handleSubmit, type }) {
 				</>
 			)}
 			<Spacer y={1}></Spacer>
-			<Button onPress={submitHandler}>
-				{type == 'signin' ? 'Sign in' : 'Sign up'}
-			</Button>
+			{error ? (
+				<>
+					<Text
+						b
+						css={{
+							textGradient:
+								'45deg, $yellow600 -20%, $red600 100%',
+						}}>
+						{error}
+					</Text>
+					<Spacer y={1}></Spacer>
+				</>
+			) : null}
+			<div
+				style={{
+					display: 'flex',
+					justifyContent: 'space-between',
+				}}>
+				<Button onPress={submitHandler}>
+					{type == 'signin' ? 'Sign in' : 'Sign up'}
+				</Button>
+				{type == 'signin' ? (
+					<Link href='/auth/signup'>
+						<a>Sign up</a>
+					</Link>
+				) : null}
+			</div>
 		</Container>
 	);
 }
