@@ -7,7 +7,7 @@ export default function Signup() {
 		transformer: superjson,
 		links: [
 			httpLink({
-				url: 'http://localhost:3000/api/trpc',
+				url: '/api/trpc',
 			}),
 		],
 	});
@@ -19,7 +19,7 @@ export default function Signup() {
 	};
 	return (
 		<div>
-			<Form handlerSubmit={handlerSubmit}></Form>
+			<Form type={'signup'} handlerSubmit={handlerSubmit}></Form>
 		</div>
 	);
 }
