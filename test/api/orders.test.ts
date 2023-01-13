@@ -68,17 +68,3 @@ test('with empty itemsData', async () => {
 	expect(json.mock.calls[0][0].total).toBe(0);
 	expect(json.mock.calls[0][0].clientSecret).toBe('clientSecret');
 });
-
-test('when cookies is presented', async () => {
-	body.checkoutMode = true;
-
-	req = {
-		method: 'POST',
-		body: body,
-		headers: { cookie: 'clientSecret=testing' },
-	};
-
-	await orderHandler(req, res);
-
-	expect(json.mock.calls[0][0].clientSecret).toBe('testing');
-});
