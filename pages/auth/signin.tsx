@@ -14,7 +14,7 @@ export default function Signin() {
 			password,
 		});
 		if (result.ok) {
-			router.back();
+			router.push('/', undefined, { shallow: true });
 			setNotification('Sign in succesfully');
 		} else {
 			setError('Something wrong with your credentials');
