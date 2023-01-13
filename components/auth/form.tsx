@@ -1,7 +1,7 @@
 import { Container, Text, Input, Button, Spacer } from '@nextui-org/react';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-export default function Form({ handlerSubmit }) {
+export default function Form({ handlerSubmit, type }) {
 	const router = useRouter();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -23,10 +23,16 @@ export default function Form({ handlerSubmit }) {
 				aria-label='Password'
 				value={password}
 				onChange={(e) => setPassword(e.target.value)}></Input>
-			<Text>Confirm Password</Text>
-			<Input width='100%' aria-label='Confirm Password'></Input>
+			{type == 'signin' ? null : (
+				<>
+					<Text>Confirm Password</Text>
+					<Input width='100%' aria-label='Confirm Password'></Input>
+				</>
+			)}
 			<Spacer y={1}></Spacer>
-			<Button onPress={signupHandler}>Sign up</Button>
+			<Button onPress={signupHandler}>
+				{type == 'signin' ? 'Sign in' : 'Sign up'}
+			</Button>
 		</Container>
 	);
 }

@@ -11,9 +11,16 @@ import ItemsProvider from '../contexts/itemsContext';
 import CategoryProvider from '../contexts/categoryContext';
 import { trpc } from '../utils/trpc';
 import { SSRProvider } from '@react-aria/ssr';
-import { SessionProvider } from 'next-auth/react';
-import { useState } from 'react';
-const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
+import { getSession } from 'next-auth/react';
+
+const App = ({ Component, pageProps }: AppProps) => {
+	useEffect(() => {
+		const checkSession = async () => {
+			const session = await getSession();
+			console.log(session);
+		};
+		checkSession();
+	});
 	const darkTheme = createTheme({
 		type: 'dark',
 	});
@@ -32,17 +39,15 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
 	}, []);
 	return (
 		<SSRProvider>
-			<SessionProvider session={session}>
-				<NextUIProvider theme={darkTheme}>
-					<ItemsProvider>
-						<CategoryProvider>
-							<Layout>
-								<Component {...pageProps} />
-							</Layout>
-						</CategoryProvider>
-					</ItemsProvider>
-				</NextUIProvider>
-			</SessionProvider>
+			<NextUIProvider theme={darkTheme}>
+				<ItemsProvider>
+					<CategoryProvider>
+						<Layout>
+							<Component {...pageProps} />
+						</Layout>
+					</CategoryProvider>
+				</ItemsProvider>
+			</NextUIProvider>
 		</SSRProvider>
 	);
 };

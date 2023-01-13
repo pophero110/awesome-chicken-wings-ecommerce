@@ -1,14 +1,12 @@
 import { Navbar, Text, Input, Dropdown, Avatar } from '@nextui-org/react';
 import Link from 'next/link';
-// import { Logo } from './Logo';
 import { SearchIcon } from './SearchIcon';
 import { useState } from 'react';
 import NavItem from './mobileNavbar/navItem';
 import styles from './HeaderNav.module.css';
-import { useSession } from 'next-auth/react';
 export default function HeaderNav() {
 	const [activeNavItem, setActiveNavItem] = useState('Home');
-	const { data: session } = useSession();
+	const session = false;
 	return (
 		<Navbar disableBlur variant='sticky' maxWidth={'fluid'}>
 			<Navbar.Brand css={{ mr: '$4' }}>
@@ -94,7 +92,7 @@ export default function HeaderNav() {
 					<Dropdown.Menu
 						aria-label='User menu actions'
 						color='primary'
-						onAction={(actionKey) => actionHandler(actionKey)}>
+						onAction={(actionKey) => actionKey}>
 						{session ? (
 							<Dropdown.Item
 								key='profile'
