@@ -1,5 +1,4 @@
 import NavItem from './navItem';
-import { Grid } from '@nextui-org/react';
 import { CSSProperties } from '@nextui-org/react/types/theme';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
