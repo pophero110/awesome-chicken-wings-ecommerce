@@ -3,15 +3,8 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcrypt';
 import prisma from '../../../lib/prisma';
 export const authOptions = {
-	// Configure one or more authentication providers
 	providers: [
 		CredentialsProvider({
-			// The name to display on the sign in form (e.g. "Sign in with...")
-			name: 'Credentials',
-			// `credentials` is used to generate a form on the sign in page.
-			// You can specify which fields should be submitted, by adding keys to the `credentials` object.
-			// e.g. domain, username, password, 2FA token, etc.
-			// You can pass any HTML attribute to the <input> tag through the object.
 			async authorize(credentials, req) {
 				const { email, password } = credentials;
 				const user = await prisma.user.findUnique({
@@ -22,7 +15,7 @@ export const authOptions = {
 				const result = bcrypt.compareSync(password, user.passwordHash);
 				if (result) {
 					// Any object returned will be saved in `user` property of the JWT
-					return { email: user.email };
+					return { name: user.id, email: user.email };
 				} else {
 					// If you return null then an error will be displayed advising the user to check their details.
 					return null;
@@ -48,10 +41,6 @@ export const authOptions = {
 		encryption: true,
 	},
 	useSecureCookies: process.env.NODE_ENV === 'production',
-	events: {
-		async signIn(message) {
-			console.log('signed in');
-		},
-	},
+	events: {},
 };
 export default NextAuth(authOptions);

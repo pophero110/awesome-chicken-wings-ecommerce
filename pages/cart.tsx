@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Spacer, Grid } from '@nextui-org/react';
+import { Container, Grid } from '@nextui-org/react';
 import { setCookie } from 'nookies';
 import { GetServerSideProps } from 'next';
 import prisma from '../lib/prisma';
