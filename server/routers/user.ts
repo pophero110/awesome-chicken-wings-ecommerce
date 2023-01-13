@@ -10,6 +10,6 @@ export const userRoute = router({
 			const service = new CreateUser({ email, password });
 			const result = await service.process();
 
-			return 'created user';
+			return result;
 		}),
 });
