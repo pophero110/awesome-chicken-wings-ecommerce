@@ -1,4 +1,4 @@
-import React, { Dispatch, ReactNode, SetStateAction } from 'react';
+import React, { ReactNode } from 'react';
 import MoblieNavbar from './mobileNavbar/mobileNavbar';
 import { Spacer } from '@nextui-org/react';
 import Notification from './Notification';
