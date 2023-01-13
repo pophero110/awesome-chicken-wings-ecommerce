@@ -9,23 +9,33 @@ export const getServerSideProps = async (ctx) => {
 		ctx.res,
 		authOptions
 	);
-	const user = await prisma.user.findUnique({
-		where: {
-			email: session.user.email,
-		},
-		include: { order: true },
-	});
+	if (session) {
+		const user = await prisma.user.findUnique({
+			where: {
+				email: session.user.email,
+			},
+			include: { order: true },
+		});
+
+		return {
+			props: {
+				orders: JSON.parse(JSON.stringify(user.order)),
+				session: JSON.parse(JSON.stringify(session)),
+			},
+		};
+	}
 
 	return {
 		props: {
-			orders: JSON.parse(JSON.stringify(user.order)),
-			session: JSON.parse(JSON.stringify(session)),
+			orders: null,
+			session: null,
 		},
 	};
 };
 export default function Profile({ orders, session }) {
 	if (!session) {
 		return (
+			//TODO add sign in link
 			<>
 				<h1
 					style={{
