@@ -23,7 +23,7 @@ export default function Signup() {
 			password,
 		});
 		if (result.ok) {
-			router.push('/', undefined, { shallow: true });
+			router.back();
 			setNotification('Sign up successfully');
 		} else {
 			setError('Something went wong');

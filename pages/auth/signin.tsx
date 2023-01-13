@@ -13,11 +13,8 @@ export default function Signin() {
 			email,
 			password,
 		});
-		//TODO redirect the page to where user start
-		//TODO shallow = true, update the path without rererunning
-		//	getStaticProps, getServerSideProps or getInitialProps
 		if (result.ok) {
-			router.push('/', undefined, { shallow: true });
+			router.back();
 			setNotification('Sign in succesfully');
 		} else {
 			setError('Something wrong with your credentials');
