@@ -104,9 +104,15 @@ export default function HeaderNav() {
 							<Dropdown.Item
 								key='profile'
 								css={{ height: '$14' }}>
-								<Text b color='inherit' css={{ d: 'flex' }}>
-									Profile
-								</Text>
+								<Link href={'/profile'}>
+									<a
+										style={{
+											display: 'block',
+											width: '100%',
+										}}>
+										Profile
+									</a>
+								</Link>
 							</Dropdown.Item>
 						) : null}
 						{session ? (
