@@ -1,11 +1,30 @@
 import { Container, Text, Input, Button, Spacer } from '@nextui-org/react';
 import { useState } from 'react';
 import Link from 'next/link';
-export default function Form({ handleSubmit, type, error }) {
+export default function Form({ handleSubmit, type, error, setError }) {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [confirmPassword, setConfirmPassword] = useState('');
 	const submitHandler = async () => {
-		await handleSubmit({ email, password });
+		if (passValidate()) {
+			await handleSubmit({ email, password });
+		}
+	};
+	const passValidate = () => {
+		let error = '';
+		const emailRegex =
+			/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+		if (confirmPassword !== password) {
+			error = 'Password does not match';
+		}
+		if (!email.match(emailRegex)) {
+			error = 'Please check your email format';
+		}
+		if (error) {
+			setError(error);
+			return false;
+		}
+		return true;
 	};
 	return (
 		<Container gap={2}>
@@ -14,17 +33,26 @@ export default function Form({ handleSubmit, type, error }) {
 				width='100%'
 				aria-label='Email'
 				value={email}
+				type={'email'}
 				onChange={(e) => setEmail(e.target.value)}></Input>
 			<Text>Password</Text>
 			<Input
 				width='100%'
 				aria-label='Password'
 				value={password}
+				type={'password'}
 				onChange={(e) => setPassword(e.target.value)}></Input>
 			{type == 'signin' ? null : (
 				<>
 					<Text>Confirm Password</Text>
-					<Input width='100%' aria-label='Confirm Password'></Input>
+					<Input
+						width='100%'
+						aria-label='Confirm Password'
+						value={confirmPassword}
+						type={'password'}
+						onChange={(e) =>
+							setConfirmPassword(e.target.value)
+						}></Input>
 				</>
 			)}
 			<Spacer y={1}></Spacer>
