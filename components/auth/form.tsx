@@ -1,13 +1,10 @@
 import { Container, Text, Input, Button, Spacer } from '@nextui-org/react';
 import { useState } from 'react';
-import { useRouter } from 'next/router';
-export default function Form({ handlerSubmit, type }) {
-	const router = useRouter();
+export default function Form({ handleSubmit, type }) {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const signupHandler = () => {
-		handlerSubmit({ email, password });
-		router.push('/');
+	const submitHandler = async () => {
+		await handleSubmit({ email, password });
 	};
 	return (
 		<Container gap={2}>
@@ -30,7 +27,7 @@ export default function Form({ handlerSubmit, type }) {
 				</>
 			)}
 			<Spacer y={1}></Spacer>
-			<Button onPress={signupHandler}>
+			<Button onPress={submitHandler}>
 				{type == 'signin' ? 'Sign in' : 'Sign up'}
 			</Button>
 		</Container>
