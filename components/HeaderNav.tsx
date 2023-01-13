@@ -107,7 +107,17 @@ export default function HeaderNav() {
 						) : null}
 						{session ? (
 							<Dropdown.Item key='signout' color='warning'>
-								<div onClick={signOut}>Sign out</div>
+								<Text
+									style={{
+										width: '100%',
+										display: 'block',
+									}}
+									b
+									onClick={() =>
+										signOut({ redirect: false })
+									}>
+									Sign out
+								</Text>
 							</Dropdown.Item>
 						) : (
 							<Dropdown.Item key='signin' color='warning'>
