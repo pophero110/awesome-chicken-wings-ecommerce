@@ -6,7 +6,9 @@ export default function Signin() {
 	const handleSubmit = async ({ email, password }) => {
 		signIn('credentials', { redirect: false, email, password });
 		//TODO redirect the page to where user start
-		router.push('/');
+		//TODO shallow = true, update the path without rererunning
+		//	getStaticProps, getServerSideProps or getInitialProps
+		router.push('/', undefined, { shallow: true });
 	};
 	return (
 		<div>

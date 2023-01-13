@@ -20,6 +20,7 @@ const App = ({ Component, pageProps }: AppProps) => {
 	});
 	useEffect(() => {
 		const fetchSession = async () => {
+			//TODO avoid session from fetch on every route change
 			const session = await getSession();
 			setSession(session);
 		};
