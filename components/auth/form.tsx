@@ -28,31 +28,41 @@ export default function Form({ handleSubmit, type, error, setError }) {
 	};
 	return (
 		<Container gap={2}>
-			<Text>Email</Text>
+			<Spacer y={2}></Spacer>
 			<Input
+				clearable
 				width='100%'
 				aria-label='Email'
 				value={email}
-				type={'email'}
+				bordered
+				color='primary'
+				labelPlaceholder='Email'
 				onChange={(e) => setEmail(e.target.value)}></Input>
-			<Text>Password</Text>
-			<Input
+			<Spacer y={2}></Spacer>
+			<Input.Password
+				clearable
 				width='100%'
 				aria-label='Password'
+				bordered
+				color='primary'
+				labelPlaceholder='Password'
 				value={password}
-				type={'password'}
-				onChange={(e) => setPassword(e.target.value)}></Input>
+				onChange={(e) => setPassword(e.target.value)}></Input.Password>
+
 			{type == 'signin' ? null : (
 				<>
-					<Text>Confirm Password</Text>
-					<Input
+					<Spacer y={2}></Spacer>
+					<Input.Password
+						clearable
 						width='100%'
 						aria-label='Confirm Password'
+						bordered
+						color='primary'
+						labelPlaceholder='Confirm Password'
 						value={confirmPassword}
-						type={'password'}
 						onChange={(e) =>
 							setConfirmPassword(e.target.value)
-						}></Input>
+						}></Input.Password>
 				</>
 			)}
 			<Spacer y={1}></Spacer>
