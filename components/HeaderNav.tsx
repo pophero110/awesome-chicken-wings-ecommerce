@@ -5,11 +5,15 @@ import { useState } from 'react';
 import NavItem from './mobileNavbar/navItem';
 import styles from './HeaderNav.module.css';
 import { signOut, useSession } from 'next-auth/react';
-
+import { useSetNotification } from '../contexts/notification';
 export default function HeaderNav() {
+	const { setNotification } = useSetNotification();
 	const { data: session } = useSession();
 	const [activeNavItem, setActiveNavItem] = useState('Home');
-
+	const signoutHandler = () => {
+		signOut({ redirect: false });
+		setNotification('Sign out successfully');
+	};
 	return (
 		<Navbar disableBlur variant='sticky' maxWidth={'fluid'}>
 			<Navbar.Brand css={{ mr: '$4' }}>
@@ -113,9 +117,7 @@ export default function HeaderNav() {
 										display: 'block',
 									}}
 									b
-									onClick={() =>
-										signOut({ redirect: false })
-									}>
+									onClick={() => signoutHandler()}>
 									Sign out
 								</Text>
 							</Dropdown.Item>
