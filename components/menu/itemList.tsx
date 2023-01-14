@@ -9,7 +9,7 @@ const ItemList: React.FC<ItemListProps> = ({ items }) => {
 		<Grid.Container gap={1} justify='flex-start'>
 			{items.map((item) => {
 				return (
-					<Grid xs={12} sm={3} key={item.id}>
+					<Grid xs={12} sm={6} md={4} xl={3} key={item.id}>
 						<Item
 							id={item.id}
 							name={item.name}
