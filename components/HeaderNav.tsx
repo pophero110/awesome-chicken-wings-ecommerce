@@ -79,8 +79,9 @@ export default function HeaderNav() {
 						contentLeftStyling={false}
 						css={{
 							w: '100%',
-							'@xsMax': {
-								w: '90%',
+							'@xsMin': {
+								w: '400px',
+								justifyContent: 'center',
 							},
 							'& .nextui-input-content--left': {
 								h: '100%',
@@ -132,6 +133,7 @@ export default function HeaderNav() {
 									<Logout set='bold' primaryColor='white' />
 								}
 								key='signout'
+								withDivider
 								color='warning'>
 								<Text b onClick={() => signoutHandler()}>
 									Sign out
