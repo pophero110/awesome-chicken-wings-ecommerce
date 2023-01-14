@@ -67,7 +67,7 @@ export default function CheckoutForm({
 			destroyCookie(null, 'clientSecret');
 			destroyCookie(null, 'paymentIntentId');
 			itemDispatch({ type: 'clearItems' });
-			router.push('/');
+			router.push('/', undefined, { shallow: true });
 		}
 	};
 	return (
