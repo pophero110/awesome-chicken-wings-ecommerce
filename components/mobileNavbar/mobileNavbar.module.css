@@ -1,6 +1,6 @@
 .mobileNavbar {
 }
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 651px) {
 	.mobileNavbar {
 		display: none !important;
 	}
