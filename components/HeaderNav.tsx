@@ -1,12 +1,24 @@
 import { Navbar, Text, Input, Dropdown, Avatar } from '@nextui-org/react';
 import Link from 'next/link';
 import { SearchIcon } from './SearchIcon';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import NavItem from './mobileNavbar/navItem';
 import styles from './HeaderNav.module.css';
 import { signOut, useSession } from 'next-auth/react';
 import { useSetNotification } from '../contexts/notification';
 export default function HeaderNav() {
+	useEffect(() => {
+		let prevScrollpos = window.pageYOffset;
+		window.onscroll = function () {
+			var currentScrollPos = window.pageYOffset;
+			if (prevScrollpos > currentScrollPos) {
+				document.getElementById('headerNavbar').style.top = '0';
+			} else {
+				document.getElementById('headerNavbar').style.top = '-75px';
+			}
+			prevScrollpos = currentScrollPos;
+		};
+	});
 	const { setNotification } = useSetNotification();
 	const { data: session } = useSession();
 	const [activeNavItem, setActiveNavItem] = useState('Home');
@@ -15,7 +27,14 @@ export default function HeaderNav() {
 		setNotification('Sign out successfully');
 	};
 	return (
-		<Navbar disableBlur variant='sticky' maxWidth={'fluid'}>
+		<Navbar
+			id='headerNavbar'
+			disableBlur
+			css={{
+				transition: 'top 0.3s',
+			}}
+			variant='sticky'
+			maxWidth={'fluid'}>
 			<Navbar.Brand css={{ mr: '$4' }}>
 				<Text b color='inherit' hideIn='xs'>
 					Awesome Chicken
