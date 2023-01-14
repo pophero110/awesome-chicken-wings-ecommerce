@@ -7,7 +7,9 @@ import styles from './HeaderNav.module.css';
 import { signOut, useSession } from 'next-auth/react';
 import { useSetNotification } from '../contexts/notification';
 import { Login, User, Logout } from 'react-iconly';
+import { useRouter } from 'next/router';
 export default function HeaderNav() {
+	const router = useRouter();
 	useEffect(() => {
 		let prevScrollpos = window.pageYOffset;
 		window.onscroll = function () {
@@ -23,9 +25,18 @@ export default function HeaderNav() {
 	const { setNotification } = useSetNotification();
 	const { data: session } = useSession();
 	const [activeNavItem, setActiveNavItem] = useState('Home');
-	const signoutHandler = () => {
-		signOut({ redirect: false });
-		setNotification('Sign out successfully');
+	const handleMenuAction = (key) => {
+		if (key === 'profile') {
+			router.push('/profile');
+		}
+		if (key === 'signin') {
+			router.push('/auth/signin');
+		}
+		if (key === 'signout') {
+			signOut({ redirect: false });
+			setNotification('Sign out successfully');
+			router.push('/');
+		}
 	};
 	return (
 		<Navbar
@@ -109,21 +120,26 @@ export default function HeaderNav() {
 						</Dropdown.Trigger>
 					</Navbar.Item>
 					<Dropdown.Menu
+						onAction={(key) => handleMenuAction(key)}
 						css={{
 							width: '200px',
 						}}
 						aria-label='User menu actions'
-						color='primary'
-						onAction={(actionKey) => actionKey}>
+						color='primary'>
 						{session ? (
 							<Dropdown.Item
 								key='profile'
 								description='View order history'
 								icon={<User set='bold' primaryColor='white' />}
 								css={{ height: '$14' }}>
-								<Link href={'/profile'}>
-									<Text b>Profile</Text>
-								</Link>
+								<Text
+									b
+									css={{
+										display: 'block',
+										width: '100%',
+									}}>
+									Profile
+								</Text>
 							</Dropdown.Item>
 						) : null}
 						{session ? (
@@ -134,7 +150,12 @@ export default function HeaderNav() {
 								key='signout'
 								withDivider
 								color='warning'>
-								<Text b onClick={() => signoutHandler()}>
+								<Text
+									b
+									css={{
+										display: 'block',
+										width: '100%',
+									}}>
 									Sign out
 								</Text>
 							</Dropdown.Item>
@@ -143,9 +164,14 @@ export default function HeaderNav() {
 								icon={<Login set='bold' primaryColor='white' />}
 								key='signin'
 								color='warning'>
-								<Link href={'/auth/signin'}>
-									<Text b>Sign in</Text>
-								</Link>
+								<Text
+									b
+									css={{
+										display: 'block',
+										width: '100%',
+									}}>
+									Sign in
+								</Text>
 							</Dropdown.Item>
 						)}
 					</Dropdown.Menu>
