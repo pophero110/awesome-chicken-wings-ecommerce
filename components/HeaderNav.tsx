@@ -57,7 +57,7 @@ export default function HeaderNav() {
 				css={{
 					'@xsMax': {
 						w: '100%',
-						jc: 'space-between',
+						jc: 'space-center',
 					},
 				}}>
 				<Navbar.Item
@@ -78,7 +78,10 @@ export default function HeaderNav() {
 						}
 						contentLeftStyling={false}
 						css={{
-							flex: '100%',
+							'@xsMax': {
+								w: '100%',
+								marginLeft: '50px',
+							},
 							'& .nextui-input-content--left': {
 								h: '100%',
 								ml: '$4',
