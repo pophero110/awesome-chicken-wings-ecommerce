@@ -29,7 +29,17 @@ const Category: React.FC<CategoryProps> = ({ category }) => {
 					padding: '10px',
 				}}>
 				<Col>
-					<Text color='white'>{category.name}</Text>
+					<Text
+						b
+						css={{
+							fontSize: '$xl',
+							'@mdMin': {
+								fontSize: '$2xl',
+							},
+						}}
+						color='white'>
+						{category.name}
+					</Text>
 				</Col>
 			</Card.Header>
 			<Card.Image
