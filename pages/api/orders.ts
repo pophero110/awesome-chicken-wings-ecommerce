@@ -39,8 +39,6 @@ const orderHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 				clientSecret: paymentIntent.client_secret,
 			});
 		} else {
-			destroyCookie({ res }, 'paymentIntentId');
-			destroyCookie({ res }, 'clientSecret');
 			res.status(200).json({
 				message: 'Order was created successfully',
 			});
