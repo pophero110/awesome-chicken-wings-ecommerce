@@ -22,11 +22,11 @@ export default function Signup() {
 			email,
 			password,
 		});
-		if (result.ok) {
+		if (result.error) {
+			setError(result.error);
+		} else {
 			router.push('/', undefined, { shallow: true });
 			setNotification('Sign up successfully');
-		} else {
-			setError('Something went wong');
 		}
 	};
 	return (

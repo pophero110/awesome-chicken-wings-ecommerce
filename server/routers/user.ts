@@ -9,7 +9,6 @@ export const userRoute = router({
 			const { email, password } = input;
 			const service = new CreateUser({ email, password });
 			const result = await service.process();
-
-			return { ok: true };
+			return result;
 		}),
 });

@@ -1,6 +1,6 @@
 import prisma from '../lib/prisma';
 import bcrypt from 'bcrypt';
-
+import { Prisma } from '@prisma/client';
 const saltRounds = 10;
 export default class CreateUser {
 	email: string;
@@ -12,13 +12,22 @@ export default class CreateUser {
 	}
 
 	async process() {
-		await bcrypt.hash(this.password, saltRounds).then(async (hash) => {
-			await prisma.user.create({
-				data: {
-					email: this.email,
-					passwordHash: hash,
-				},
+		try {
+			await bcrypt.hash(this.password, saltRounds).then(async (hash) => {
+				await prisma.user.create({
+					data: {
+						email: this.email,
+						passwordHash: hash,
+					},
+				});
 			});
-		});
+			return { error: '' };
+		} catch (error) {
+			if (error instanceof Prisma.PrismaClientKnownRequestError) {
+				if (error.code === 'P2002') {
+					return { error: 'Email has been taken' };
+				}
+			}
+		}
 	}
 }
