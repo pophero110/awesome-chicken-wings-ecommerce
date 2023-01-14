@@ -28,7 +28,16 @@ export default function Form({ handleSubmit, type, error, setError }) {
 		return true;
 	};
 	return (
-		<Container gap={2}>
+		<Container
+			gap={2}
+			css={{
+				'@smMin': {
+					display: 'flex',
+					flexDirection: 'column',
+					justifyContent: 'center',
+					alignItems: 'center',
+				},
+			}}>
 			<Spacer y={1}></Spacer>
 			<Text
 				h4
@@ -46,6 +55,11 @@ export default function Form({ handleSubmit, type, error, setError }) {
 				value={email}
 				bordered
 				color='primary'
+				css={{
+					'@smMin': {
+						width: '50%',
+					},
+				}}
 				labelPlaceholder='Email'
 				contentLeft={<Message set='broken' primaryColor='white' />}
 				onChange={(e) => setEmail(e.target.value)}></Input>
@@ -56,6 +70,11 @@ export default function Form({ handleSubmit, type, error, setError }) {
 				aria-label='Password'
 				bordered
 				color='primary'
+				css={{
+					'@smMin': {
+						width: '50%',
+					},
+				}}
 				labelPlaceholder='Password'
 				contentLeft={<Lock set='broken' primaryColor='white' />}
 				value={password}
@@ -70,6 +89,11 @@ export default function Form({ handleSubmit, type, error, setError }) {
 						aria-label='Confirm Password'
 						bordered
 						color='primary'
+						css={{
+							'@smMin': {
+								width: '50%',
+							},
+						}}
 						labelPlaceholder='Confirm Password'
 						contentLeft={<Lock set='broken' primaryColor='white' />}
 						value={confirmPassword}
@@ -92,11 +116,14 @@ export default function Form({ handleSubmit, type, error, setError }) {
 					<Spacer y={1}></Spacer>
 				</>
 			) : null}
-			<div
-				style={{
+			<Container
+				css={{
 					display: 'flex',
 					justifyContent: 'space-between',
 					alignItems: 'center',
+					'@smMin': {
+						width: '40%',
+					},
 				}}>
 				<Button onPress={submitHandler}>
 					{type == 'signin' ? 'Sign in' : 'Sign up'}
@@ -111,7 +138,7 @@ export default function Form({ handleSubmit, type, error, setError }) {
 						</a>
 					</Link>
 				) : null}
-			</div>
+			</Container>
 		</Container>
 	);
 }
