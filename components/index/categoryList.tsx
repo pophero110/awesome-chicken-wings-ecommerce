@@ -7,7 +7,7 @@ type CategoryListProps = {
 
 const CategoryList: React.FC<CategoryListProps> = ({ categories }) => {
 	return (
-		<Grid.Container gap={1}>
+		<Grid.Container gap={1} id={'categoryList'}>
 			{categories.map((category) => {
 				return (
 					<Grid xs={6} key={category.id}>
