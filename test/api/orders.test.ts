@@ -1,5 +1,7 @@
 import orderHandler from '../../pages/api/orders';
 import prisma from '../../lib/prisma';
+
+jest.mock('next-auth');
 let body = {
 	itemsData: {},
 	checkoutMode: false,

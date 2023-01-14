@@ -4,11 +4,19 @@ import prisma from '../../lib/prisma';
 describe('process', () => {
 	let order;
 	let checkoutMode = false;
+	let userId = 7;
 	const itemsData = {
 		0: 1,
 		1: 1,
 	};
 	beforeAll(async () => {
+		await prisma.user.create({
+			data: {
+				id: userId,
+				email: 'test@gmail.com',
+				passwordHash: 'test',
+			},
+		});
 		await prisma.item.createMany({
 			data: [
 				{ id: 0, price: 15.25, name: 'Chicken Sandwich' },
@@ -17,7 +25,7 @@ describe('process', () => {
 			skipDuplicates: true,
 		});
 
-		const service = new CreateOrder(itemsData, checkoutMode);
+		const service = new CreateOrder({ itemsData, checkoutMode, userId });
 		order = await service.process();
 	});
 	afterAll(() => {
@@ -38,7 +46,11 @@ describe('process', () => {
 	describe('checkMode is true', () => {
 		beforeAll(async () => {
 			checkoutMode = true;
-			const service = new CreateOrder(itemsData, checkoutMode);
+			const service = new CreateOrder({
+				itemsData,
+				checkoutMode,
+				userId,
+			});
 			await service.process();
 		});
 
