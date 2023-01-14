@@ -78,11 +78,7 @@ export default function HeaderNav() {
 						}
 						contentLeftStyling={false}
 						css={{
-							w: '100%',
-							'@xsMin': {
-								w: '400px',
-								justifyContent: 'center',
-							},
+							flex: '100%',
 							'& .nextui-input-content--left': {
 								h: '100%',
 								ml: '$4',
