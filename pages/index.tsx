@@ -26,7 +26,10 @@ const Index: React.FC<IndexProps> = ({ categories }) => {
 	return (
 		<>
 			<HeroSection></HeroSection>
-			<Container>
+			<Container
+				css={{
+					maxWidth: '80%',
+				}}>
 				<CategoryList categories={categories}></CategoryList>
 			</Container>
 		</>
