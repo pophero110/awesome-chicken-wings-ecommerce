@@ -17,6 +17,7 @@ export default function HeroSection() {
 				direction='column'
 				css={{
 					height: '80%',
+					maxWidth: '90%',
 				}}>
 				<Row
 					justify='flex-end'
