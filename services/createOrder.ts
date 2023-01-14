@@ -3,9 +3,11 @@ import { Prisma } from '@prisma/client';
 class CreateOrder {
 	itemsData: {};
 	checkoutMode: boolean;
-	constructor(itemsData, checkoutMode) {
+	userId: any;
+	constructor({ itemsData, checkoutMode, userId }) {
 		this.itemsData = itemsData;
 		this.checkoutMode = checkoutMode;
+		this.userId = userId;
 	}
 
 	async process() {
@@ -31,7 +33,7 @@ class CreateOrder {
 					data: {
 						subtotal,
 						total,
-
+						userId: this.userId,
 						//@ts-ignore
 						orderNumber,
 						lineItem: {

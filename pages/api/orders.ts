@@ -5,10 +5,14 @@ import {
 	createPaymentIntent,
 	updatePaymentIntent,
 } from '../../utils/paymentIntent';
+import { unstable_getServerSession } from 'next-auth';
+import { authOptions } from './auth/[...nextauth]';
 const orderHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === 'POST') {
 		const { itemsData, checkoutMode } = req.body;
-		const service = new CreateOrder(itemsData, checkoutMode);
+		const session = await unstable_getServerSession(req, res, authOptions);
+		const userId = session ? session.user.name : null;
+		const service = new CreateOrder({ itemsData, checkoutMode, userId });
 		const order = await service.process();
 
 		if (order.error) {
