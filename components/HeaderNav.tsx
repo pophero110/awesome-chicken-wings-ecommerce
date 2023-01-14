@@ -35,20 +35,12 @@ export default function HeaderNav() {
 			}}
 			variant='sticky'
 			maxWidth={'fluid'}>
-			<Navbar.Brand css={{ mr: '$4' }}>
-				<Text b color='inherit' hideIn='xs'>
-					Awesome Chicken
-				</Text>
-				{/* <Text b color='inherit' css={{ mr: '$11' }} hideIn='xs'>
-					Awesome Chicken
-				</Text> */}
-			</Navbar.Brand>
 			<Navbar.Content hideIn='xs' variant='default'>
 				<Link href='/'>
 					<Navbar.Link
 						onClick={() => setActiveNavItem('Home')}
 						isActive={activeNavItem === 'Home'}>
-						Home
+						Awesome Chicken
 					</Navbar.Link>
 				</Link>
 
