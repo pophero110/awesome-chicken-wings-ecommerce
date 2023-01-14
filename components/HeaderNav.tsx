@@ -97,7 +97,7 @@ export default function HeaderNav() {
 						route={'/cart'}
 						className={styles.headerNav__navItem}></NavItem>
 				</Navbar.Item>
-				<Dropdown placement='bottom-right'>
+				<Dropdown placement='bottom-right' isBordered>
 					<Navbar.Item>
 						<Dropdown.Trigger>
 							<Avatar
