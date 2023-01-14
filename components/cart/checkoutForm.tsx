@@ -32,6 +32,9 @@ export default function CheckoutForm({
 					color: '#697177',
 				},
 			},
+			complete: {
+				backgroundColor: 'black',
+			},
 			invalid: {
 				fontFamily: 'Arial, sans-serif',
 				color: '#F31260',
