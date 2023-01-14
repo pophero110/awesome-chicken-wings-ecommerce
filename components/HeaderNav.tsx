@@ -6,6 +6,7 @@ import NavItem from './mobileNavbar/navItem';
 import styles from './HeaderNav.module.css';
 import { signOut, useSession } from 'next-auth/react';
 import { useSetNotification } from '../contexts/notification';
+import { Login, User, Logout } from 'react-iconly';
 export default function HeaderNav() {
 	useEffect(() => {
 		let prevScrollpos = window.pageYOffset;
@@ -79,7 +80,7 @@ export default function HeaderNav() {
 						css={{
 							w: '100%',
 							'@xsMax': {
-								mw: '300px',
+								w: '90%',
 							},
 							'& .nextui-input-content--left': {
 								h: '100%',
@@ -108,46 +109,41 @@ export default function HeaderNav() {
 						</Dropdown.Trigger>
 					</Navbar.Item>
 					<Dropdown.Menu
+						css={{
+							width: '200px',
+						}}
 						aria-label='User menu actions'
 						color='primary'
 						onAction={(actionKey) => actionKey}>
 						{session ? (
 							<Dropdown.Item
 								key='profile'
+								description='View order history'
+								icon={<User set='bold' primaryColor='white' />}
 								css={{ height: '$14' }}>
 								<Link href={'/profile'}>
-									<a
-										style={{
-											display: 'block',
-											width: '100%',
-										}}>
-										Profile
-									</a>
+									<Text b>Profile</Text>
 								</Link>
 							</Dropdown.Item>
 						) : null}
 						{session ? (
-							<Dropdown.Item key='signout' color='warning'>
-								<Text
-									style={{
-										width: '100%',
-										display: 'block',
-									}}
-									b
-									onClick={() => signoutHandler()}>
+							<Dropdown.Item
+								icon={
+									<Logout set='bold' primaryColor='white' />
+								}
+								key='signout'
+								color='warning'>
+								<Text b onClick={() => signoutHandler()}>
 									Sign out
 								</Text>
 							</Dropdown.Item>
 						) : (
-							<Dropdown.Item key='signin' color='warning'>
+							<Dropdown.Item
+								icon={<Login set='bold' primaryColor='white' />}
+								key='signin'
+								color='warning'>
 								<Link href={'/auth/signin'}>
-									<a
-										style={{
-											display: 'block',
-											width: '100%',
-										}}>
-										Sign in
-									</a>
+									<Text b>Sign in</Text>
 								</Link>
 							</Dropdown.Item>
 						)}
