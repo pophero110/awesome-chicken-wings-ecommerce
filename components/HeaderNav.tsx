@@ -6,7 +6,7 @@ import NavItem from './mobileNavbar/navItem';
 import styles from './HeaderNav.module.css';
 import { signOut, useSession } from 'next-auth/react';
 import { useSetNotification } from '../contexts/notification';
-import { Login, User, Logout } from 'react-iconly';
+import { Login, User, Logout, Home } from 'react-iconly';
 import { useRouter } from 'next/router';
 export default function HeaderNav() {
 	const router = useRouter();
@@ -42,25 +42,37 @@ export default function HeaderNav() {
 		<Navbar
 			id='headerNavbar'
 			disableBlur
+			isCompact
 			css={{
 				transition: 'top 0.3s',
 			}}
 			variant='sticky'
 			maxWidth={'fluid'}>
-			<Navbar.Content hideIn='xs' variant='default'>
-				<Link href='/'>
-					<Navbar.Link
-						onClick={() => setActiveNavItem('Home')}
-						isActive={activeNavItem === 'Home'}>
-						Awesome Chicken
+			<Navbar.Content
+				hideIn='xs'
+				activeColor={'warning'}
+				variant='underline'>
+				<Link href={'/'}>
+					<Navbar.Link onClick={() => setActiveNavItem('')}>
+						<Home set='bold' primaryColor='#F5A524' />
+						<Text
+							b
+							color={'#F5A524'}
+							css={{
+								marginLeft: '10px',
+							}}>
+							Awesome Chicken
+						</Text>
 					</Navbar.Link>
 				</Link>
 
-				<Link href='/menu'>
+				<Link href={'/menu'}>
 					<Navbar.Link
-						onClick={() => setActiveNavItem('Menu')}
-						isActive={activeNavItem === 'Menu'}>
-						Menu
+						isActive={activeNavItem == 'Menu'}
+						onClick={() => setActiveNavItem('Menu')}>
+						<Text b color='white'>
+							Menu
+						</Text>
 					</Navbar.Link>
 				</Link>
 			</Navbar.Content>

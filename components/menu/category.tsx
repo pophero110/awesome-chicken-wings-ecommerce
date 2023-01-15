@@ -13,6 +13,7 @@ const Category: React.FC<CategoryProps> = ({ name, id }) => {
 	const { setActiveCategory } = useSetCategory();
 	return (
 		<Text
+			size={'$sm'}
 			onClick={() =>
 				setActiveCategory({
 					name,
@@ -22,7 +23,7 @@ const Category: React.FC<CategoryProps> = ({ name, id }) => {
 			className={style.categoryNav__category}
 			style={
 				activeCategory.name === name
-					? { backgroundColor: '#0F3158', color: '#EAF4FF' }
+					? { borderBottom: '3px solid #F5A524', borderRadius: '0' }
 					: {}
 			}>
 			{name}

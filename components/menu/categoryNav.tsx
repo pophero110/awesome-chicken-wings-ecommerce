@@ -1,13 +1,19 @@
 import Category, { CategoryProps } from './category';
 import Slider from '../shared/slider/slider';
 import { useCategory } from '../../contexts/categoryContext';
+import { Container } from '@nextui-org/react';
 type CategroyNavProps = {
 	categories: CategoryProps[];
 };
 const CategroyNav: React.FC<CategroyNavProps> = ({ categories }) => {
 	const { activeCategory } = useCategory();
 	return (
-		<div className='categoryNav'>
+		<Container
+			className='categoryNav'
+			css={{
+				borderBottom: '2px solid #2B2F31',
+				padding: 0,
+			}}>
 			<Slider scrollTo={activeCategory.id}>
 				{categories.map((category) => {
 					return (
@@ -19,7 +25,7 @@ const CategroyNav: React.FC<CategroyNavProps> = ({ categories }) => {
 					);
 				})}
 			</Slider>
-		</div>
+		</Container>
 	);
 };
 
