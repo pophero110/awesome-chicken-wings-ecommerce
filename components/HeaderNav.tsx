@@ -7,10 +7,17 @@ import styles from './HeaderNav.module.css';
 import { signOut, useSession } from 'next-auth/react';
 import { useSetNotification } from '../contexts/notification';
 import { Login, User, Logout, Home } from 'react-iconly';
-import { useRouter } from 'next/router';
+import { useRouter, Router } from 'next/router';
 export default function HeaderNav() {
 	const router = useRouter();
 	useEffect(() => {
+		const handleRouteDone = (e) => {
+			if (e == '/menu') {
+				setActiveNavItem('Menu');
+			}
+		};
+		Router.events.on('routeChangeComplete', handleRouteDone);
+
 		let prevScrollpos = window.pageYOffset;
 		window.onscroll = function () {
 			var currentScrollPos = window.pageYOffset;
@@ -21,10 +28,14 @@ export default function HeaderNav() {
 			}
 			prevScrollpos = currentScrollPos;
 		};
+
+		return () => {
+			Router.events.off('routeChangeComplete', handleRouteDone);
+		};
 	});
 	const { setNotification } = useSetNotification();
 	const { data: session } = useSession();
-	const [activeNavItem, setActiveNavItem] = useState('Home');
+	const [activeNavItem, setActiveNavItem] = useState('');
 	const handleMenuAction = (key) => {
 		if (key === 'profile') {
 			router.push('/profile');
@@ -68,6 +79,10 @@ export default function HeaderNav() {
 
 				<Link href={'/menu'}>
 					<Navbar.Link
+						css={{
+							'--nextui--navbarItemUnderlineHeight':
+								'2px !important',
+						}}
 						isActive={activeNavItem == 'Menu'}
 						onClick={() => setActiveNavItem('Menu')}>
 						<Text b color='white'>
@@ -111,7 +126,7 @@ export default function HeaderNav() {
 								dflex: 'center',
 							},
 						}}
-						placeholder='Search...'
+						placeholder='Search Item'
 					/>
 				</Navbar.Item>
 				<Navbar.Item>

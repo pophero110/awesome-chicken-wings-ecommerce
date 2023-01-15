@@ -10,7 +10,7 @@ const Slider: React.FC<SliderProps> = ({ children, scrollTo }) => {
 		const slider = document.getElementsByClassName(
 			'categoryNav__slider'
 		)[0];
-		slider.scrollLeft = 116 * scrollTo;
+		slider.scrollLeft = 50 * scrollTo;
 
 		let mouseX = 0;
 		let scollLeft = 0;

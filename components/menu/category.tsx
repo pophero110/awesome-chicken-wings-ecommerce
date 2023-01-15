@@ -20,6 +20,11 @@ const Category: React.FC<CategoryProps> = ({ name, id }) => {
 					id,
 				})
 			}
+			css={{
+				'@smMax': {
+					marginRight: '15px',
+				},
+			}}
 			className={style.categoryNav__category}
 			style={
 				activeCategory.name === name
