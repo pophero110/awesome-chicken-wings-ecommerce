@@ -7,9 +7,10 @@ import { signOut, useSession } from 'next-auth/react';
 import { useSetNotification } from '../contexts/notification';
 import { Login, User, Logout, Home } from 'react-iconly';
 import { useRouter, Router } from 'next/router';
-
+import { useSetModalContainer } from '../contexts/modalContainerContext';
 export default function HeaderNav() {
 	const router = useRouter();
+	const { setModalContainer } = useSetModalContainer();
 	const { setNotification } = useSetNotification();
 	const { data: session } = useSession();
 	const [activeNavItem, setActiveNavItem] = useState('');
@@ -18,7 +19,7 @@ export default function HeaderNav() {
 			router.push('/profile');
 		}
 		if (key === 'signin') {
-			router.push('/auth/signin');
+			setModalContainer({ visible: true, type: 'signin' });
 		}
 		if (key === 'signout') {
 			signOut({ redirect: false });
@@ -138,7 +139,7 @@ export default function HeaderNav() {
 							},
 						}}>
 						<NavItem
-							type={currentPage !== '/' ? 'icon' : 'link'}
+							type={currentPage === '/menu' ? 'icon' : 'link'}
 							route='/cart'></NavItem>
 					</Navbar.Item>
 
