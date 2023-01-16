@@ -4,7 +4,7 @@ import { createTheme } from '@nextui-org/react';
 import Layout from '../components/Layout';
 import './global.css';
 import Router from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import ItemsProvider from '../contexts/itemsContext';
@@ -12,25 +12,12 @@ import CategoryProvider from '../contexts/categoryContext';
 import { trpc } from '../utils/trpc';
 import { SSRProvider } from '@react-aria/ssr';
 import { SessionProvider } from 'next-auth/react';
-import { authOptions } from './api/auth/[...nextauth]';
 
-export const getServerSideProps = async (ctx) => {
-	const session = await unstable_getServerSession(
-		ctx.req,
-		ctx.res,
-		authOptions
-	);
-
-	return {
-		props: {
-			session: JSON.parse(JSON.stringify(session)),
-		},
-	};
-};
 const App = ({ Component, pageProps, session }: AppProps) => {
 	const darkTheme = createTheme({
 		type: 'dark',
 	});
+
 	useEffect(() => {
 		const handleRouteStart = () => {
 			NProgress.start();

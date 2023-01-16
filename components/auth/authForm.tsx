@@ -7,12 +7,11 @@ import {
 	useSetModalContainer,
 } from '../../contexts/modalContainerContext';
 import { createTRPCProxyClient, httpLink } from '@trpc/client';
-import { AppRouter } from '../../server/routers/_app';
+import type { AppRouter } from '../../server/routers/_app';
 import superjson from 'superjson';
 export default function AuthForm() {
 	const { modalContainer } = useModalContainer();
 	const { setModalContainer } = useSetModalContainer();
-	const { setNotification } = useSetNotification();
 	const [error, setError] = useState('');
 	const client = createTRPCProxyClient<AppRouter>({
 		transformer: superjson,
