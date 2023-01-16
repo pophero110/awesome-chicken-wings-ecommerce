@@ -1,4 +1,4 @@
-import { Navbar, Text, Input, Dropdown, Avatar } from '@nextui-org/react';
+import { Navbar, Text, Input, Dropdown, Avatar, Col } from '@nextui-org/react';
 import Link from 'next/link';
 import { SearchIcon } from './SearchIcon';
 import { useState, useEffect } from 'react';
@@ -8,12 +8,27 @@ import { useSetNotification } from '../contexts/notification';
 import { Login, User, Logout, Home } from 'react-iconly';
 import { useRouter, Router } from 'next/router';
 import { useSetModalContainer } from '../contexts/modalContainerContext';
+import SearchResultBox from './SearchResultBox';
+import Fuse from 'fuse.js';
+import { createTRPCProxyClient, httpLink } from '@trpc/client';
+import type { AppRouter } from '../server/routers/_app';
+import superjson from 'superjson';
 export default function HeaderNav() {
 	const router = useRouter();
 	const { setModalContainer } = useSetModalContainer();
 	const { setNotification } = useSetNotification();
 	const { data: session } = useSession();
+	const client = createTRPCProxyClient<AppRouter>({
+		transformer: superjson,
+		links: [
+			httpLink({
+				url: '/api/trpc',
+			}),
+		],
+	});
+	const [items, setItems] = useState([]);
 	const [activeNavItem, setActiveNavItem] = useState('');
+	const [searchResult, setSearchResult] = useState([]);
 	const handleMenuAction = (key) => {
 		if (key === 'profile') {
 			router.push('/profile');
@@ -28,7 +43,16 @@ export default function HeaderNav() {
 		}
 	};
 	const [currentPage, setCurrentPage] = useState('');
+	const fuse = new Fuse(items, { includeScore: true, keys: ['name'] });
+	const searchOnChange = (e) => {
+		setSearchResult(fuse.search(e.target.value));
+	};
 	useEffect(() => {
+		const fetchItems = async () => {
+			const items = await client.item.get.query();
+			setItems(items);
+		};
+		fetchItems();
 		setCurrentPage(router.pathname);
 		if (router.pathname === '/menu') {
 			setActiveNavItem('Menu');
@@ -112,28 +136,33 @@ export default function HeaderNav() {
 								jc: 'center',
 							},
 						}}>
-						<Input
-							aria-label='search'
-							clearable
-							contentLeft={
-								<SearchIcon
-									fill='var(--nextui-colors-accents6)'
-									size={16}
-								/>
-							}
-							contentLeftStyling={false}
-							css={{
-								'@xsMax': {
-									w: '100%',
-								},
-								'& .nextui-input-content--left': {
-									h: '100%',
-									ml: '$4',
-									dflex: 'center',
-								},
-							}}
-							placeholder='Search Item'
-						/>
+						<Col>
+							<Input
+								aria-label='search'
+								clearable
+								onChange={(e) => searchOnChange(e)}
+								contentLeft={
+									<SearchIcon
+										fill='var(--nextui-colors-accents6)'
+										size={16}
+									/>
+								}
+								contentLeftStyling={false}
+								css={{
+									'@xsMax': {
+										w: '100%',
+									},
+									'& .nextui-input-content--left': {
+										h: '100%',
+										ml: '$4',
+										dflex: 'center',
+									},
+								}}
+								placeholder='Search Item'
+							/>
+							<SearchResultBox
+								searchResult={searchResult}></SearchResultBox>
+						</Col>
 					</Navbar.Item>
 
 					<Navbar.Item
