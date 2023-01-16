@@ -9,6 +9,7 @@ import EmptyCartText from '../components/cart/emptyCartText';
 import CartPayment from '../components/cart/cartPayment';
 import CartSection from '../components/CartSection';
 import { useSetCartSection } from '../contexts/cartSectionContext';
+import CartItemList from '../components/cart/cartItemList';
 
 export const getServerSideProps: GetServerSideProps = async () => {
 	const items = await prisma.item.findMany();
@@ -121,6 +122,18 @@ const Cart: React.FC<CartProps> = ({ mapItemsById }) => {
 									border: '2px solid #2B2F31',
 									width: '500px',
 								}}>
+								<Col
+									css={{
+										display: 'none',
+										'@smMax': {
+											display: 'block',
+										},
+									}}>
+									<CartItemList
+										mapItemsById={
+											mapItemsById
+										}></CartItemList>
+								</Col>
 								<OrderSummary
 									orderSummary={orderSummary}></OrderSummary>
 								<CartPayment
