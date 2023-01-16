@@ -57,12 +57,15 @@ export default function HeaderNav() {
 				}}
 				variant='sticky'
 				maxWidth={'fluid'}>
-				<Navbar.Content
-					hideIn='xs'
-					activeColor={'warning'}
-					variant='underline'>
+				<Navbar.Content>
 					<Link href={'/'}>
-						<Navbar.Link onClick={() => setActiveNavItem('')}>
+						<Navbar.Link
+							css={{
+								'@xsMax': {
+									display: 'none',
+								},
+							}}
+							onClick={() => setActiveNavItem('')}>
 							<Home set='bold' primaryColor='#F5A524' />
 							<Text
 								b
@@ -77,12 +80,14 @@ export default function HeaderNav() {
 							</Text>
 						</Navbar.Link>
 					</Link>
-
 					<Link href={'/menu'}>
 						<Navbar.Link
 							css={{
 								'--nextui--navbarItemUnderlineHeight':
 									'2px !important',
+								'@smMax': {
+									display: 'none',
+								},
 							}}
 							isActive={activeNavItem == 'Menu'}
 							onClick={() => setActiveNavItem('Menu')}>
@@ -92,11 +97,12 @@ export default function HeaderNav() {
 						</Navbar.Link>
 					</Link>
 				</Navbar.Content>
+				<Navbar.Content></Navbar.Content>
 				<Navbar.Content
 					css={{
 						'@xsMax': {
 							w: '100%',
-							jc: 'space-center',
+							jc: 'space-between',
 						},
 					}}>
 					<Navbar.Item
@@ -119,7 +125,6 @@ export default function HeaderNav() {
 							css={{
 								'@xsMax': {
 									w: '100%',
-									marginLeft: '50px',
 								},
 								'& .nextui-input-content--left': {
 									h: '100%',
