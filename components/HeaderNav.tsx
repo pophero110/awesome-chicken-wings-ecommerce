@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import NavItem from './mobileNavbar/navItem';
 import { signOut, useSession } from 'next-auth/react';
 import { useSetNotification } from '../contexts/notification';
-import { Login, User, Logout, Home } from 'react-iconly';
+import { Login, User, Logout, Home, Category } from 'react-iconly';
 import { useRouter, Router } from 'next/router';
 import { useSetModalContainer } from '../contexts/modalContainerContext';
 import SearchResultBox from './SearchResultBox';
@@ -81,7 +81,7 @@ export default function HeaderNav() {
 				}}
 				variant='sticky'
 				maxWidth={'fluid'}>
-				<Navbar.Content>
+				<Navbar.Content activeColor={'warning'} variant='underline'>
 					<Link href={'/'}>
 						<Navbar.Link
 							css={{
@@ -113,9 +113,15 @@ export default function HeaderNav() {
 									display: 'none',
 								},
 							}}
-							isActive={activeNavItem == 'Menu'}
+							isActive={activeNavItem === 'Menu'}
 							onClick={() => setActiveNavItem('Menu')}>
-							<Text b color='white'>
+							<Category set='bold' primaryColor='#F5A524' />
+							<Text
+								b
+								color={'#F5A524'}
+								css={{
+									marginLeft: '10px',
+								}}>
 								Menu
 							</Text>
 						</Navbar.Link>
@@ -271,7 +277,7 @@ export default function HeaderNav() {
 				}}
 				variant='sticky'
 				maxWidth={'fluid'}>
-				<Navbar.Content activeColor={'warning'} variant='underline'>
+				<Navbar.Content>
 					<Link href={'/menu'}>
 						<Navbar.Link
 							css={{
