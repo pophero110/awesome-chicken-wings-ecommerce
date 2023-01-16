@@ -24,7 +24,7 @@ type Props = {
 const ModalContainerProvider: React.FC<Props> = ({ children }) => {
 	const [modalContainer, setModalContainer] = useState({
 		visible: false,
-		type: '',
+		type: 'signin',
 	});
 
 	return (

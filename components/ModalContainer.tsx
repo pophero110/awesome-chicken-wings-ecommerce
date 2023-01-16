@@ -8,7 +8,7 @@ export default function ModalContainer() {
 	const { modalContainer } = useModalContainer();
 	const { setModalContainer } = useSetModalContainer();
 	const closeHandler = () => {
-		setModalContainer({ visible: false, type: '' });
+		setModalContainer({ visible: false, type: 'signin' });
 	};
 	return (
 		<Modal
