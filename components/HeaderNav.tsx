@@ -1,38 +1,17 @@
 import { Navbar, Text, Input, Dropdown, Avatar } from '@nextui-org/react';
 import Link from 'next/link';
 import { SearchIcon } from './SearchIcon';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import NavItem from './mobileNavbar/navItem';
-import styles from './HeaderNav.module.css';
 import { signOut, useSession } from 'next-auth/react';
 import { useSetNotification } from '../contexts/notification';
 import { Login, User, Logout, Home } from 'react-iconly';
-import { useRouter, Router } from 'next/router';
+import { useRouter } from 'next/router';
+import { useSetCartSection } from '../contexts/cartSectionContext';
+
 export default function HeaderNav() {
+	const { setCartSection } = useSetCartSection();
 	const router = useRouter();
-	useEffect(() => {
-		const handleRouteDone = (e) => {
-			if (e == '/menu') {
-				setActiveNavItem('Menu');
-			}
-		};
-		Router.events.on('routeChangeComplete', handleRouteDone);
-
-		let prevScrollpos = window.pageYOffset;
-		window.onscroll = function () {
-			var currentScrollPos = window.pageYOffset;
-			if (prevScrollpos > currentScrollPos) {
-				document.getElementById('headerNavbar').style.top = '0';
-			} else {
-				document.getElementById('headerNavbar').style.top = '-75px';
-			}
-			prevScrollpos = currentScrollPos;
-		};
-
-		return () => {
-			Router.events.off('routeChangeComplete', handleRouteDone);
-		};
-	});
 	const { setNotification } = useSetNotification();
 	const { data: session } = useSession();
 	const [activeNavItem, setActiveNavItem] = useState('');
@@ -56,6 +35,7 @@ export default function HeaderNav() {
 			isCompact
 			css={{
 				transition: 'top 0.3s',
+				borderBottom: '2px solid #2B2F31',
 			}}
 			variant='sticky'
 			maxWidth={'fluid'}>
@@ -129,10 +109,17 @@ export default function HeaderNav() {
 						placeholder='Search Item'
 					/>
 				</Navbar.Item>
-				<Navbar.Item>
-					<NavItem
-						route={'/cart'}
-						className={styles.headerNav__navItem}></NavItem>
+				<Navbar.Item
+					onClick={() => {
+						setCartSection({ visible: true });
+					}}
+					css={{
+						borderTop: '0px',
+						'@xsMax': {
+							display: 'none',
+						},
+					}}>
+					<NavItem type='icon' route='/cart'></NavItem>
 				</Navbar.Item>
 				<Dropdown placement='bottom-right' isBordered>
 					<Navbar.Item>

@@ -5,18 +5,20 @@ import { Category } from 'react-iconly';
 import Link from 'next/link';
 import { Badge } from '@nextui-org/react';
 import { useItems } from '../../contexts/itemsContext';
+import { useSetCartSection } from '../../contexts/cartSectionContext';
 type NavItemProps = {
 	activeNavItem?: string;
-	route: string;
+	route?: string;
+	type: string;
 	style?: {};
-	className?: string;
 };
 const NavItem: React.FC<NavItemProps> = ({
 	route,
 	activeNavItem,
-	className,
 	style,
+	type,
 }) => {
+	const { setCartSection } = useSetCartSection();
 	const { itemState } = useItems();
 	const quantity = Object.values(itemState).reduce(
 		(acc: number, cur: number) => acc + cur,
@@ -35,37 +37,58 @@ const NavItem: React.FC<NavItemProps> = ({
 		color: 'white',
 		borderTop: '4px solid #102C4C',
 	};
-	return (
-		<Link href={route}>
+	if (type == 'link') {
+		return (
+			<Link href={route}>
+				<a
+					aria-label='cart'
+					style={
+						activeNavItem === route
+							? { ...styles, borderTop: '4px solid #0072F5' }
+							: styles
+					}>
+					{route === '/cart' ? (
+						<Badge
+							color='error'
+							content={quantity > 100 ? '99+' : quantity}
+							size='sm'
+							isInvisible={quantity < 1}
+							shape='circle'>
+							{mapIcon[route]}
+						</Badge>
+					) : (
+						<Badge
+							content=''
+							size='xs'
+							isInvisible={true}
+							shape='circle'>
+							{mapIcon[route]}
+						</Badge>
+					)}
+				</a>
+			</Link>
+		);
+	} else {
+		return (
 			<a
+				onClick={() => setCartSection({ visible: true })}
 				aria-label='cart'
-				className={className}
 				style={
 					activeNavItem === route
 						? { ...styles, borderTop: '4px solid #0072F5' }
 						: styles
 				}>
-				{route === '/cart' ? (
-					<Badge
-						color='error'
-						content={quantity > 100 ? '99+' : quantity}
-						size='sm'
-						isInvisible={quantity < 1}
-						shape='circle'>
-						{mapIcon[route]}
-					</Badge>
-				) : (
-					<Badge
-						content=''
-						size='xs'
-						isInvisible={true}
-						shape='circle'>
-						{mapIcon[route]}
-					</Badge>
-				)}
+				<Badge
+					color='error'
+					content={quantity > 100 ? '99+' : quantity}
+					size='sm'
+					isInvisible={quantity < 1}
+					shape='circle'>
+					{mapIcon[route]}
+				</Badge>
 			</a>
-		</Link>
-	);
+		);
+	}
 };
 
 export default NavItem;

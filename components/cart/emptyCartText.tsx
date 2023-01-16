@@ -11,7 +11,7 @@ const EmptyCartText = () => {
 	};
 	return (
 		<div style={style}>
-			<Text size={20}>No item found in your shopping cart</Text>
+			<Text size={20}>No item found in your cart</Text>
 			<Link href='/menu'>Go to find some food you love!</Link>
 		</div>
 	);

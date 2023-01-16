@@ -12,7 +12,7 @@ const CategroyNav: React.FC<CategroyNavProps> = ({ categories }) => {
 			className='categoryNav'
 			css={{
 				borderBottom: '2px solid #2B2F31',
-				padding: 0,
+				padding: '0 2px 0 0',
 			}}>
 			<Slider scrollTo={activeCategory.id}>
 				{categories.map((category) => {

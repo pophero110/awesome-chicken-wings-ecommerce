@@ -3,9 +3,15 @@ import CategroyNav from '../components/menu/categoryNav';
 import { CategoryProps } from '../components/menu/category';
 import { GetStaticProps } from 'next';
 import prisma from '../lib/prisma';
-import { Container, Spacer } from '@nextui-org/react';
+import { Row, Col } from '@nextui-org/react';
 import { useCategory } from '../contexts/categoryContext';
+import CartSection from '../components/CartSection';
+import { useSetCartSection } from '../contexts/cartSectionContext';
 export const getStaticProps: GetStaticProps = async () => {
+	const items = await prisma.item.findMany();
+	const mapItemsById = items.reduce((acc, { id, name, price }) => {
+		return { ...acc, ...{ [id]: { name, price } } };
+	}, {});
 	const categories = await prisma.category.findMany({
 		include: { items: { include: { item: true } } },
 	});
@@ -25,28 +31,49 @@ export const getStaticProps: GetStaticProps = async () => {
 	return {
 		props: {
 			categories: JSON.parse(JSON.stringify(mapCategories)),
+			mapItemsById: JSON.parse(JSON.stringify(mapItemsById)),
 		},
 	};
 };
 
 type MenuProps = {
 	categories: CategoryProps[];
+	mapItemsById: [];
 };
 
-const Menu: React.FC<MenuProps> = ({ categories }) => {
+const Menu: React.FC<MenuProps> = ({ categories, mapItemsById }) => {
 	const { activeCategory } = useCategory();
 	const items = categories.filter(
 		(category) => category.name === activeCategory.name
 	)[0].items;
+	const { setCartSection } = useSetCartSection();
+	const closeCartHandler = () => {
+		setCartSection(false);
+	};
 	return (
-		<>
-			<Container>
-				<Spacer y={1}></Spacer>
-				<CategroyNav categories={categories}></CategroyNav>
-				<Spacer y={1}></Spacer>
-				<ItemList items={items}></ItemList>
-			</Container>
-		</>
+		<div
+			onClick={() => closeCartHandler()}
+			style={{
+				height: '100vh',
+			}}>
+			<Row
+				css={{
+					paddingLeft: '5px',
+				}}>
+				<Col
+					css={{
+						'@mdMin': {
+							width: 'calc(100vw - 370px)',
+						},
+					}}>
+					<CategroyNav categories={categories}></CategroyNav>
+					<ItemList items={items}></ItemList>
+				</Col>
+				<CartSection
+					onCheckout={false}
+					mapItemsById={mapItemsById}></CartSection>
+			</Row>
+		</div>
 	);
 };
 

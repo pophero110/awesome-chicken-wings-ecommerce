@@ -1,6 +1,6 @@
 import { Text } from '@nextui-org/react';
 import { ItemProps } from './item';
-import style from './category.module.css';
+
 import { useCategory, useSetCategory } from '../../contexts/categoryContext';
 export type CategoryProps = {
 	id: string;
@@ -21,11 +21,18 @@ const Category: React.FC<CategoryProps> = ({ name, id }) => {
 				})
 			}
 			css={{
+				flex: '0 0 1',
+				whiteSpace: 'nowrap',
+				textAlign: 'center',
+				padding: '0px 10px',
+				borderRadius: 'var(--nextui-radii-lg)',
+				cursor: 'pointer',
+				userSelect: 'none',
+				paddingTop: '5px',
 				'@smMax': {
 					marginRight: '15px',
 				},
 			}}
-			className={style.categoryNav__category}
 			style={
 				activeCategory.name === name
 					? { borderBottom: '3px solid #F5A524', borderRadius: '0' }

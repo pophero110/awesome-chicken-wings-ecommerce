@@ -6,7 +6,12 @@ type ItemListProps = {
 
 const ItemList: React.FC<ItemListProps> = ({ items }) => {
 	return (
-		<Grid.Container gap={1} justify='flex-start'>
+		<Grid.Container
+			gap={1}
+			justify='flex-start'
+			css={{
+				paddingRight: '10px',
+			}}>
 			{items.map((item) => {
 				return (
 					<Grid xs={12} sm={6} md={4} xl={3} key={item.id}>

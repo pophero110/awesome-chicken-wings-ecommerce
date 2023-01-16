@@ -1,6 +1,7 @@
 import CartItem from './cartItem';
 import { Grid } from '@nextui-org/react';
 import { useItems } from '../../contexts/itemsContext';
+import EmptyCartText from './emptyCartText';
 type CartItemListProps = {
 	mapItemsById: {
 		id: {
@@ -12,17 +13,19 @@ type CartItemListProps = {
 const CartItemList = ({ mapItemsById }: CartItemListProps) => {
 	const { itemState } = useItems();
 	const itemIds = Object.keys(itemState);
-	const cartItems = itemIds.map((id) => {
-		return itemState[id] === 0 ? null : (
-			<Grid xs={12} key={id}>
-				<CartItem
-					id={id}
-					quantity={itemState[id]}
-					name={mapItemsById[id].name}
-					price={mapItemsById[id].price}></CartItem>
-			</Grid>
-		);
-	});
+	const cartItems = itemIds.length
+		? itemIds.map((id) => {
+				return itemState[id] === 0 ? null : (
+					<Grid xs={12} key={id}>
+						<CartItem
+							id={id}
+							quantity={itemState[id]}
+							name={mapItemsById[id].name}
+							price={mapItemsById[id].price}></CartItem>
+					</Grid>
+				);
+		  })
+		: null;
 	return <Grid.Container gap={1}>{cartItems}</Grid.Container>;
 };
 

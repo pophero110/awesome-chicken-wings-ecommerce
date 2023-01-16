@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Grid } from '@nextui-org/react';
+import { Container, Col, Row } from '@nextui-org/react';
 import { setCookie } from 'nookies';
 import { GetServerSideProps } from 'next';
 import prisma from '../lib/prisma';
@@ -7,7 +7,8 @@ import { useItems } from '../contexts/itemsContext';
 import OrderSummary from '../components/cart/orderSummary';
 import EmptyCartText from '../components/cart/emptyCartText';
 import CartPayment from '../components/cart/cartPayment';
-import CartItemList from '../components/cart/cartItemList';
+import CartSection from '../components/CartSection';
+import { useSetCartSection } from '../contexts/cartSectionContext';
 
 export const getServerSideProps: GetServerSideProps = async () => {
 	const items = await prisma.item.findMany();
@@ -42,7 +43,7 @@ const Cart: React.FC<CartProps> = ({ mapItemsById }) => {
 	});
 	const [checkoutMode, setCheckoutMode] = useState(false);
 	const [clientSecret, setClientSecret] = useState(null);
-
+	const { setCartSection } = useSetCartSection();
 	const setCheckoutModeHandler = () => {
 		setCheckoutMode(true);
 	};
@@ -86,47 +87,57 @@ const Cart: React.FC<CartProps> = ({ mapItemsById }) => {
 			createOrder();
 		}
 	}, [JSON.stringify(itemState), checkoutMode]);
+	const closeCartHandler = () => {
+		setCartSection(false);
+	};
 	return (
 		<>
 			{!emptyCart ? (
-				<Container>
-					<Grid.Container
-						gap={1}
-						justify='flex-start'
-						alignItems='flex-start'>
-						<Grid xs={12} sm={6}>
-							<CartItemList
-								mapItemsById={mapItemsById}></CartItemList>
-						</Grid>
-						<Grid
-							xs={12}
-							sm={6}
-							style={{
-								width: '100%',
+				<div
+					onClick={() => closeCartHandler()}
+					style={{
+						height: '100vh',
+					}}>
+					<Row
+						css={{
+							'@xsMax': {
+								padding: '0',
+							},
+						}}>
+						<Col
+							css={{
+								marginTop: '20px',
+								padding: '16px',
+								borderRadius: '4px',
+								border: '2px solid #2B2F31',
+								display: 'flex',
+								flexDirection: 'column',
+								marginLeft: '25%',
+								width: '500px',
+								'@mdMax': {
+									marginLeft: '15%',
+									marginRight: '10%',
+								},
+								'@xsMax': {
+									marginLeft: '0',
+									marginRight: '0',
+									width: '100vw',
+								},
 							}}>
-							<Grid.Container direction='column' gap={1}>
-								<Grid>
-									<OrderSummary
-										orderSummary={
-											orderSummary
-										}></OrderSummary>
-								</Grid>
-								<Grid>
-									<CartPayment
-										clientSecret={clientSecret}
-										total={orderSummary.total}
-										setCheckoutModeHandler={
-											setCheckoutModeHandler
-										}></CartPayment>
-								</Grid>
-							</Grid.Container>
-						</Grid>
-						<Grid
-							style={{
-								width: '100%',
-							}}></Grid>
-					</Grid.Container>
-				</Container>
+							<OrderSummary
+								orderSummary={orderSummary}></OrderSummary>
+							<CartPayment
+								clientSecret={clientSecret}
+								total={orderSummary.total}
+								setCheckoutModeHandler={
+									setCheckoutModeHandler
+								}></CartPayment>
+						</Col>
+						<CartSection
+							onCheckout={true}
+							mapItemsById={mapItemsById}></CartSection>
+					</Row>
+				</div>
 			) : (
 				<EmptyCartText></EmptyCartText>
 			)}

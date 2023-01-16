@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import styles from './mobileNavbar.module.css';
 const MoblieNavbar = () => {
 	const [activeNavItem, setActiveNavItem] = useState('/');
+
 	const router = useRouter();
 	useEffect(() => {
 		const handleRouteDone = (url) => {
@@ -26,14 +27,17 @@ const MoblieNavbar = () => {
 	return (
 		<div className={styles.mobileNavbar} style={style}>
 			<NavItem
+				type='link'
 				key={'home'}
 				route={'/'}
 				activeNavItem={activeNavItem}></NavItem>
 			<NavItem
+				type='link'
 				key={'menu'}
 				route={'/menu'}
 				activeNavItem={activeNavItem}></NavItem>
 			<NavItem
+				type='icon'
 				key={'cart'}
 				route={'/cart'}
 				activeNavItem={activeNavItem}></NavItem>

@@ -19,7 +19,7 @@ export const SetNotificationCtx = createContext<SetNotificationCtx | null>(
 );
 
 type Props = {
-	children: ReactNode[];
+	children: ReactNode;
 };
 const NotificationProvider: React.FC<Props> = ({ children }) => {
 	const [notification, setNotification] = useState('');
