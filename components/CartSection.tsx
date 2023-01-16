@@ -4,9 +4,10 @@ import { useSetCartSection } from '../contexts/cartSectionContext';
 import { useCartSection } from '../contexts/cartSectionContext';
 
 import { useItems } from '../contexts/itemsContext';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import EmptyCartText from './cart/emptyCartText';
 export default function CartSection({ mapItemsById, onCheckout }) {
+	const router = useRouter();
 	const { itemState } = useItems();
 	const { setCartSection } = useSetCartSection();
 	const { cartSection } = useCartSection();
@@ -86,6 +87,7 @@ export default function CartSection({ mapItemsById, onCheckout }) {
 								padding: '0px 5px',
 							}}>
 							<Button
+								onPress={() => router.push('/cart')}
 								color='error'
 								css={{
 									width: '100%',
@@ -93,11 +95,9 @@ export default function CartSection({ mapItemsById, onCheckout }) {
 										width: '100%',
 									},
 								}}>
-								<Link href={'/cart'}>
-									<Text b size={'$md'}>
-										Check Out
-									</Text>
-								</Link>
+								<Text b size={'$md'}>
+									Check Out
+								</Text>
 							</Button>
 						</div>
 					)}
