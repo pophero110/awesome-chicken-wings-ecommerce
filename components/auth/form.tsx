@@ -1,8 +1,9 @@
 import { Container, Text, Input, Button, Spacer } from '@nextui-org/react';
 import { useState } from 'react';
-import Link from 'next/link';
 import { Message, Lock } from 'react-iconly';
+import { useSetModalContainer } from '../../contexts/modalContainerContext';
 export default function Form({ handleSubmit, type, error, setError }) {
+	const { setModalContainer } = useSetModalContainer();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
@@ -39,15 +40,6 @@ export default function Form({ handleSubmit, type, error, setError }) {
 				},
 			}}>
 			<Spacer y={1}></Spacer>
-			<Text
-				h4
-				css={{
-					textAlign: 'center',
-					margin: 0,
-				}}>
-				Welcome to Awesome Chicken
-			</Text>
-			<Spacer y={2}></Spacer>
 			<Input
 				clearable
 				width='100%'
@@ -55,11 +47,6 @@ export default function Form({ handleSubmit, type, error, setError }) {
 				value={email}
 				bordered
 				color='primary'
-				css={{
-					'@smMin': {
-						width: '50%',
-					},
-				}}
 				labelPlaceholder='Email'
 				contentLeft={<Message set='broken' primaryColor='white' />}
 				onChange={(e) => setEmail(e.target.value)}></Input>
@@ -70,11 +57,6 @@ export default function Form({ handleSubmit, type, error, setError }) {
 				aria-label='Password'
 				bordered
 				color='primary'
-				css={{
-					'@smMin': {
-						width: '50%',
-					},
-				}}
 				labelPlaceholder='Password'
 				contentLeft={<Lock set='broken' primaryColor='white' />}
 				value={password}
@@ -89,11 +71,6 @@ export default function Form({ handleSubmit, type, error, setError }) {
 						aria-label='Confirm Password'
 						bordered
 						color='primary'
-						css={{
-							'@smMin': {
-								width: '50%',
-							},
-						}}
 						labelPlaceholder='Confirm Password'
 						contentLeft={<Lock set='broken' primaryColor='white' />}
 						value={confirmPassword}
@@ -120,24 +97,47 @@ export default function Form({ handleSubmit, type, error, setError }) {
 				css={{
 					display: 'flex',
 					justifyContent: 'space-between',
+					padding: '0',
 					alignItems: 'center',
-					'@smMin': {
-						width: '40%',
-					},
 				}}>
-				<Button onPress={submitHandler}>
+				{type == 'signup' && (
+					<Button
+						size={'sm'}
+						bordered={type == 'signup'}
+						onPress={() => {
+							setError('');
+							setModalContainer({
+								visible: true,
+								type: 'signin',
+							});
+						}}>
+						Sign in
+					</Button>
+				)}
+				<Button
+					shadow
+					onPress={() => {
+						setPassword('');
+						setConfirmPassword('');
+						submitHandler();
+					}}
+					size={'sm'}>
 					{type == 'signin' ? 'Sign in' : 'Sign up'}
 				</Button>
-				{type == 'signin' ? (
-					<Link href='/auth/signup'>
-						<a
-							style={{
-								fontSize: '14px',
-							}}>
-							Sign up
-						</a>
-					</Link>
-				) : null}
+				{type == 'signin' && (
+					<Button
+						size={'sm'}
+						bordered={type == 'signin'}
+						onPress={() => {
+							setError('');
+							setModalContainer({
+								visible: true,
+								type: 'signup',
+							});
+						}}>
+						Sign up
+					</Button>
+				)}
 			</Container>
 		</Container>
 	);
