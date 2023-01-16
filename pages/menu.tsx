@@ -62,8 +62,8 @@ const Menu: React.FC<MenuProps> = ({ categories, mapItemsById }) => {
 				}}>
 				<Col
 					css={{
-						'@mdMin': {
-							width: 'calc(100vw - 370px)',
+						'@smMin': {
+							width: 'calc(100vw - 390px)',
 						},
 					}}>
 					<CategroyNav categories={categories}></CategroyNav>

@@ -11,7 +11,13 @@ export default function CartSection({ mapItemsById, onCheckout }) {
 	const { itemState } = useItems();
 	const { setCartSection } = useSetCartSection();
 	const { cartSection } = useCartSection();
-
+	const itemIds = Object.keys(itemState);
+	const subtotal = itemIds.length
+		? itemIds.reduce((acc, id) => {
+				const prices = mapItemsById[id].price * itemState[id];
+				return acc + prices;
+		  }, 0)
+		: null;
 	return (
 		<Col
 			id='CartSection'
@@ -28,6 +34,9 @@ export default function CartSection({ mapItemsById, onCheckout }) {
 				transition:
 					'transform 225ms ease-in-out 0s, opacity 225ms linear 0s',
 				opacity: 1,
+				'&::-webkit-scrollbar': {
+					display: 'none',
+				},
 				'@smMax': {
 					height: '100vh',
 					top: '0',
@@ -64,7 +73,7 @@ export default function CartSection({ mapItemsById, onCheckout }) {
 							color: 'white',
 							display: 'block',
 							minWidth: '0',
-							'@mdMin': {
+							'@smMin': {
 								display: 'none',
 							},
 						}}>
@@ -93,13 +102,16 @@ export default function CartSection({ mapItemsById, onCheckout }) {
 								}}
 								color='error'
 								css={{
+									display: 'flex',
+									justifyContent: 'center',
+									padding: '0',
 									width: '100%',
 									'@smMax': {
 										width: '100%',
 									},
 								}}>
 								<Text b size={'$md'}>
-									Check Out
+									Check Out {`       $${subtotal}`}
 								</Text>
 							</Button>
 						</div>

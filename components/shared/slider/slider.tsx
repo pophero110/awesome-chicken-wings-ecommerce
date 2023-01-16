@@ -48,7 +48,7 @@ const Slider: React.FC<SliderProps> = ({ children, scrollTo }) => {
 					minWidth: '30px',
 					backgroundColor: 'black',
 					height: '33px',
-					'@smMin': {
+					'@mdMin': {
 						display: 'none',
 					},
 				}}>
@@ -75,7 +75,7 @@ const Slider: React.FC<SliderProps> = ({ children, scrollTo }) => {
 					padding: '0',
 					minWidth: '30px',
 					height: '33px',
-					'@smMin': {
+					'@mdMin': {
 						display: 'none',
 					},
 				}}>
