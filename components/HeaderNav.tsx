@@ -7,10 +7,8 @@ import { signOut, useSession } from 'next-auth/react';
 import { useSetNotification } from '../contexts/notification';
 import { Login, User, Logout, Home } from 'react-iconly';
 import { useRouter, Router } from 'next/router';
-import { useSetCartSection } from '../contexts/cartSectionContext';
 
 export default function HeaderNav() {
-	const { setCartSection } = useSetCartSection();
 	const router = useRouter();
 	const { setNotification } = useSetNotification();
 	const { data: session } = useSession();
@@ -31,8 +29,14 @@ export default function HeaderNav() {
 	const [currentPage, setCurrentPage] = useState('');
 	useEffect(() => {
 		setCurrentPage(router.pathname);
+		if (router.pathname === '/menu') {
+			setActiveNavItem('Menu');
+		}
 		const handlerRouteStart = (path) => {
 			setCurrentPage(path);
+			if (path === '/menu') {
+				setActiveNavItem('Menu');
+			}
 		};
 		Router.events.on('routeChangeStart', handlerRouteStart);
 
@@ -64,6 +68,9 @@ export default function HeaderNav() {
 								color={'#F5A524'}
 								css={{
 									marginLeft: '10px',
+									'@smMax': {
+										display: 'none',
+									},
 								}}>
 								Awesome Chicken
 							</Text>
