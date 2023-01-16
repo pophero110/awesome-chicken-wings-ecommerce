@@ -106,32 +106,30 @@ const Cart: React.FC<CartProps> = ({ mapItemsById }) => {
 						}}>
 						<Col
 							css={{
+								width: 'calc(100vw - 370px)',
 								marginTop: '20px',
-								padding: '16px',
-								borderRadius: '4px',
-								border: '2px solid #2B2F31',
 								display: 'flex',
-								flexDirection: 'column',
-								marginLeft: '25%',
-								width: '500px',
-								'@mdMax': {
-									marginLeft: '15%',
-									marginRight: '10%',
-								},
-								'@xsMax': {
-									marginLeft: '0',
-									marginRight: '0',
-									width: '100vw',
+								justifyContent: 'center',
+								'@smMax': {
+									width: '100%',
 								},
 							}}>
-							<OrderSummary
-								orderSummary={orderSummary}></OrderSummary>
-							<CartPayment
-								clientSecret={clientSecret}
-								total={orderSummary.total}
-								setCheckoutModeHandler={
-									setCheckoutModeHandler
-								}></CartPayment>
+							<Col
+								css={{
+									padding: '16px',
+									borderRadius: '4px',
+									border: '2px solid #2B2F31',
+									width: '500px',
+								}}>
+								<OrderSummary
+									orderSummary={orderSummary}></OrderSummary>
+								<CartPayment
+									clientSecret={clientSecret}
+									total={orderSummary.total}
+									setCheckoutModeHandler={
+										setCheckoutModeHandler
+									}></CartPayment>
+							</Col>
 						</Col>
 						<CartSection
 							onCheckout={true}

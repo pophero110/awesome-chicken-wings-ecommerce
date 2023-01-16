@@ -87,7 +87,10 @@ export default function CartSection({ mapItemsById, onCheckout }) {
 								padding: '0px 5px',
 							}}>
 							<Button
-								onPress={() => router.push('/cart')}
+								onPress={() => {
+									setCartSection({ visible: false });
+									router.push('/cart');
+								}}
 								color='error'
 								css={{
 									width: '100%',
