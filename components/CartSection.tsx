@@ -111,7 +111,7 @@ export default function CartSection({ mapItemsById, onCheckout }) {
 									},
 								}}>
 								<Text b size={'$md'}>
-									Check Out {`       $${subtotal}`}
+									Check Out {`       $${subtotal.toFixed(2)}`}
 								</Text>
 							</Button>
 						</div>
