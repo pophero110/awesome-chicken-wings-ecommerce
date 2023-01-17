@@ -1,6 +1,23 @@
 import { Col, Container, Row, Text } from '@nextui-org/react';
-
+import { useSetItemModalContainer } from '../contexts/itemModalContext';
 export default function SearchResultBox({ searchResult }) {
+	const { setItemModalContainer } = useSetItemModalContainer();
+	const handleSelection = (e) => {
+		const item = e.currentTarget.children;
+
+		const serializedItem = Array.from(item).reduce((acc, e) => {
+			return { ...acc, ...{ [e.id]: e.innerText } };
+		}, {});
+
+		setItemModalContainer({
+			visible: true,
+			item: {
+				id: serializedItem.id,
+				price: serializedItem.price.substring(1),
+				name: serializedItem.name,
+			},
+		});
+	};
 	return (
 		<Col
 			css={{
@@ -24,9 +41,9 @@ export default function SearchResultBox({ searchResult }) {
 					padding: 0,
 				}}>
 				{searchResult.map((item) => {
-					console.log(item);
 					return (
 						<Row
+							onClick={(e) => handleSelection(e)}
 							key={item.refIndex}
 							css={{
 								display: 'flex',
@@ -39,6 +56,7 @@ export default function SearchResultBox({ searchResult }) {
 							}}>
 							<Text
 								b
+								id='name'
 								css={{
 									padding: '10px 10px',
 									whiteSpace: 'nowrap',
@@ -47,10 +65,18 @@ export default function SearchResultBox({ searchResult }) {
 							</Text>
 							<Text
 								b
+								id='price'
 								css={{
 									padding: '10px 10px',
 								}}>
 								${item.item.price}
+							</Text>
+							<Text
+								id='id'
+								css={{
+									display: 'none',
+								}}>
+								{item.item.id}
 							</Text>
 						</Row>
 					);

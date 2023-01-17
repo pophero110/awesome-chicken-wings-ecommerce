@@ -7,6 +7,8 @@ import HeaderNav from './HeaderNav';
 import CartSectionProvider from '../contexts/cartSectionContext';
 import ModalContainer from './ModalContainer';
 import ModalContainerProvider from '../contexts/modalContainerContext';
+import ItemModalContainerProvider from '../contexts/itemModalContext';
+import ItemModalContainer from './ItemModalContainer';
 type Props = {
 	children: ReactNode;
 };
@@ -14,18 +16,21 @@ type Props = {
 const Layout: React.FC<Props> = ({ children }) => {
 	return (
 		<div>
-			<ModalContainerProvider>
-				<NotificationProvider>
-					<CartSectionProvider>
-						<ModalContainer></ModalContainer>
-						<HeaderNav></HeaderNav>
-						<Notification></Notification>
-						{children}
-						<Spacer y={3}></Spacer>
-						<MoblieNavbar></MoblieNavbar>
-					</CartSectionProvider>
-				</NotificationProvider>
-			</ModalContainerProvider>
+			<ItemModalContainerProvider>
+				<ModalContainerProvider>
+					<NotificationProvider>
+						<CartSectionProvider>
+							<ItemModalContainer></ItemModalContainer>
+							<ModalContainer></ModalContainer>
+							<HeaderNav></HeaderNav>
+							<Notification></Notification>
+							{children}
+							<Spacer y={3}></Spacer>
+							<MoblieNavbar></MoblieNavbar>
+						</CartSectionProvider>
+					</NotificationProvider>
+				</ModalContainerProvider>
+			</ItemModalContainerProvider>
 		</div>
 	);
 };
