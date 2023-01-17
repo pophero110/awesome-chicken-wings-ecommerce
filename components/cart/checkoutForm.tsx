@@ -28,6 +28,7 @@ export default function CheckoutForm({
 				fontSmoothing: 'antialiased',
 				fontSize: '16px',
 				iconColor: 'white',
+				backgroundColor: 'black',
 				'::placeholder': {
 					color: '#697177',
 				},
