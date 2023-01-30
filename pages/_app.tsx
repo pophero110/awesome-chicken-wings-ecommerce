@@ -12,6 +12,7 @@ import CategoryProvider from '../contexts/categoryContext';
 import { trpc } from '../utils/trpc';
 import { SSRProvider } from '@react-aria/ssr';
 import { SessionProvider } from 'next-auth/react';
+import CartSectionProvider from '../contexts/cartSectionContext';
 
 const App = ({ Component, pageProps, session }: AppProps) => {
 	const darkTheme = createTheme({
@@ -36,15 +37,17 @@ const App = ({ Component, pageProps, session }: AppProps) => {
 	return (
 		<SSRProvider>
 			<NextUIProvider theme={darkTheme}>
-				<ItemsProvider>
-					<CategoryProvider>
-						<SessionProvider session={session}>
-							<Layout>
-								<Component {...pageProps} />
-							</Layout>
-						</SessionProvider>
-					</CategoryProvider>
-				</ItemsProvider>
+				<CartSectionProvider>
+					<ItemsProvider>
+						<CategoryProvider>
+							<SessionProvider session={session}>
+								<Layout>
+									<Component {...pageProps} />
+								</Layout>
+							</SessionProvider>
+						</CategoryProvider>
+					</ItemsProvider>
+				</CartSectionProvider>
 			</NextUIProvider>
 		</SSRProvider>
 	);

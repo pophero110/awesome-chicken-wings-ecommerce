@@ -89,7 +89,7 @@ const Cart: React.FC<CartProps> = ({ mapItemsById }) => {
 		}
 	}, [JSON.stringify(itemState), checkoutMode]);
 	const closeCartHandler = () => {
-		setCartSection(false);
+		setCartSection({ visible: false });
 	};
 	return (
 		<>

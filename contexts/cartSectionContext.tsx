@@ -17,11 +17,10 @@ export const CartSectionCtx = createContext<CartSectionCtx | null>(null);
 export const SetCartSectionCtx = createContext<SetCartSectionCtx | null>(null);
 
 type Props = {
-	children: ReactNode[];
+	children: ReactNode;
 };
 const CartSectionProvider: React.FC<Props> = ({ children }) => {
 	const [cartSection, setCartSection] = useState({ visible: false });
-
 	return (
 		<CartSectionCtx.Provider value={{ cartSection }}>
 			<SetCartSectionCtx.Provider value={{ setCartSection }}>

@@ -2,7 +2,6 @@ import CartItemList from './cart/cartItemList';
 import { Container, Button, Col, Text } from '@nextui-org/react';
 import { useSetCartSection } from '../contexts/cartSectionContext';
 import { useCartSection } from '../contexts/cartSectionContext';
-
 import { useItems } from '../contexts/itemsContext';
 import { useRouter } from 'next/router';
 import EmptyCartText from './cart/emptyCartText';

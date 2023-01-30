@@ -46,12 +46,9 @@ const Menu: React.FC<MenuProps> = ({ categories, mapItemsById }) => {
 	const items = categories.filter(
 		(category) => category.name === activeCategory.name
 	)[0].items;
-	const { setCartSection } = useSetCartSection();
-	const closeCartHandler = () => {
-		setCartSection(false);
-	};
+
 	return (
-		<div onClick={() => closeCartHandler()}>
+		<div>
 			<Row
 				css={{
 					paddingLeft: '5px',

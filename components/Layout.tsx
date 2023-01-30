@@ -4,7 +4,6 @@ import { Spacer } from '@nextui-org/react';
 import Notification from './Notification';
 import NotificationProvider from '../contexts/notification';
 import HeaderNav from './HeaderNav';
-import CartSectionProvider from '../contexts/cartSectionContext';
 import ModalContainer from './ModalContainer';
 import ModalContainerProvider from '../contexts/modalContainerContext';
 import ItemModalContainerProvider from '../contexts/itemModalContext';
@@ -19,15 +18,13 @@ const Layout: React.FC<Props> = ({ children }) => {
 			<ItemModalContainerProvider>
 				<ModalContainerProvider>
 					<NotificationProvider>
-						<CartSectionProvider>
-							<ItemModalContainer></ItemModalContainer>
-							<ModalContainer></ModalContainer>
-							<HeaderNav></HeaderNav>
-							<Notification></Notification>
-							{children}
-							<Spacer y={3}></Spacer>
-							<MoblieNavbar></MoblieNavbar>
-						</CartSectionProvider>
+						<ItemModalContainer></ItemModalContainer>
+						<ModalContainer></ModalContainer>
+						<HeaderNav></HeaderNav>
+						<Notification></Notification>
+						{children}
+						<Spacer y={3}></Spacer>
+						<MoblieNavbar></MoblieNavbar>
 					</NotificationProvider>
 				</ModalContainerProvider>
 			</ItemModalContainerProvider>
