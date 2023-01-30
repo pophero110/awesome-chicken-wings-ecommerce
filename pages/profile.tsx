@@ -45,12 +45,17 @@ export default function Profile() {
 			<Container
 				css={{
 					display: 'flex',
+					height: 'calc(100vh - 5rem)',
 					flexDirection: 'column',
 					justifyContent: 'space-between',
-					alignItems: '',
 				}}>
 				<OrderList orders={orders}></OrderList>
 				<Button
+					css={{
+						'@xsMin': {
+							display: 'none',
+						},
+					}}
 					onPress={() => {
 						signOut({ redirect: false });
 						setNotification('Sign out successfully');
