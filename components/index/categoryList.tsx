@@ -10,7 +10,7 @@ const CategoryList: React.FC<CategoryListProps> = ({ categories }) => {
 		<Grid.Container gap={1} id={'categoryList'}>
 			{categories.map((category) => {
 				return (
-					<Grid xs={6} sm={4} lg={3} key={category.id}>
+					<Grid xs={12} sm={6} lg={3} key={category.id}>
 						<Category category={category}></Category>
 					</Grid>
 				);

@@ -121,6 +121,9 @@ const Cart: React.FC<CartProps> = ({ mapItemsById }) => {
 									borderRadius: '4px',
 									border: '2px solid #2B2F31',
 									width: '500px',
+									'@smMax': {
+										border: 'none',
+									},
 								}}>
 								<Col
 									css={{

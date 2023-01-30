@@ -204,6 +204,7 @@ export default function HeaderNav() {
 							color='primary'>
 							{session ? (
 								<Dropdown.Item
+									textValue='avatar'
 									key='profile'
 									description='View order history'
 									icon={
@@ -222,6 +223,7 @@ export default function HeaderNav() {
 							) : null}
 							{session ? (
 								<Dropdown.Item
+									textValue='avatar'
 									icon={
 										<Logout
 											set='bold'
@@ -242,6 +244,7 @@ export default function HeaderNav() {
 								</Dropdown.Item>
 							) : (
 								<Dropdown.Item
+									textValue='avatar'
 									icon={
 										<Login
 											set='bold'
