@@ -144,34 +144,40 @@ export default function HeaderNav() {
 								jc: 'center',
 							},
 						}}>
-						<Col>
-							<Input
-								id='search-input'
-								aria-label='search'
-								clearable
-								onChange={(e) => searchOnChange(e)}
-								contentLeft={
-									<SearchIcon
-										fill='var(--nextui-colors-accents6)'
-										size={16}
-									/>
-								}
-								contentLeftStyling={false}
-								css={{
-									'@xsMax': {
-										w: '100%',
-									},
-									'& .nextui-input-content--left': {
-										h: '100%',
-										ml: '$4',
-										dflex: 'center',
-									},
-								}}
-								placeholder='Search Item'
-							/>
-							<SearchResultBox
-								searchResult={searchResult}></SearchResultBox>
-						</Col>
+						{activeNavItem === 'Menu' ? (
+							<Col>
+								<Input
+									id='search-input'
+									aria-label='search'
+									clearable
+									onChange={(e) => searchOnChange(e)}
+									contentLeft={
+										<SearchIcon
+											fill='var(--nextui-colors-accents6)'
+											size={16}
+										/>
+									}
+									contentLeftStyling={false}
+									css={{
+										'@xsMax': {
+											w: '100%',
+										},
+										'& .nextui-input-content--left': {
+											h: '100%',
+											ml: '$4',
+											dflex: 'center',
+										},
+									}}
+									placeholder='Search Item'
+								/>
+								<SearchResultBox
+									searchResult={
+										searchResult
+									}></SearchResultBox>
+							</Col>
+						) : (
+							<div></div>
+						)}
 					</Navbar.Item>
 
 					<Navbar.Item
