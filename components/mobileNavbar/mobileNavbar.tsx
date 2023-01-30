@@ -37,7 +37,7 @@ const MoblieNavbar = () => {
 				route={'/menu'}
 				activeNavItem={activeNavItem}></NavItem>
 			<NavItem
-				type='link'
+				type='icon'
 				key={'cart'}
 				route={'/cart'}
 				activeNavItem={activeNavItem}></NavItem>
