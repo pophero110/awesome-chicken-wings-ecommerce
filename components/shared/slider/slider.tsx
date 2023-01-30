@@ -37,6 +37,8 @@ const Slider: React.FC<SliderProps> = ({ children, scrollTo }) => {
 				alignItems: 'end',
 				scrollBehavior: 'smooth',
 				scrollbarWidth: 'none',
+				paddingTop: '5px',
+				paddingBottom: '5px',
 			}}>
 			{children}
 

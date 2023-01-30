@@ -11,7 +11,6 @@ const CategroyNav: React.FC<CategroyNavProps> = ({ categories }) => {
 		<Container
 			className='categoryNav'
 			css={{
-				borderBottom: '2px solid #2B2F31',
 				padding: '0 2px 0 0',
 				'@smMax': {
 					paddingLeft: '20px',
