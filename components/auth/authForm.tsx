@@ -10,6 +10,7 @@ import { createTRPCProxyClient, httpLink } from '@trpc/client';
 import type { AppRouter } from '../../server/routers/_app';
 import superjson from 'superjson';
 export default function AuthForm() {
+	const { setNotification } = useSetNotification();
 	const { modalContainer } = useModalContainer();
 	const { setModalContainer } = useSetModalContainer();
 	const [error, setError] = useState('');
@@ -29,7 +30,7 @@ export default function AuthForm() {
 		});
 		if (result.ok) {
 			setModalContainer({ visible: false, type: '' });
-			setError('Sign in succesfully');
+			setNotification('Sign in succesfully');
 		} else {
 			setError('Something wrong with your credentials');
 		}
@@ -42,8 +43,8 @@ export default function AuthForm() {
 		if (result.error) {
 			setError(result.error);
 		} else {
-			setError('Sign up successfully');
 			setModalContainer({ visible: true, type: 'signin' });
+			setNotification('Sign up successfully');
 		}
 	};
 	return (

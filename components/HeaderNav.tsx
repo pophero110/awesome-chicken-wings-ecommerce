@@ -29,6 +29,7 @@ export default function HeaderNav() {
 	const [items, setItems] = useState([]);
 	const [activeNavItem, setActiveNavItem] = useState('');
 	const [searchResult, setSearchResult] = useState([]);
+
 	const handleMenuAction = (key) => {
 		if (key === 'profile') {
 			router.push('/profile');
@@ -39,7 +40,6 @@ export default function HeaderNav() {
 		if (key === 'signout') {
 			signOut({ redirect: false });
 			setNotification('Sign out successfully');
-			router.push('/');
 		}
 	};
 	const [currentPage, setCurrentPage] = useState('');
@@ -80,6 +80,9 @@ export default function HeaderNav() {
 				css={{
 					transition: 'top 0.3s',
 					borderBottom: '2px solid #2B2F31',
+					'@xsMax': {
+						display: 'none',
+					},
 				}}
 				variant='sticky'
 				maxWidth={'fluid'}>

@@ -1,11 +1,10 @@
 import React from 'react';
-import { Buy } from 'react-iconly';
-import { Home } from 'react-iconly';
-import { Category } from 'react-iconly';
+import { Buy, Home, Category, User } from 'react-iconly';
 import Link from 'next/link';
 import { Badge } from '@nextui-org/react';
 import { useItems } from '../../contexts/itemsContext';
 import { useSetCartSection } from '../../contexts/cartSectionContext';
+import { useRouter } from 'next/router';
 type NavItemProps = {
 	activeNavItem?: string;
 	route?: string;
@@ -18,6 +17,7 @@ const NavItem: React.FC<NavItemProps> = ({
 	style,
 	type,
 }) => {
+	const router = useRouter();
 	const { setCartSection } = useSetCartSection();
 	const { itemState } = useItems();
 	const quantity = Object.values(itemState).reduce(
@@ -28,6 +28,7 @@ const NavItem: React.FC<NavItemProps> = ({
 		'/cart': <Buy set='bold' />,
 		'/': <Home set='bold' />,
 		'/menu': <Category set='bold' />,
+		'/profile': <User set='bold' />,
 	};
 
 	const styles = {
@@ -71,7 +72,13 @@ const NavItem: React.FC<NavItemProps> = ({
 	} else {
 		return (
 			<a
-				onClick={() => setCartSection({ visible: true })}
+				onClick={() => {
+					if (router.pathname === '/menu') {
+						setCartSection({ visible: true });
+					} else {
+						router.push('/cart');
+					}
+				}}
 				aria-label='cart'
 				style={
 					activeNavItem === route

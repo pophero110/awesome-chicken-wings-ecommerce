@@ -34,6 +34,7 @@ const Slider: React.FC<SliderProps> = ({ children, scrollTo }) => {
 				display: 'flex',
 				overflowX: 'scroll',
 				justifyContent: 'space-between',
+				alignItems: 'end',
 				scrollBehavior: 'smooth',
 				scrollbarWidth: 'none',
 			}}>

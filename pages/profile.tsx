@@ -1,60 +1,89 @@
-import { Container } from '@nextui-org/react';
+import { Button, Container, Spacer } from '@nextui-org/react';
 import OrderList from '../components/profile/orderList';
-import prisma from '../lib/prisma';
-import { unstable_getServerSession } from 'next-auth';
-import { authOptions } from './api/auth/[...nextauth]';
-export const getServerSideProps = async (ctx) => {
-	const session = await unstable_getServerSession(
-		ctx.req,
-		ctx.res,
-		authOptions
-	);
-	if (session) {
-		const user = await prisma.user.findUnique({
-			where: {
-				email: session.user.email,
-			},
-			include: { order: true },
-		});
-
-		return {
-			props: {
-				orders: JSON.parse(JSON.stringify(user.order)),
-				session: JSON.parse(JSON.stringify(session)),
-			},
+import { useEffect, useState } from 'react';
+import { useSetModalContainer } from '../contexts/modalContainerContext';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import { signOut } from 'next-auth/react';
+import { useSetNotification } from '../contexts/notification';
+export default function Profile() {
+	const [orders, setOrders] = useState([]);
+	const session = useSession();
+	const router = useRouter();
+	const { setNotification } = useSetNotification();
+	const { setModalContainer } = useSetModalContainer();
+	useEffect(() => {
+		const fetchOrder = async () => {
+			const requestOptions = {
+				method: 'GET',
+			};
+			await fetch('/api/orders', requestOptions)
+				.then((response) => {
+					if (!response.ok) {
+						throw Error(response.statusText);
+					}
+					return response;
+				})
+				.then(async (response) => {
+					const { orders } = await response.json();
+					console.log(orders);
+					setOrders(orders);
+				})
+				.catch((error) => {
+					// TODO
+					// show error to customer
+					// log error for debugging
+					console.log(error);
+				});
 		};
-	}
-
-	return {
-		props: {
-			orders: null,
-			session: null,
-		},
-	};
-};
-export default function Profile({ orders, session }) {
-	if (!session) {
+		if (session.status === 'authenticated') {
+			fetchOrder();
+		}
+	}, [session.status]);
+	if (session.status === 'authenticated') {
 		return (
-			//TODO add sign in link
-			<>
-				<h1
-					style={{
-						textAlign: 'center',
+			<Container
+				css={{
+					display: 'flex',
+					flexDirection: 'column',
+					justifyContent: 'space-between',
+					alignItems: '',
+				}}>
+				<OrderList orders={orders}></OrderList>
+				<Button
+					onPress={() => {
+						signOut({ redirect: false });
+						setNotification('Sign out successfully');
 					}}>
-					404
-				</h1>
-				<p
-					style={{
-						textAlign: 'center',
-					}}>
-					You need to sign in first.
-				</p>
-			</>
+					Sign Out
+				</Button>
+			</Container>
+		);
+	} else {
+		return (
+			<div
+				style={{
+					display: 'flex',
+					padding: '2rem',
+					flexDirection: 'column',
+					height: '100vh',
+					alignItems: 'center',
+					justifyContent: 'center',
+				}}>
+				<Button
+					onPress={() =>
+						setModalContainer({ visible: true, type: 'signin' })
+					}>
+					Sign in
+				</Button>
+				<Spacer y={1}></Spacer>
+				<Button
+					onPress={() =>
+						setModalContainer({ visible: true, type: 'signup' })
+					}>
+					Sign up
+				</Button>
+			</div>
 		);
 	}
-	return (
-		<Container>
-			<OrderList orders={orders}></OrderList>
-		</Container>
-	);
 }

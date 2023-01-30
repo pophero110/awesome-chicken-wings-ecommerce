@@ -6,7 +6,6 @@ import prisma from '../lib/prisma';
 import { Row, Col } from '@nextui-org/react';
 import { useCategory } from '../contexts/categoryContext';
 import CartSection from '../components/CartSection';
-import { useSetCartSection } from '../contexts/cartSectionContext';
 export const getStaticProps: GetStaticProps = async () => {
 	const items = await prisma.item.findMany();
 	const mapItemsById = items.reduce((acc, { id, name, price }) => {

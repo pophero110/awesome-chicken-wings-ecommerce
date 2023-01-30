@@ -7,6 +7,7 @@ import {
 } from '../../utils/paymentIntent';
 import { unstable_getServerSession } from 'next-auth';
 import { authOptions } from './auth/[...nextauth]';
+import prisma from '../../lib/prisma';
 const orderHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === 'POST') {
 		const { itemsData, checkoutMode } = req.body;
@@ -43,6 +44,18 @@ const orderHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 				message: 'Order was created successfully',
 			});
 		}
+	}
+	if (req.method === 'GET') {
+		const session = await unstable_getServerSession(req, res, authOptions);
+
+		const user = await prisma.user.findUnique({
+			where: {
+				email: session.user.email,
+			},
+			include: { order: true },
+		});
+
+		res.status(200).json({ orders: user.order });
 	}
 };
 

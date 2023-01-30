@@ -1,15 +1,18 @@
 .notification_container {
-	animation: forwards slidein 3s linear;
+	animation: forwards slidein 3s cubic-bezier(0.485, 0.155, 0.24, 1.245);
 }
 
 @keyframes slidein {
 	0% {
-		transform: translate(-50%, -60px);
+		transform: scale(0);
 	}
-	80% {
-		transform: translate(-50%, -60px);
+	20% {
+		transform: scale(1);
+	}
+	60% {
+		opacity: 1;
 	}
 	100% {
-		transform: translate(-50%, -120px);
+		opacity: 0;
 	}
 }

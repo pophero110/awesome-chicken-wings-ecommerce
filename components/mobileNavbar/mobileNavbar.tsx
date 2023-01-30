@@ -24,6 +24,9 @@ const MoblieNavbar = () => {
 		justifyContent: 'space-around',
 		backgroundColor: '#102C4C',
 	};
+	if (activeNavItem === '/cart') {
+		return null;
+	}
 	return (
 		<div className={styles.mobileNavbar} style={style}>
 			<NavItem
@@ -40,6 +43,12 @@ const MoblieNavbar = () => {
 				type='icon'
 				key={'cart'}
 				route={'/cart'}
+				activeNavItem={activeNavItem}></NavItem>
+
+			<NavItem
+				type='link'
+				key={'avatar'}
+				route={'/profile'}
 				activeNavItem={activeNavItem}></NavItem>
 		</div>
 	);

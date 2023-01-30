@@ -29,6 +29,7 @@ const Category: React.FC<CategoryProps> = ({ name, id }) => {
 				cursor: 'pointer',
 				userSelect: 'none',
 				paddingTop: '5px',
+				fontSize: '16px',
 				'@smMax': {
 					marginRight: '15px',
 				},
