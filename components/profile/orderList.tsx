@@ -3,7 +3,6 @@ export default function OrderList({ orders }) {
 	return (
 		<Table
 			aria-label='Order Table'
-			bordered
 			shadow
 			css={{
 				height: 'auto',
