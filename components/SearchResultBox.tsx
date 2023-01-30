@@ -23,6 +23,7 @@ export default function SearchResultBox({ searchResult }) {
 			css={{
 				position: 'absolute',
 				transformOrigin: 'left center',
+				zIndex: '300',
 				transition:
 					'transform 225ms ease-in-out 0s, opacity 225ms linear 0s',
 				transform: searchResult.length

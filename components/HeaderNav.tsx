@@ -61,6 +61,8 @@ export default function HeaderNav() {
 			setCurrentPage(path);
 			if (path === '/menu') {
 				setActiveNavItem('Menu');
+			} else {
+				setActiveNavItem('');
 			}
 		};
 		Router.events.on('routeChangeStart', handlerRouteStart);
@@ -144,6 +146,7 @@ export default function HeaderNav() {
 						}}>
 						<Col>
 							<Input
+								id='search-input'
 								aria-label='search'
 								clearable
 								onChange={(e) => searchOnChange(e)}

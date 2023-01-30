@@ -40,6 +40,9 @@ export default function ModalContainer() {
 					display: 'flex',
 					alignItems: 'center',
 					justifyContent: 'center',
+					'@smMax': {
+						padding: '0',
+					},
 				}}>
 				<AuthForm></AuthForm>
 			</Modal.Body>

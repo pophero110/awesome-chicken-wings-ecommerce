@@ -57,6 +57,9 @@ export default function HeroSection() {
 				<Spacer y={1}></Spacer>
 				<Row justify='flex-end'>
 					<Button
+						css={{
+							zIndex: '2',
+						}}
 						onPress={() =>
 							document
 								.getElementById('categoryList')

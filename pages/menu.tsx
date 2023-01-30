@@ -51,11 +51,7 @@ const Menu: React.FC<MenuProps> = ({ categories, mapItemsById }) => {
 		setCartSection(false);
 	};
 	return (
-		<div
-			onClick={() => closeCartHandler()}
-			style={{
-				height: '100vh',
-			}}>
+		<div onClick={() => closeCartHandler()}>
 			<Row
 				css={{
 					paddingLeft: '5px',
