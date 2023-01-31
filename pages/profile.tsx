@@ -49,9 +49,22 @@ export default function Profile() {
 					flexDirection: 'column',
 					justifyContent: 'space-between',
 				}}>
-				<OrderList orders={orders}></OrderList>
+				<div>
+					<div
+						style={{
+							marginTop: '1rem',
+							fontFamily: 'var(--primary-font)',
+							fontSize: '32px',
+						}}>
+						Order History
+					</div>
+					<OrderList orders={orders}></OrderList>
+				</div>
+
 				<Button
 					css={{
+						fontFamily: 'var(--primary-font)',
+						fontWeight: '700',
 						'@xsMin': {
 							display: 'none',
 						},
@@ -71,9 +84,11 @@ export default function Profile() {
 					display: 'flex',
 					padding: '2rem',
 					flexDirection: 'column',
-					height: '100vh',
 					alignItems: 'center',
+					height: '90vh',
 					justifyContent: 'center',
+					fontFamily: 'var(--primary-font)',
+					fontWeight: '700',
 				}}>
 				<Button
 					onPress={() =>

@@ -20,7 +20,7 @@ body::-webkit-scrollbar {
 	display: none;
 }
 
-.nextui-modal-close-icon-svg svg {
+.nextui-modal-close-icon {
 	color: white;
 }
 

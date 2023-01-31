@@ -81,21 +81,12 @@ export default function HeaderNav() {
 				css={{
 					transition: 'top 0.3s',
 					borderBottom: '2px solid #2B2F31',
-					'@xsMax': {
-						display: 'none',
-					},
 				}}
 				variant='sticky'
 				maxWidth={'fluid'}>
 				<Navbar.Content activeColor={'warning'} variant='underline'>
 					<Link href={'/'}>
-						<Navbar.Link
-							css={{
-								'@xsMax': {
-									display: 'none',
-								},
-							}}
-							onClick={() => setActiveNavItem('')}>
+						<Navbar.Link onClick={() => setActiveNavItem('')}>
 							<Logo width='2rem' height='2rem'></Logo>
 							<Text
 								b

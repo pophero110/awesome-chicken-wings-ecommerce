@@ -16,6 +16,8 @@ class MyDocument extends Document {
 			<Html lang='en'>
 				<Head>
 					{CssBaseline.flush()}
+					<title>Awesome Chicken</title>
+					<link rel='icon' href='/web_icon.png' />
 					<link
 						rel='preconnect'
 						href='https://fonts.googleapis.com'></link>

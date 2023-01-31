@@ -67,11 +67,10 @@ export default function CheckoutForm({
 		} else {
 			setProcessing(false);
 			setSucceeded(true);
-			setNotification('Your order has been placed Successfully');
 			destroyCookie(null, 'clientSecret');
 			destroyCookie(null, 'paymentIntentId');
 			itemDispatch({ type: 'clearItems' });
-			router.push('/', undefined, { shallow: true });
+			router.push('?orderStatus=success', undefined, { shallow: true });
 		}
 	};
 	return (

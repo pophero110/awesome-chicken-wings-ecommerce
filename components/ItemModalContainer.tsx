@@ -38,6 +38,10 @@ export default function ItemModalContainer() {
 
 	return (
 		<Modal
+			css={{
+				color: 'white',
+			}}
+			closeButton
 			fullScreen={isFullScreen}
 			aria-labelledby='modal-title'
 			open={itemModalContainer.visible}
@@ -48,7 +52,7 @@ export default function ItemModalContainer() {
 					display: 'flex',
 					alignItems: 'center',
 					justifyContent: 'center',
-					padding: '0',
+					paddingTop: '1rem',
 				}}>
 				<Item
 					id={itemModalContainer.item.id}

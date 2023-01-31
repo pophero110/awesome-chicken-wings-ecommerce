@@ -97,7 +97,7 @@ const Cart: React.FC<CartProps> = ({ mapItemsById }) => {
 				<div
 					onClick={() => closeCartHandler()}
 					style={{
-						height: '100vh',
+						height: '80vh',
 					}}>
 					<Row
 						css={{
@@ -123,6 +123,7 @@ const Cart: React.FC<CartProps> = ({ mapItemsById }) => {
 									width: '500px',
 									'@smMax': {
 										border: 'none',
+										padding: '0 16px 16px 16px',
 									},
 								}}>
 								<Col

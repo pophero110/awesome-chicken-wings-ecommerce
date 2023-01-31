@@ -6,6 +6,8 @@ export default function OrderList({ orders }) {
 			shadow
 			css={{
 				height: 'auto',
+				padding: '0',
+				marginTop: '1rem',
 				minWidth: '100%',
 			}}>
 			<Table.Header>

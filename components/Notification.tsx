@@ -22,8 +22,9 @@ const Notification = () => {
 				display: 'flex',
 				alignItems: 'center',
 				zIndex: '300',
+				top: '0',
 				left: '50%',
-				transform: 'translate(-50%, 1rem)',
+				transform: 'translate(-50%, 0)',
 				padding: 'var(--ui-padding)',
 				whiteSpace: 'nowrap',
 				textAlign: 'center',
@@ -36,10 +37,12 @@ const Notification = () => {
 						backgroundColor: '#17C964',
 						borderRadius: '5px',
 						padding: '5px',
+						alignItems: 'center',
 					}}>
 					<InfoCircle set='bold' />
 					<Text
 						b
+						size={'20px'}
 						css={{
 							marginLeft: '0.3rem',
 						}}>

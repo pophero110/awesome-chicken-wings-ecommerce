@@ -44,7 +44,7 @@ export default function AuthForm() {
 			setError(result.error);
 		} else {
 			setModalContainer({ visible: true, type: 'signin' });
-			setNotification('Sign up successfully');
+			setError('Sign up successfully');
 		}
 	};
 	return (

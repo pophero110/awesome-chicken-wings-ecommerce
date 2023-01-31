@@ -14,21 +14,24 @@ export default function Footer() {
 				backgroundColor: 'black',
 				bottom: '0',
 				position: 'fixed',
+				display: 'flex',
+				justifyContent: 'center',
 			}}
 			css={{
 				'@lgMax': {
 					position: 'static !important',
 				},
 				'@xsMax': {
-					display: 'none',
+					display: 'none !important',
 				},
 			}}>
 			<Col
 				style={{
+					maxWidth: '80%',
 					display: 'flex',
 					justifyContent: 'center',
 					alignItems: 'center',
-					padding: '1rem 12rem',
+					padding: '1rem 2rem',
 					flexDirection: 'column',
 				}}
 				css={{
@@ -36,7 +39,6 @@ export default function Footer() {
 						padding: '1rem 6rem !important',
 					},
 				}}>
-				<Logo width={'2rem'} height={'2rem'}></Logo>
 				<Col
 					className='footer__text'
 					style={{
@@ -52,7 +54,7 @@ export default function Footer() {
 							alignItems: 'center',
 						},
 					}}>
-					<div>Copyright © Jiajin Ou. All right reserved</div>
+					<div>Copyright © 2023 Jiajin Ou. All rights reserved.</div>
 					<div
 						style={{
 							display: 'flex',
