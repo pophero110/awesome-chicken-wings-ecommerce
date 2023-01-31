@@ -4,6 +4,7 @@
 	--ui-border-radius: 14px;
 	--primary-font: 'Roboto', sans-serif;
 	--black-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+	--primary-color: #f5a524;
 }
 
 body {
@@ -21,4 +22,9 @@ body::-webkit-scrollbar {
 
 .nextui-modal-close-icon-svg svg {
 	color: white;
+}
+
+.footer__text div div:hover {
+	text-shadow: 0px 4px 10px white;
+	transform: scale(1.1);
 }

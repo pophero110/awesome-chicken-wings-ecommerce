@@ -25,9 +25,10 @@ type IndexProps = {
 const Index: React.FC<IndexProps> = ({ categories }) => {
 	return (
 		<>
-			<HeroSection></HeroSection>
+			{/* <HeroSection></HeroSection> */}
 			<Container
 				css={{
+					marginTop: '2rem',
 					maxWidth: '80%',
 				}}>
 				<CategoryList categories={categories}></CategoryList>

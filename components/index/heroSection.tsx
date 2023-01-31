@@ -26,14 +26,24 @@ export default function HeroSection() {
 					}}>
 					<Col>
 						<Text
-							weight='extrabold'
+							color='white'
 							css={{
 								textAlign: 'end',
-								textGradient:
-									'45deg, $yellow600 -20%, $red600 100%',
-								fontSize: '$xl',
+								fontFamily: 'var(--primary-font)',
+								fontWeight: '700',
+								fontSize: '3rem',
+								lineHeight: '120%',
+								color: 'var(--primary-color)',
 								'@xsMin': {
-									fontSize: '$2xl',
+									fontSize: '5rem',
+								},
+								'@smMin': {
+									lineHeight: '100%',
+									fontSize: '7rem',
+								},
+								'@mdMin': {
+									lineHeight: '100%',
+									fontSize: '4rem',
 								},
 							}}>
 							We are dedicated to bringing you
@@ -41,16 +51,27 @@ export default function HeroSection() {
 					</Col>
 					<Col>
 						<Text
-							weight='extrabold'
-							color='white'
 							css={{
+								fontFamily: 'var(--primary-font)',
+								fontWeight: '700',
+								textShadow: 'var(--black-shadow)',
+								fontSize: '3rem',
 								textAlign: 'end',
-								fontSize: '$3xl',
-								'@xsMax': {
-									fontSize: '$2xl',
+								lineHeight: '120%',
+								color: 'white',
+								'@xsMin': {
+									fontSize: '5rem',
+								},
+								'@smMin': {
+									lineHeight: '100%',
+									fontSize: '7rem',
+								},
+								'@mdMin': {
+									lineHeight: '100%',
+									fontSize: '4rem',
 								},
 							}}>
-							THE AWESOME CHICKEN
+							AWESOME CHICKEN
 						</Text>
 					</Col>
 				</Row>
@@ -59,6 +80,10 @@ export default function HeroSection() {
 					<Button
 						css={{
 							zIndex: '2',
+							fontSize: '$2xl',
+							fontFamily: 'var(--primary-font)',
+							fontWeight: '700',
+							padding: '30px 0px',
 						}}
 						onPress={() =>
 							document
@@ -68,7 +93,7 @@ export default function HeroSection() {
 									behavior: 'smooth',
 								})
 						}
-						color='gradient'>
+						color='primary'>
 						Order Now
 					</Button>
 				</Row>

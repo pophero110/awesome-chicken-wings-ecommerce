@@ -1,4 +1,5 @@
 import { Col } from '@nextui-org/react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Logo } from './Logo';
 export default function Footer() {
@@ -11,6 +12,8 @@ export default function Footer() {
 			style={{
 				width: '100%',
 				backgroundColor: 'black',
+				position: 'fixed',
+				bottom: '0',
 			}}
 			css={{
 				'@xsMax': {
@@ -52,13 +55,18 @@ export default function Footer() {
 						style={{
 							display: 'flex',
 						}}>
-						<div
-							style={{
-								marginRight: '2rem',
-							}}>
-							Terms & conditions
-						</div>
-						<div>Private policy</div>
+						<Link href={'/terms'}>
+							<div
+								style={{
+									marginRight: '2rem',
+								}}>
+								Terms & conditions
+							</div>
+						</Link>
+
+						<Link href={'/privatePolicy'}>
+							<div>Private policy</div>
+						</Link>
 					</div>
 				</Col>
 			</Col>

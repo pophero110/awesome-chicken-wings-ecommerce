@@ -38,7 +38,6 @@ export default function ItemModalContainer() {
 
 	return (
 		<Modal
-			closeButton
 			fullScreen={isFullScreen}
 			aria-labelledby='modal-title'
 			open={itemModalContainer.visible}
@@ -49,13 +48,13 @@ export default function ItemModalContainer() {
 					display: 'flex',
 					alignItems: 'center',
 					justifyContent: 'center',
+					padding: '0',
 				}}>
 				<Item
 					id={itemModalContainer.item.id}
 					name={itemModalContainer.item.name}
 					price={itemModalContainer.item.price}></Item>
 			</Modal.Body>
-			<Modal.Footer></Modal.Footer>
 		</Modal>
 	);
 }
