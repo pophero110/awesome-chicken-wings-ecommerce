@@ -9,7 +9,11 @@ const MoblieNavbar = () => {
 	const router = useRouter();
 	useEffect(() => {
 		const handleRouteDone = (url) => {
-			setActiveNavItem(url);
+			if (url.includes('?')) {
+				setActiveNavItem('/');
+			} else {
+				setActiveNavItem(url);
+			}
 		};
 		router.events.on('routeChangeComplete', handleRouteDone);
 		return () => {

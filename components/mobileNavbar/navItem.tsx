@@ -45,7 +45,7 @@ const NavItem: React.FC<NavItemProps> = ({
 					aria-label='cart'
 					style={
 						activeNavItem === route
-							? { ...styles, borderTop: '4px solid #0072F5' }
+							? { ...styles, borderTop: '5px solid #f5a524' }
 							: styles
 					}>
 					{route === '/cart' ? (
@@ -82,7 +82,7 @@ const NavItem: React.FC<NavItemProps> = ({
 				aria-label='cart'
 				style={
 					activeNavItem === route
-						? { ...styles, borderTop: '4px solid #0072F5' }
+						? { ...styles, borderTop: '5px solid #f5a524' }
 						: styles
 				}>
 				<Badge
