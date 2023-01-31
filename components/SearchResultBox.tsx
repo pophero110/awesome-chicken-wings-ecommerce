@@ -20,7 +20,9 @@ export default function SearchResultBox({ searchResult }) {
 	};
 	return (
 		<Col
+			className='searchResultBox'
 			css={{
+				opacity: '0',
 				position: 'absolute',
 				transformOrigin: 'left center',
 				zIndex: '300',
@@ -35,6 +37,9 @@ export default function SearchResultBox({ searchResult }) {
 				minWidth: '100%',
 				boxShadow:
 					'rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset',
+				overflow: 'scroll',
+				maxHeight: '50vh',
+				overflowX: 'hidden',
 			}}>
 			<Container
 				css={{

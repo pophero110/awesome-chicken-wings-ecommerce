@@ -142,7 +142,12 @@ export default function HeaderNav() {
 							},
 						}}>
 						{activeNavItem === 'Menu' ? (
-							<Col>
+							<Col
+								css={{
+									'&:focus-within .searchResultBox': {
+										opacity: '1',
+									},
+								}}>
 								<Input
 									id='search-input'
 									aria-label='search'
