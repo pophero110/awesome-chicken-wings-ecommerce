@@ -146,6 +146,7 @@ export default function HeaderNav() {
 								css={{
 									'&:focus-within .searchResultBox': {
 										opacity: '1',
+										right: '0',
 									},
 								}}>
 								<Input

@@ -21,16 +21,17 @@ export default function SearchResultBox({ searchResult }) {
 	return (
 		<Col
 			className='searchResultBox'
-			css={{
-				opacity: '0',
+			css={{	
 				position: 'absolute',
 				transformOrigin: 'left center',
+				right: '100vw',
 				zIndex: '300',
 				transition:
-					'transform 225ms ease-in-out 0s, opacity 225ms linear 0s',
+					'transform 225ms ease-in-out 0s, opacity 225ms linear 0s, right 1ms linear 30ms',
 				transform: searchResult.length
-					? 'translate3d(0%, 0px, 0px) scale(1)'
+					? 'translate3d(0%, 0%, 0px) scale(1)'
 					: 'translate3d(0%, -5%, 0px) scale(1)',
+				opacity: '1',
 				borderRadius: '4px',
 				backgroundColor: 'black',
 				width: 'auto',

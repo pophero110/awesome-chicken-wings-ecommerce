@@ -7,7 +7,7 @@
 		"npm": "8.5.0"
 	},
 	"scripts": {
-		"dev": "next",
+		"dev": "PORT=4000 next",
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
