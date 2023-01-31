@@ -70,7 +70,7 @@ export default function CheckoutForm({
 			destroyCookie(null, 'clientSecret');
 			destroyCookie(null, 'paymentIntentId');
 			itemDispatch({ type: 'clearItems' });
-			router.push('?orderStatus=success', undefined, { shallow: true });
+			router.push('/?orderStatus=success', undefined, { shallow: true });
 		}
 	};
 	return (
