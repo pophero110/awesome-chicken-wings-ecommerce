@@ -28,7 +28,7 @@ const Index: React.FC<IndexProps> = ({ categories }) => {
 			{/* <HeroSection></HeroSection> */}
 			<Container
 				css={{
-					marginTop: '2rem',
+					marginTop: '1rem',
 					maxWidth: '80%',
 				}}>
 				<CategoryList categories={categories}></CategoryList>

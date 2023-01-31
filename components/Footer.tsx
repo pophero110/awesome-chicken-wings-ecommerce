@@ -12,10 +12,13 @@ export default function Footer() {
 			style={{
 				width: '100%',
 				backgroundColor: 'black',
-				position: 'fixed',
 				bottom: '0',
+				position: 'fixed',
 			}}
 			css={{
+				'@lgMax': {
+					position: 'static !important',
+				},
 				'@xsMax': {
 					display: 'none',
 				},
@@ -49,7 +52,6 @@ export default function Footer() {
 							alignItems: 'center',
 						},
 					}}>
-					<div>Jiajin.webdeveloper@gmail.com</div>
 					<div>Copyright © Jiajin Ou. All right reserved</div>
 					<div
 						style={{
