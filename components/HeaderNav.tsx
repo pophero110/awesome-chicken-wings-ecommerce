@@ -13,6 +13,7 @@ import Fuse from 'fuse.js';
 import { createTRPCProxyClient, httpLink } from '@trpc/client';
 import type { AppRouter } from '../server/routers/_app';
 import superjson from 'superjson';
+import { Logo } from './Logo';
 export default function HeaderNav() {
 	const router = useRouter();
 	const { setModalContainer } = useSetModalContainer();
@@ -95,11 +96,12 @@ export default function HeaderNav() {
 								},
 							}}
 							onClick={() => setActiveNavItem('')}>
-							<Home set='bold' primaryColor='#F5A524' />
+							<Logo width='2rem' height='2rem'></Logo>
 							<Text
 								b
 								color={'#F5A524'}
 								css={{
+									fontFamily: 'var(--primary-font)',
 									marginLeft: '10px',
 									'@smMax': {
 										display: 'none',
@@ -125,6 +127,7 @@ export default function HeaderNav() {
 								b
 								color={'#F5A524'}
 								css={{
+									fontFamily: 'var(--primary-font)',
 									marginLeft: '10px',
 								}}>
 								Menu

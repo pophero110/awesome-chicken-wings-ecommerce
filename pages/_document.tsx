@@ -14,7 +14,19 @@ class MyDocument extends Document {
 	render() {
 		return (
 			<Html lang='en'>
-				<Head>{CssBaseline.flush()}</Head>
+				<Head>
+					{CssBaseline.flush()}
+					<link
+						rel='preconnect'
+						href='https://fonts.googleapis.com'></link>
+					<link
+						rel='preconnect'
+						href='https://fonts.gstatic.com'
+						crossOrigin=''></link>
+					<link
+						href='https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap'
+						rel='stylesheet'></link>
+				</Head>
 				<script src='https://js.stripe.com/v3/' async></script>
 				<body>
 					<Main />

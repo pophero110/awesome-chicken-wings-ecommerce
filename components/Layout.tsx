@@ -8,6 +8,7 @@ import ModalContainer from './ModalContainer';
 import ModalContainerProvider from '../contexts/modalContainerContext';
 import ItemModalContainerProvider from '../contexts/itemModalContext';
 import ItemModalContainer from './ItemModalContainer';
+import Footer from './Footer';
 type Props = {
 	children: ReactNode;
 };
@@ -24,6 +25,7 @@ const Layout: React.FC<Props> = ({ children }) => {
 						<Notification></Notification>
 						{children}
 						<Spacer y={3}></Spacer>
+						<Footer></Footer>
 						<MoblieNavbar></MoblieNavbar>
 					</NotificationProvider>
 				</ModalContainerProvider>

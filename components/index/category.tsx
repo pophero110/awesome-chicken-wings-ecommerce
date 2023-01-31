@@ -33,6 +33,9 @@ const Category: React.FC<CategoryProps> = ({ category }) => {
 						b
 						css={{
 							fontSize: '$xl',
+							textShadow: 'var(--black-shadow)',
+							fontFamily: 'var(--primary-font)',
+							color: 'white',
 							'@mdMin': {
 								fontSize: '$2xl',
 							},

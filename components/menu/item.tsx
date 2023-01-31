@@ -28,10 +28,21 @@ const Item: React.FC<ItemProps> = ({ id, name, price }) => {
 					alt={name}
 				/>
 				<div className={style.menu__item__metadata}>
-					<Text b style={{ backgroundColor: 'transparent' }}>
+					<Text
+						b
+						style={{
+							textShadow: 'var(--black-shadow)',
+							fontFamily: 'var(--primary-font)',
+							color: 'white',
+						}}>
 						{name}
 					</Text>
-					<Text color='white'>{`$${price}`}</Text>
+					<Text
+						css={{
+							textShadow: 'var(--black-shadow)',
+							fontFamily: 'var(--primary-font)',
+							color: 'white',
+						}}>{`$${price}`}</Text>
 				</div>
 				<div className={style.menu__item__modify}>
 					{itemState[id] >= 1 ? (

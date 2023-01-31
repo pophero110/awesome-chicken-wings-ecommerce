@@ -32,6 +32,7 @@ const Category: React.FC<CategoryProps> = ({ name, id }) => {
 				paddingTop: '5px',
 				fontSize: '16px',
 				fontWeight: '700',
+				fontFamily: 'var(--primary-font)',
 				'@smMax': {
 					marginRight: '15px',
 				},
