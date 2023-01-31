@@ -36,7 +36,7 @@ const NavItem: React.FC<NavItemProps> = ({
 		padding: '15px 15px',
 		textDecoration: 'none',
 		color: 'white',
-		borderTop: '4px solid #102C4C',
+		borderTop: '5px solid #102C4C',
 	};
 	if (type == 'link') {
 		return (
