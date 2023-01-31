@@ -103,7 +103,7 @@ export default function HeaderNav() {
 								css={{
 									fontFamily: 'var(--primary-font)',
 									marginLeft: '10px',
-									'@smMax': {
+									'@xsMax': {
 										display: 'none',
 									},
 								}}>
@@ -116,7 +116,7 @@ export default function HeaderNav() {
 							css={{
 								'--nextui--navbarItemUnderlineHeight':
 									'2px !important',
-								'@smMax': {
+								'@xsMax': {
 									display: 'none',
 								},
 							}}

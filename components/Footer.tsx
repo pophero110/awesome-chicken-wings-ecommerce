@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { Logo } from './Logo';
 export default function Footer() {
 	const router = useRouter();
-	console.log(router.pathname);
 	if (router.pathname !== '/') {
 		return null;
 	}

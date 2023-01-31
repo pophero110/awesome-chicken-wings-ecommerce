@@ -15,7 +15,7 @@ export const Sandwich = [
 export const Wing = [...Array(15)].map((e, index) => {
 	return {
 		name: `${(index + 1) * 5}PC Chicken Wings`,
-		price: index * 5.5,
+		price: (index + 1) * 5.5,
 	};
 });
 
