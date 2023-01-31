@@ -1,21 +1,38 @@
+import { Col } from '@nextui-org/react';
+import { useRouter } from 'next/router';
 import { Logo } from './Logo';
 export default function Footer() {
+	const router = useRouter();
+	console.log(router.pathname);
+	if (router.pathname !== '/') {
+		return null;
+	}
 	return (
-		<div
+		<Col
 			style={{
 				width: '100%',
 				backgroundColor: 'black',
+			}}
+			css={{
+				'@xsMax': {
+					display: 'none',
+				},
 			}}>
-			<div
+			<Col
 				style={{
 					display: 'flex',
 					justifyContent: 'center',
 					alignItems: 'center',
 					padding: '1rem 12rem',
 					flexDirection: 'column',
+				}}
+				css={{
+					'@mdMax': {
+						padding: '1rem 6rem !important',
+					},
 				}}>
 				<Logo width={'2rem'} height={'2rem'}></Logo>
-				<div
+				<Col
 					className='footer__text'
 					style={{
 						display: 'flex',
@@ -23,6 +40,12 @@ export default function Footer() {
 						width: '100%',
 						justifyContent: 'space-between',
 						marginTop: '1rem',
+					}}
+					css={{
+						'@smMax': {
+							flexDirection: 'column',
+							alignItems: 'center',
+						},
 					}}>
 					<div>Jiajin.webdeveloper@gmail.com</div>
 					<div>Copyright © Jiajin Ou. All right reserved</div>
@@ -38,8 +61,8 @@ export default function Footer() {
 						</div>
 						<div>Private policy</div>
 					</div>
-				</div>
-			</div>
-		</div>
+				</Col>
+			</Col>
+		</Col>
 	);
 }
