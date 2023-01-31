@@ -13,6 +13,7 @@ const Category: React.FC<CategoryProps> = ({ name, id }) => {
 	const { setActiveCategory } = useSetCategory();
 	return (
 		<Text
+			id={id}
 			size={'$sm'}
 			onClick={() =>
 				setActiveCategory({
@@ -30,6 +31,7 @@ const Category: React.FC<CategoryProps> = ({ name, id }) => {
 				userSelect: 'none',
 				paddingTop: '5px',
 				fontSize: '16px',
+				fontWeight: '700',
 				'@smMax': {
 					marginRight: '15px',
 				},
